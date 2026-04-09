@@ -1,3 +1,13 @@
 {
-  "name": "ai-driven-sdlc"
+  "name": "ai-driven-sdlc",
+  "version": "0.1.0",
+  "description": "AI-driven SDLC через призму системного мышления",
+  "author": {
+    "name": "Yuri Polosov",
+    "email": "ypolosov@gmail.com",
+    "url": "https://github.com/ypolosov"
+  },
+  "repository": "https://github.com/ypolosov/ai-driven-sdlc-plugin",
+  "license": "MIT",
+  "keywords": ["sdlc", "systems-thinking", "ai-driven"]
 }
