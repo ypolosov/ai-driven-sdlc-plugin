@@ -9,7 +9,7 @@
       "name": "ai-driven-sdlc",
       "source": "./",
       "description": "Methodological framework for AI-driven SDLC based on systems thinking",
-      "version": "0.2.0",
+      "version": "0.1.1",
       "author": {
         "name": "Yuri Polosov",
         "email": "ypolosov@gmail.com"
