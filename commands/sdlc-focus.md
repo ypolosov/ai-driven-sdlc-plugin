@@ -16,9 +16,12 @@ argument-hint: "<slug-системы> [--transient | --retire]"
    - без флагов: сделать систему текущей целевой; пересчитать роли соседей.
    - `--transient`: запись в журнал фокусировок, но без создания описания.
    - `--retire <slug>`: перенести систему в `retired-systems/` (Волна 2).
-4. Обновить `system-context.md` (`current_focus`, таблица систем).
-5. В Волне 2 — создать/актуализировать `README.sdlc.md` или `external-systems/<slug>.md`.
+4. Обновить `system-context.md` (`current_focus`, `last_focused_at`, `focus_count`, таблица систем).
+5. Создать/актуализировать описание системы по мета-шаблону `system-readme.meta.md`:
+   - `kind=materialized` → `<system-root>/README.sdlc.md` (sidecar, не трогает существующий `README.md`).
+   - `kind=logical` → `<target>/.claude/sdlc/external-systems/<slug>.md`.
 6. Зафиксировать решение в `decisions.md` (принцип 1).
+7. После записи сработает `check-system-readmes.sh` PostToolUse.
 
 ## Аргументы
 
