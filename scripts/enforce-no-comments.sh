@@ -11,6 +11,11 @@ case "$tool_name" in
   *) exit 0 ;;
 esac
 
+plugin_root="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
+case "$file_path" in
+  "$plugin_root"/*) exit 0 ;;
+esac
+
 case "$file_path" in
   *.md|*.yml|*.yaml|*.json|*/.gitignore|*/.env.example|*/.env) exit 0 ;;
 esac
@@ -51,7 +56,7 @@ while IFS= read -r line_raw; do
   done
   [ "$allowed" = "1" ] && continue
 
-  if [[ "$rest" =~ ^[[:space:]]*// ]] || [[ "$rest" =~ ^[[:space:]]*# ]] || [[ "$rest" =~ ^[[:space:]]*/\* ]] || [[ "$rest" =~ ^[[:space:]]*\*/ ]]; then
+  if [[ "$rest" =~ ^[[:space:]]*// ]] || [[ "$rest" =~ ^[[:space:]]*# ]] || [[ "$rest" =~ ^[[:space:]]*/\* ]] || [[ "$rest" =~ ^[[:space:]]*\*/[[:space:]]*$ ]]; then
     printf 'no-comments: %s:%s содержит комментарий.\n' "$file_path" "$ln" >&2
     violations=$((violations+1))
   fi

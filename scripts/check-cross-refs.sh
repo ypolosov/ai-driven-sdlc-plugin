@@ -26,7 +26,7 @@ while IFS= read -r ref_line; do
   while IFS= read -r ref; do
     [ -z "$ref" ] && continue
     case "$ref" in
-      http*|#*|mailto:*) continue ;;
+      http*|\#*|mailto:*) continue ;;
     esac
     resolved="$(cd "$(dirname "$f")" 2>/dev/null && readlink -f -- "$ref" 2>/dev/null || true)"
     if [ -z "$resolved" ] || [ ! -e "$resolved" ]; then
