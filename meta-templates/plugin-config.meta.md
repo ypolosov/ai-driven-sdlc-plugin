@@ -88,6 +88,16 @@ no_comments_whitelist:
   - '^/// <reference'
 ```
 
+### system_readme_ttl_days
+TTL для описаний систем внимания (принцип 17, Волна 2).
+
+```yaml
+system_readme_ttl_days: 30
+```
+
+Если `last_focused_at` старше N дней, `sdlc-consistency-auditor` понижает приоритет расхождений по системе.
+Значение по умолчанию — 30 дней.
+
 ## Правила
 
 - Без `state_artifact` агент `sdlc-state-reader` падает с понятным сообщением.

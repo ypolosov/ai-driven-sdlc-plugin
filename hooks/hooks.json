@@ -30,6 +30,10 @@
           {
             "type": "command",
             "command": "${CLAUDE_PLUGIN_ROOT}/scripts/enforce-no-comments.sh"
+          },
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/check-system-readmes.sh \"$CLAUDE_PROJECT_DIR\""
           }
         ]
       }

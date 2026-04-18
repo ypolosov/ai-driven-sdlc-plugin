@@ -45,8 +45,12 @@ meta_templates: [system-context.meta.md]
 1. Прочитать `system-context.md` целевого.
 2. Применить действие (focus / transient / retire) к записи.
 3. Пересчитать `role_vs_target` для связанных систем.
-4. Обновить `current_focus` и журнал фокусировок.
-5. В Волне 2: создать/актуализировать описание (`README.sdlc.md` или `external-systems/<slug>.md`).
+4. Обновить `current_focus`, `last_focused_at`, `focus_count` и журнал фокусировок.
+5. Создать/актуализировать описание по `meta-templates/system-readme.meta.md`:
+   - `kind=materialized` → `<system-root>/README.sdlc.md` (sidecar, не трогать существующий `README.md`).
+   - `kind=logical` → `<target>/.claude/sdlc/external-systems/<slug>.md`.
+   - `--transient` — описание не создаётся.
+   - `--retire <slug>` — описание перемещается в `retired-systems/`.
 6. Зафиксировать изменение в `decisions.md` (с 2–3 альтернативами, если переход неочевиден).
 
 ## Критерии готовности

@@ -4,10 +4,11 @@
 Плагин technology-agnostic; выбор уровня сложности и инструментов — за пользователем.
 Решения фиксируются как артефакты Claude Code в целевом проекте, не в плагине.
 
-## Статус: Волна 1 MVP
+## Статус: Волна 2 (dogfooding-ready)
 
-Принципы 1–13 + 4a. Цель — прогон демо-сценария на стороннем проекте.
-Волна 2 добавит принципы 14–17 (memom, README систем внимания, dogfooding).
+Принципы 1–17 + 4a.
+Волна 1 — каркас для сценария 1 (todo-list).
+Волна 2 — memom, README систем внимания, сценарий 2 (dogfooding).
 
 ## Опорные источники
 
@@ -65,24 +66,28 @@
 - `sdlc-consistency-auditor` — сквозная согласованность артефактов.
 - `sdlc-alpha-tracker` — единственный источник истины о состоянии альф.
 
-### Scripts (6, Волна 1)
+### Scripts (9)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
 - `enforce-tdd.sh` — мягкая блокировка записи кода без парного теста.
 - `enforce-format-lint.sh` — диспетчер форматера и линтера из `plugin-config.md`.
 - `enforce-no-comments.sh` — запрет комментариев в коде.
 - `check-cross-refs.sh` — детерминированная проверка осиротевших ссылок.
+- `check-readme-inventory.sh` — сверка имён в README плагина со структурой (Волна 2).
+- `check-system-readmes.sh` — инвентарь описаний систем внимания в целевом (Волна 2).
+- `check-memom-consistency.sh` — блокирует изменение принципов без записи в memom (Волна 2).
 - `bootstrap-target.sh` — инициализация целевого, режимы `--fail-if-exists` / `--merge` / `--force`.
 
-### Meta-templates (10, Волна 1)
+### Meta-templates (11)
 - `work-product.meta.md` — базовая схема рабочего продукта.
 - `phase-artifact.meta.md` — схема любого артефакта фазы.
 - `profile.meta.md` — схема SME-выбора целевого.
-- `plugin-config.meta.md` — схема конфига hooks.
+- `plugin-config.meta.md` — схема конфига hooks (+TTL в Волне 2).
 - `alpha-state.meta.md` — схема журнала альф.
-- `system-context.meta.md` — схема фокуса внимания.
+- `system-context.meta.md` — схема фокуса внимания (kind, role_vs_target).
 - `roles-state.meta.md` — схема журнала ролей.
 - `decisions.meta.md` — схема журнала альтернатив (HOOTL-лог).
 - `audit-report.meta.md` — схема отчёта `/sdlc-audit`.
+- `system-readme.meta.md` — схема описания системы внимания (Волна 2).
 - `credentials.meta.md` — схема `.env.example` + правила `.gitignore`.
 
 ### Catalogs (4)
@@ -92,13 +97,16 @@
 - `catalogs/method-tool-matrix.md` — матрица «метод → примеры инструментов».
 
 ### Hooks (1 файл)
-- `hooks/hooks.json` — PreToolUse TDD (soft); PostToolUse порядок: validator → check-cross-refs → auditor async → format/lint → no-comments.
+- `hooks/hooks.json` — PreToolUse TDD (soft); PostToolUse порядок: validator → check-cross-refs → format/lint → no-comments → check-system-readmes.
+
+### Memom (Волна 2)
+- `memom.md` — журнал эволюции принципов плагина (принцип 15).
 
 ## Демо-сценарии
 
 Живут отдельно в проекте доклада: `/home/ypolosov/DEV/GITS/talk-ai-driven-sdlc/demo/`.
 - `01-target-todo-list.md` — плагин применяется к стороннему проекту `todo-list`.
-- `02-dogfooding-extend-plugin.md` — плагин применяется к самому себе (Волна 2).
+- `02-dogfooding-extend-plugin.md` — плагин применяется к самому себе (dogfooding).
 
 ## Как читать плагин
 
