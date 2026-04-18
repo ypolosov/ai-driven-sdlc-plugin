@@ -1,0 +1,22 @@
+{
+  "name": "ypolosov",
+  "owner": {
+    "name": "Yuri Polosov",
+    "email": "ypolosov@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "ai-driven-sdlc",
+      "source": "./",
+      "description": "Methodological framework for AI-driven SDLC based on systems thinking",
+      "version": "0.2.0",
+      "author": {
+        "name": "Yuri Polosov",
+        "email": "ypolosov@gmail.com"
+      },
+      "homepage": "https://github.com/ypolosov/ai-driven-sdlc-plugin",
+      "license": "MIT",
+      "keywords": ["sdlc", "systems-thinking", "ai-driven", "levenchuk"]
+    }
+  ]
+}
