@@ -787,3 +787,51 @@ updated: 2026-04-19
   - `.claude/sdlc/alphas.md`
   - `CHANGELOG.md`
 
+## 2026-04-19 22:30 — формат work-unit issue template
+
+- context: активация GitHub Issues как state_artifact для альфы Work.
+- autonomy_mode: hitl
+- phase: operations
+- role: method-engineer
+- alternatives:
+  1. Полный: альфа + фаза + AC + definition-of-done.
+  2. Компактный: только scope + AC.
+  3. Расширенный: выше + estimate + dependencies.
+- choice: 1
+- rationale: максимум трассируемости; каждая US из requirements.md может быть отражена.
+- traces_to:
+  - `.github/ISSUE_TEMPLATE/work-unit.yml`
+  - `.claude/sdlc/phases/operations/operations.md` §3.2
+
+## 2026-04-19 22:31 — стратегия milestones
+
+- context: группировка backlog-единиц.
+- autonomy_mode: hitl
+- phase: operations
+- role: method-engineer
+- alternatives:
+  1. По волнам (Wave 1, Wave 2, Wave 3).
+  2. По релизам (v0.3.0, v0.4.0).
+  3. Без milestones на старте.
+- choice: 1
+- rationale: совпадает с семантикой CLAUDE.md «Wave 1/2»; Wave 3 — текущий backlog.
+- traces_to:
+  - `CLAUDE.md` (секция «Двухволновое MVP»)
+  - GitHub milestones
+
+## 2026-04-19 22:32 — объём pilot-issues
+
+- context: дымовой тест backlog-процесса.
+- autonomy_mode: hitl
+- phase: operations
+- role: method-engineer
+- alternatives:
+  1. 3 issues: bats-покрытие + gitleaks + MCP dev/runtime.
+  2. 1 self-referential (настройка backlog).
+  3. 6 issues (весь backlog development.md §3.5).
+- choice: 1
+- rationale: 3 типа задач для дымового теста; не спам.
+- traces_to:
+  - `.claude/sdlc/phases/development/development.md` §3.5
+  - GitHub Issues
+

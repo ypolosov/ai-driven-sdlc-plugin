@@ -1,0 +1,75 @@
+name: Work Unit
+description: Единица работы backlog для альфы Work
+title: "[work-unit] "
+labels: [work-unit]
+body:
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Что именно надо сделать; границы задачи.
+    validations:
+      required: true
+  - type: dropdown
+    id: alpha
+    attributes:
+      label: Продвигает альфу
+      description: Какую альфу Essence закрытие задачи продвинет.
+      options:
+        - Opportunity
+        - Stakeholders
+        - Requirements
+        - Software System
+        - Work
+        - Team
+        - Way of Working
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Фаза SDLC
+      options:
+        - vision
+        - requirements
+        - architecture
+        - development
+        - testing
+        - deployment
+        - operations
+        - cross-cutting
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Критерии приёмки (AC)
+      description: Gherkin-style или bullet-list; проверяемые условия.
+      placeholder: |
+        - GIVEN ... WHEN ... THEN ...
+        - AC-1: ...
+        - AC-2: ...
+    validations:
+      required: true
+  - type: textarea
+    id: definition_of_done
+    attributes:
+      label: Definition of Done
+      description: Что должно быть выполнено чтобы закрыть issue.
+      placeholder: |
+        - [ ] код написан и проходит bats
+        - [ ] shellcheck/shfmt чистые
+        - [ ] CI зелёный
+        - [ ] CHANGELOG обновлён
+        - [ ] /sdlc-audit pass
+    validations:
+      required: true
+  - type: textarea
+    id: traces
+    attributes:
+      label: Трассировки
+      description: Ссылки на связанные артефакты SDLC (requirements AC, ADR, testing сценарии).
+      placeholder: |
+        - requirements.md: US-03 AC-03.2
+        - architecture.md: ADR-005
+        - testing.md: §3.1 unit для script X

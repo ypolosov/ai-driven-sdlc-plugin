@@ -48,8 +48,10 @@ updated: 2026-04-19
 - `.github/ISSUE_TEMPLATE/bug.yml` — обязательные поля: версия, команда, ожидаемое, фактическое.
 - `.github/ISSUE_TEMPLATE/feature.yml` — мотивация, альтернативы, scope.
 - `.github/ISSUE_TEMPLATE/question.yml` — контекст, попытки решения.
+- `.github/ISSUE_TEMPLATE/work-unit.yml` — scope, альфа, фаза, AC, DoD, трассировки.
 
-Labels: `bug`, `feature`, `question`, `good-first-issue`, `wontfix`.
+Labels: `bug`, `feature`, `question`, `work-unit`, `wave-1`, `wave-2`, `wave-3`, `good-first-issue`, `wontfix`.
+Milestones: `Wave 1` (closed), `Wave 2` (closed), `Wave 3` (текущий backlog).
 
 ### 3.3. Triage процесс
 

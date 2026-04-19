@@ -58,7 +58,10 @@ updated: 2026-04-19
 
 ### 3.3. Work-трекинг (принцип 9)
 
-- Единица работы — issue в GitHub с лейблом `work-unit`.
+- Единица работы — issue через `.github/ISSUE_TEMPLATE/work-unit.yml`.
+- Обязательные поля: scope, альфа, фаза, AC, definition-of-done, трассировки.
+- Labels — `work-unit` + wave-метка (`wave-1`..`wave-3`).
+- Milestone — `Wave N` для группировки.
 - Evidence для Work alpha — закрытый issue с PR-ссылкой.
 - Макросостояние в `alphas.md` обновляется при закрытии milestone.
 - state_artifact в `plugin-config.md`: `kind: mcp`, `ref: github`.
