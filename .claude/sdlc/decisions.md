@@ -536,3 +536,19 @@ updated: 2026-04-19
   - `.claude/sdlc/phases/testing/testing.md` §4
   - `.claude/sdlc/audit.md`
 
+## 2026-04-19 18:00 — /sdlc-focus ai-driven-sdlc-plugin (возврат фокуса)
+
+- context: hooks-подсистема углублена; готовимся к `/sdlc-phase development`.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. Вернуть фокус на ai-driven-sdlc-plugin (плагин как целое).
+  2. Оставить фокус на hooks (только hooks как sub-target).
+  3. Переключиться на новую подсистему (например, agents или skills).
+- choice: 1
+- rationale: tdd_pairs общие для всех bash-скриптов, formatter/linter применяются ко всему репо, testing.md имеет system_of_attention=ai-driven-sdlc-plugin.
+- traces_to:
+  - `.claude/sdlc/system-context.md`
+  - `README.sdlc.md`
+

@@ -2,7 +2,7 @@
 name: system-context
 type: attention-context
 project: ai-driven-sdlc-plugin
-current_focus: hooks
+current_focus: ai-driven-sdlc-plugin
 updated: 2026-04-19
 ---
 
@@ -16,12 +16,12 @@ updated: 2026-04-19
 
 | slug | role_vs_target | kind | last_focused_at | focus_count |
 |---|---|---|---|---|
-| ai-driven-sdlc-plugin | target | materialized | 2026-04-19 | 1 |
+| ai-driven-sdlc-plugin | target | materialized | 2026-04-19 | 2 |
 | hooks | subsystem | logical | 2026-04-19 | 1 |
 
 ## Пояснения
 
-`current_focus=hooks` — внимание перенесено на подсистему hooks.
+`current_focus=ai-driven-sdlc-plugin` — внимание возвращено на целевую систему.
 `role_vs_target` остаётся относительно корня проекта (ai-driven-sdlc-plugin=target, dogfooding, принцип 12).
 Надсистему, подсистемы и окружение фиксируйте через `/sdlc-focus` по мере необходимости.
 
@@ -39,3 +39,10 @@ updated: 2026-04-19
 - Граница: `hooks/hooks.json` + `scripts/enforce-*.sh` + `scripts/check-*.sh`.
 - Описание системы: `.claude/sdlc/external-systems/hooks.md`.
 - Мотив: §8 architecture.md — подсистема заслуживает отдельного анализа.
+
+### 2026-04-19 — возврат внимания на ai-driven-sdlc-plugin
+
+- focus: `ai-driven-sdlc-plugin` (kind=materialized).
+- Граница: корень репозитория.
+- Описание системы: `README.sdlc.md` в корне проекта.
+- Мотив: подготовка к `/sdlc-phase development` для всего плагина.

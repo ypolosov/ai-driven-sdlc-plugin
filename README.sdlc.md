@@ -5,7 +5,7 @@ kind: materialized
 role_vs_target: target
 project: ai-driven-sdlc-plugin
 last_focused_at: 2026-04-19
-focus_count: 1
+focus_count: 2
 updated: 2026-04-19
 ---
 
