@@ -28,7 +28,11 @@ while IFS= read -r ref_line; do
     case "$ref" in
       http*|\#*|mailto:*) continue ;;
     esac
-    resolved="$(cd "$(dirname "$f")" 2>/dev/null && readlink -f -- "$ref" 2>/dev/null || true)"
+    resolved=""
+    ref_dir="$(dirname -- "$f")"
+    if [ -d "$ref_dir" ]; then
+      resolved="$( (cd "$ref_dir" && readlink -f -- "$ref") 2>/dev/null)" || resolved=""
+    fi
     if [ -z "$resolved" ] || [ ! -e "$resolved" ]; then
       printf 'check-cross-refs: битая ссылка в %s: %s\n' "$f" "$ref" >&2
       broken=$((broken+1))
