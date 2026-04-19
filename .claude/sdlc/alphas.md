@@ -15,8 +15,8 @@ updated: 2026-04-19
 | Альфа | Состояние | Артефакт-свидетельство | Дата |
 |---|---|---|---|
 | Opportunity | Value Established | `.claude/sdlc/phases/vision/vision.md` | 2026-04-19 |
-| Stakeholders | Represented | `.claude/sdlc/phases/vision/vision.md` | 2026-04-19 |
-| Requirements | — | — | — |
+| Stakeholders | Involved | `.claude/sdlc/phases/requirements/requirements.md` | 2026-04-19 |
+| Requirements | Bounded | `.claude/sdlc/phases/requirements/requirements.md` | 2026-04-19 |
 | Software System | — | — | — |
 | Work | Initiated | `.claude/sdlc/decisions.md#bootstrap` | 2026-04-19 |
 | Team | Seeded | `.claude/sdlc/roles.md` | 2026-04-19 |
@@ -47,3 +47,12 @@ updated: 2026-04-19
 - Stakeholders: Recognized → Represented.
   - Артефакт: `.claude/sdlc/phases/vision/vision.md` (секция 3.4).
   - Мотив: ключевые стейкхолдеры с интересами перечислены.
+
+### 2026-04-19 — завершение фазы requirements
+
+- Requirements: — → Bounded (skip: Conceived).
+  - Артефакт: `.claude/sdlc/phases/requirements/requirements.md` (8 US с Gherkin AC).
+  - Мотив: объём MVP Волны 2 зафиксирован и декомпозирован.
+- Stakeholders: Represented → Involved.
+  - Артефакт: `.claude/sdlc/phases/requirements/requirements.md` (AC каждой US).
+  - Мотив: интересы стейкхолдеров учтены в критериях приёмки.

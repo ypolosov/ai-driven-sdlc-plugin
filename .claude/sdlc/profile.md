@@ -16,7 +16,7 @@ updated: 2026-04-19
 | Фаза | Уровень SME | Выбранный метод | Выбранный инструмент | default_autonomy |
 |---|---|---|---|---|
 | vision | pet | Одностраничное описание проблемы и цели | README-as-vision | hitl |
-| requirements | — | — | — | hitl |
+| requirements | mid | Декомпозиция на проверяемые единицы с AC | User Stories + Gherkin AC | hitl |
 | architecture | — | — | — | hitl |
 | development | — | — | — | hitl |
 | testing | — | — | — | hitl |
@@ -36,3 +36,4 @@ updated: 2026-04-19
 
 - 2026-04-19 — bootstrap; уровень проекта зафиксирован как pet.
 - 2026-04-19 — vision выбран: pet, README-as-vision, autonomy hitl.
+- 2026-04-19 — requirements выбран: mid, User Stories + Gherkin AC, autonomy hitl.

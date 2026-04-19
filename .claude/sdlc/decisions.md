@@ -153,6 +153,84 @@ updated: 2026-04-19
 - traces_to:
   - `.claude/sdlc/phases/vision/vision.md` (секция 3.5)
 
+## 2026-04-19 15:20 — SME фазы requirements (уровень)
+
+- context: выбор уровня SME для фазы requirements.
+- autonomy_mode: hitl
+- phase: requirements
+- role: method-engineer
+- alternatives:
+  1. pet — свободный список желаемого без критериев приёмки.
+  2. mid — декомпозиция на проверяемые единицы с AC и готовностью.
+  3. enterprise — формальные контракты с трассируемостью до стейкхолдеров.
+- choice: 2
+- rationale: mid согласуется с TDD (принцип 5) и даёт опору для testing.
+- traces_to:
+  - `.claude/sdlc/profile.md`
+  - `.claude/sdlc/phases/requirements/requirements.md`
+
+## 2026-04-19 15:21 — SME фазы requirements (инструмент)
+
+- context: выбор инструмента при mid для фазы requirements.
+- autonomy_mode: hitl
+- phase: requirements
+- role: method-engineer
+- alternatives:
+  1. User Stories + Gherkin AC — текстовый сценарий под AC, прямой путь в TDD.
+  2. Impact Mapping — Why/Who/How/What; фокус на связи стейкхолдеров с фичами.
+  3. Story Mapping — двумерная карта сценариев пользователя.
+- choice: 1
+- rationale: Gherkin AC напрямую ложится на второй TDD-слой LLM-аудитора.
+- traces_to:
+  - `.claude/sdlc/profile.md`
+  - `.claude/sdlc/phases/requirements/requirements.md`
+
+## 2026-04-19 15:22 — место хранения backlog
+
+- context: выбор единого или раздельного хранилища требований.
+- autonomy_mode: hitl
+- phase: requirements
+- role: method-engineer
+- alternatives:
+  1. GitHub Issues репозитория с label `requirement` — единый трекер state и backlog.
+  2. Плоский `requirements.md` в репо — проще версионировать, но state и backlog разойдутся.
+  3. GitHub Projects — канбан-доска, ограниченная поддержка через MCP.
+- choice: 1
+- rationale: state-артефакт уже MCP/Issues; единый трекер упрощает трассировку.
+- traces_to:
+  - `.claude/sdlc/phases/requirements/requirements.md` (поле backlog_store)
+
+## 2026-04-19 15:23 — volatility требований
+
+- context: оценка скорости изменений требований для выбора режима.
+- autonomy_mode: hitl
+- phase: requirements
+- role: method-engineer
+- alternatives:
+  1. Часто — dogfooding итерации уточняют требования после каждой демо.
+  2. Редко — стабильное ядро с периферийными изменениями.
+  3. Пока неясно — пересмотреть через квартал.
+- choice: 1
+- rationale: плагин в активной разработке; требования уточняются по ходу.
+- traces_to:
+  - `.claude/sdlc/phases/requirements/requirements.md` (поле volatility)
+
+## 2026-04-19 15:10 — выбор следующей фазы после vision
+
+- context: sdlc-continue после завершения vision, role method-engineer.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. `/sdlc-phase requirements` — декомпозиция vision в проверяемые единицы.
+  2. `/sdlc-focus` на Волну 2 — сузить границу до принципов 14-17.
+  3. `/sdlc-phase architecture` — сразу к структурным решениям, пропустив явные требования.
+  4. `/sdlc-audit` — проверить консистентность артефактов до перехода.
+- choice: 1
+- rationale: логичный порядок, Requirements альфа ещё в начальном состоянии.
+- traces_to:
+  - `.claude/sdlc/phases/requirements/` (будет создан)
+
 ## 2026-04-19 15:05 — противоречия интересов стейкхолдеров
 
 - context: фиксация конфликтов, которые разрешает плагин.
