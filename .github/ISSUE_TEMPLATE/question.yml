@@ -1,0 +1,31 @@
+name: Вопрос
+description: Задать вопрос по использованию плагина
+title: "[question] "
+labels: [question]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Контекст
+      description: Что вы пытаетесь сделать.
+    validations:
+      required: true
+  - type: textarea
+    id: attempted
+    attributes:
+      label: Что уже попробовали
+      description: Какие команды запустили, какие артефакты прочитали.
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Вопрос
+      description: Конкретная формулировка того, что хотите понять.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Версия плагина
+      placeholder: "0.1.2"

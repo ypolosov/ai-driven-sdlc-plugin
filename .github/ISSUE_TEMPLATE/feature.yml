@@ -1,0 +1,44 @@
+name: Фича
+description: Предложить новую функциональность или улучшение
+title: "[feature] "
+labels: [feature]
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Мотивация
+      description: Какую проблему решает фича? Какой use case.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Предложение
+      description: Что конкретно добавить или изменить.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Альтернативы
+      description: Какие варианты вы рассмотрели? Почему этот лучше.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Какие skills/commands/scripts затрагиваются.
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Фаза SDLC
+      options:
+        - vision
+        - requirements
+        - architecture
+        - development
+        - testing
+        - deployment
+        - operations
+        - cross-cutting

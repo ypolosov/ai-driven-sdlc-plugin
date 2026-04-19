@@ -721,3 +721,53 @@ updated: 2026-04-19
   - `.claude-plugin/marketplace.json`
   - `.claude/sdlc/phases/deployment/deployment.md` §3.3
 
+## 2026-04-19 21:30 — SME фазы operations
+
+- context: выбор уровня сложности для operations.
+- autonomy_mode: hitl
+- phase: operations
+- role: method-engineer
+- alternatives:
+  1. pet — GitHub Issues как единственный канал.
+  2. mid — Issues + telemetry + CHANGELOG-driven.
+  3. enterprise — SLA + on-call + дашборды.
+- choice: 1
+- rationale: solo-разработчик, плагин без server-side компонента, best-effort поддержка.
+- traces_to:
+  - `.claude/sdlc/phases/operations/operations.md`
+  - `.claude/sdlc/profile.md`
+
+## 2026-04-19 21:31 — канал обратной связи
+
+- context: где пользователи сообщают о проблемах.
+- autonomy_mode: hitl
+- phase: operations
+- role: method-engineer
+- alternatives:
+  1. GitHub Issues с 3 темплейтами (bug/feature/question).
+  2. GitHub Discussions.
+  3. Email / другой канал.
+- choice: 1 (+ email для сенситивных в SUPPORT.md).
+- rationale: минимальный вход для пользователей; структурированные поля через yml-темплейты.
+- traces_to:
+  - `.github/ISSUE_TEMPLATE/bug.yml`
+  - `.github/ISSUE_TEMPLATE/feature.yml`
+  - `.github/ISSUE_TEMPLATE/question.yml`
+  - `SUPPORT.md`
+
+## 2026-04-19 21:32 — первый артефакт operations
+
+- context: стартовый набор для фазы operations.
+- autonomy_mode: hitl
+- phase: operations
+- role: method-engineer
+- alternatives:
+  1. operations.md + Issue templates + SUPPORT.md.
+  2. Только operations.md без templates.
+  3. Incident playbook сразу.
+- choice: 1
+- rationale: канал обратной связи открыт сразу; playbook — после первого инцидента.
+- traces_to:
+  - `.claude/sdlc/phases/operations/operations.md`
+  - `SUPPORT.md`
+

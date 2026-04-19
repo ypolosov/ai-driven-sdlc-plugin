@@ -11,7 +11,8 @@ role: method-engineer
 traces_from:
   - ../development/development.md
   - ../testing/testing.md
-traces_to: []
+traces_to:
+  - ../operations/operations.md
 system_of_attention: ai-driven-sdlc-plugin
 created: 2026-04-19
 updated: 2026-04-19
@@ -85,7 +86,7 @@ updated: 2026-04-19
 - `traces_from`:
   - [`development.md`](../development/development.md) — backlog и покрытие тестами.
   - [`testing.md`](../testing/testing.md) — green-build как release gate.
-- `traces_to`: пуст; operations ещё не начат.
+- `traces_to`: [`operations.md`](../operations/operations.md) — канал feedback после релиза.
 
 ## 5. Критерии готовности фазы
 

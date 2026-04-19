@@ -101,3 +101,11 @@ updated: 2026-04-19
 - Software System: без перехода; останется Demonstrable.
   - Мотив: Usable требует первого успешного релиза в marketplace; план зафиксирован, релиз не выполнен.
 - Стратегия релизов: `phases/deployment/deployment.md` + `CHANGELOG.md`.
+
+### 2026-04-19 — завершение фазы operations (стратегия)
+
+- Software System: без перехода; останется Demonstrable.
+  - Мотив: Usable требует реального использования пользователями, канал обратной связи готов.
+- Opportunity: без перехода; останется Value Established.
+  - Мотив: Addressed требует внешнего пользователя, подтвердившего ценность.
+- Стратегия поддержки: `phases/operations/operations.md` + 3 issue templates + `SUPPORT.md`.
