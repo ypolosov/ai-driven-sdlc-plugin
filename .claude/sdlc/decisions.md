@@ -771,3 +771,19 @@ updated: 2026-04-19
   - `.claude/sdlc/phases/operations/operations.md`
   - `SUPPORT.md`
 
+## 2026-04-19 22:00 — релиз v0.2.0 и продвижение Software System
+
+- context: релиз Волны 2 выполнен; тег v0.2.0 опубликован.
+- autonomy_mode: hitl
+- phase: deployment
+- role: method-engineer
+- alternatives:
+  1. Software System Demonstrable → Usable (релиз опубликован).
+  2. Оставить Demonstrable до первого внешнего пользователя.
+  3. Пропустить Usable и целиться в Ready.
+- choice: 1
+- rationale: система установима через marketplace, доступна стейкхолдерам; Essence Usable — «система готова к использованию».
+- traces_to:
+  - `.claude/sdlc/alphas.md`
+  - `CHANGELOG.md`
+

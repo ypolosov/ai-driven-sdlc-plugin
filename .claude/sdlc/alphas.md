@@ -17,7 +17,7 @@ updated: 2026-04-19
 | Opportunity | Value Established | `.claude/sdlc/phases/vision/vision.md` | 2026-04-19 |
 | Stakeholders | Involved | `.claude/sdlc/phases/requirements/requirements.md` | 2026-04-19 |
 | Requirements | Acceptable | `.claude/sdlc/phases/architecture/architecture.md` | 2026-04-19 |
-| Software System | Demonstrable | `tests/unit/validate-artifact.bats` | 2026-04-19 |
+| Software System | Usable | `CHANGELOG.md#0.2.0` (release v0.2.0) | 2026-04-19 |
 | Work | Under Control | `tests/unit/validate-artifact.bats` | 2026-04-19 |
 | Team | Seeded | `.claude/sdlc/roles.md` | 2026-04-19 |
 | Way of Working | In Use | `.claude/sdlc/phases/testing/testing.md` | 2026-04-19 |
@@ -109,3 +109,11 @@ updated: 2026-04-19
 - Opportunity: без перехода; останется Value Established.
   - Мотив: Addressed требует внешнего пользователя, подтвердившего ценность.
 - Стратегия поддержки: `phases/operations/operations.md` + 3 issue templates + `SUPPORT.md`.
+
+### 2026-04-19 — релиз v0.2.0
+
+- Software System: Demonstrable → Usable.
+  - Артефакт: `CHANGELOG.md` секция `[0.2.0]` + GitHub Release v0.2.0.
+  - Мотив: система установима и пригодна к использованию внешними стейкхолдерами через marketplace.
+- Opportunity: без перехода; останется Value Established.
+  - Мотив: Addressed требует подтверждения ценности от внешнего пользователя.

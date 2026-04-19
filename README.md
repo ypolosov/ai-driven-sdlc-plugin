@@ -25,6 +25,16 @@
 
 Или через локальный marketplace в настройках Claude Code.
 
+## Рекомендуемые MCP-плагины
+
+Плагин использует внешние MCP-серверы для полного функционала:
+
+- `context7@claude-plugins-official` — референсная документация инструментов (обязательно для SME-опроса).
+- `github@claude-plugins-official` — GitHub Issues как state_artifact для альфы Work (опционально, mid+).
+
+Плагин не ship'ит собственный `context7` — используйте dedicated плагин.
+Плагин ship'ит минимальный `github` MCP в `.mcp.json` как fallback.
+
 ## Быстрый старт
 
 1. Открыть целевой проект в Claude Code.
