@@ -10,7 +10,8 @@ disciplines: [requirements-engineering, stakeholder-analysis]
 role: method-engineer
 traces_from:
   - ../vision/vision.md
-traces_to: []
+traces_to:
+  - ../architecture/architecture.md
 system_of_attention: ai-driven-sdlc-plugin
 backlog_store: github-issues
 volatility: high

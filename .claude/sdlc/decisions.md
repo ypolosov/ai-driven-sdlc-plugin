@@ -326,3 +326,69 @@ updated: 2026-04-19
   - `.claude/sdlc/phases/vision/vision.md`
   - `.claude/sdlc/audit.md#issue-05`
 
+## 2026-04-19 16:30 — SME фазы architecture (уровень)
+
+- context: выбор уровня SME для фазы architecture в dogfooding.
+- autonomy_mode: hitl
+- phase: architecture
+- role: method-engineer
+- alternatives:
+  1. pet — одностраничное описание структуры с одной диаграммой.
+  2. mid — фиксация значимых решений + многоуровневое моделирование.
+  3. enterprise — C4 L1-3 + ADR + fitness-функции + явные NFR.
+- choice: 2
+- rationale: плагин уже большой, mid согласован с requirements=mid.
+- traces_to:
+  - `.claude/sdlc/profile.md`
+  - `.claude/sdlc/phases/architecture/architecture.md`
+
+## 2026-04-19 16:31 — SME фазы architecture (инструмент)
+
+- context: выбор инструмента при mid для фазы architecture.
+- autonomy_mode: hitl
+- phase: architecture
+- role: method-engineer
+- alternatives:
+  1. ADR (Nygard) — по файлу на значимое решение; ясная история эволюции.
+  2. C4 Level 1-2 — Context + Container диаграммы.
+  3. arc42 — шаблон из 12 разделов; полный, но тяжеловесный.
+- choice: 1
+- rationale: ADR параллелен decisions.md; разделяет решения и декомпозицию.
+- traces_to:
+  - `.claude/sdlc/profile.md`
+  - `.claude/sdlc/phases/architecture/adr/`
+
+## 2026-04-19 16:32 — качественные атрибуты (NFR)
+
+- context: выбор критичных NFR для architecture.
+- autonomy_mode: hitl
+- phase: architecture
+- role: method-engineer
+- alternatives (multi-select):
+  1. extensibility — пользователь добавляет инструменты в method-tool-extensions.
+  2. reversibility — /sdlc-init fail-if-exists, /sdlc-focus retire.
+  3. determinism — скрипты приоритетнее LLM для проверяемого.
+  4. hooks-performance — hooks не блокируют пользователя заметно.
+  5. security — секреты не утекают в git через артефакты.
+- choice: 1, 2, 3, 4, 5
+- rationale: все пять критичны для плагина; каждому соответствует ADR.
+- traces_to:
+  - `.claude/sdlc/phases/architecture/architecture.md` (секция 4)
+  - ADR-003, ADR-007, ADR-006, ADR-005, ADR-008
+
+## 2026-04-19 16:33 — подсистема для /sdlc-focus после architecture
+
+- context: выбор наиболее требующей внимания подсистемы плагина.
+- autonomy_mode: hitl
+- phase: architecture
+- role: method-engineer
+- alternatives:
+  1. hooks-система — 5 скриптов + plugin-config + 3 слоя TDD.
+  2. catalogs — источники терминологии.
+  3. meta-templates — 11 мета-шаблонов.
+  4. Нет — описать всё в architecture.md.
+- choice: 1
+- rationale: hooks критически влияют на надёжность; заслуживают отдельного анализа.
+- traces_to:
+  - `.claude/sdlc/phases/architecture/architecture.md` §8 (открытые вопросы)
+

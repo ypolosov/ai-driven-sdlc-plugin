@@ -30,7 +30,7 @@ issues_count: 1
 | System-context ↔ README.sdlc.md ↔ артефакты | pass | `system-context.md` и `README.sdlc.md` согласованы по `slug`, `kind`, `role_vs_target`, `last_focused_at`, `focus_count`. Связанные артефакты (`profile.md`, `plugin-config.md`, `alphas.md`, `decisions.md`, `roles.md`) перечислены в `README.sdlc.md §4`. |
 | Decisions-покрытие (принцип 1) | pass | 20 записей покрывают bootstrap, оба SME-выбора по фазам, содержательные выборы vision, выбор следующей фазы, выборы requirements и пять фиксов аудита. Каждая запись содержит 2–4 альтернативы. Порядок по timestamp корректен. |
 | Роли: roles.md ↔ profile.md ↔ vision/requirements | pass | `method-engineer` активна, отвечает за Way of Working. `systems-thinker` зарегистрирована как неактивная, покрывает US-04 и US-07 (sовместимо с `catalogs/roles.md`). Висячих указателей нет. |
-| Осиротевшие ссылки (`check-cross-refs.sh` + визуальная проверка) | pass | Скрипт отработал без нарушений. Ручная проверка: `[vision.md](../vision/vision.md)` в `requirements.md §4` разрешается; frontmatter `traces_to: - ../requirements/requirements.md` в `vision.md` ведёт к существующему файлу. |
+| Осиротевшие ссылки (`check-cross-refs.sh` + визуальная проверка) | pass | Скрипт отработал без нарушений. Ручная проверка: относительная ссылка на `vision.md` из `requirements.md §4` разрешается; frontmatter `traces_to` в `vision.md` ведёт к существующему `requirements.md`. |
 | TDD-семантика (второй слой принципа 5) | n/a | Фаза development не начата; источники не изменялись. |
 | Memom-консистентность (Волна 2) | pass | `memom.md` присутствует в корне плагина; `CLAUDE.md` плагина не правился в этом прогоне. |
 

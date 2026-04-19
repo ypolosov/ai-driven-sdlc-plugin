@@ -16,8 +16,8 @@ updated: 2026-04-19
 |---|---|---|---|
 | Opportunity | Value Established | `.claude/sdlc/phases/vision/vision.md` | 2026-04-19 |
 | Stakeholders | Involved | `.claude/sdlc/phases/requirements/requirements.md` | 2026-04-19 |
-| Requirements | Bounded | `.claude/sdlc/phases/requirements/requirements.md` | 2026-04-19 |
-| Software System | — | — | — |
+| Requirements | Acceptable | `.claude/sdlc/phases/architecture/architecture.md` | 2026-04-19 |
+| Software System | Architecture Selected | `.claude/sdlc/phases/architecture/architecture.md` | 2026-04-19 |
 | Work | Initiated | `.claude/sdlc/decisions.md#bootstrap` | 2026-04-19 |
 | Team | Seeded | `.claude/sdlc/roles.md` | 2026-04-19 |
 | Way of Working | Foundation Established | `.claude/sdlc/plugin-config.md` | 2026-04-19 |
@@ -56,3 +56,13 @@ updated: 2026-04-19
 - Stakeholders: Represented → Involved.
   - Артефакт: `.claude/sdlc/phases/requirements/requirements.md` (AC каждой US).
   - Мотив: интересы стейкхолдеров учтены в критериях приёмки.
+
+### 2026-04-19 — завершение фазы architecture
+
+- Software System: — → Architecture Selected.
+  - Артефакт: `.claude/sdlc/phases/architecture/architecture.md` + 8 ADR в `adr/`.
+  - Мотив: функциональная декомпозиция и значимые решения зафиксированы.
+  - Примечание: первое состояние альфы, skip неприменим.
+- Requirements: Bounded → Acceptable (skip: Coherent).
+  - Артефакт: `.claude/sdlc/phases/architecture/architecture.md` §4 (5 NFR).
+  - Мотив: NFR extensibility, reversibility, determinism, hooks-performance, security зафиксированы.
