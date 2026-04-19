@@ -473,6 +473,28 @@ updated: 2026-04-19
 - traces_to:
   - `.claude/sdlc/phases/testing/testing.md` §4
 
+## 2026-04-19 17:30 — /sdlc-focus hooks
+
+- context: перенос внимания на подсистему hooks (§8 architecture.md).
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives (kind):
+  1. logical — композиция hooks.json + scripts/*.sh + config.
+  2. materialized (hooks/) — директория с одним json.
+  3. materialized (scripts/) — директория не только hooks.
+- choice (kind): 1
+- rationale: hooks — логическая композиция поперёк директорий.
+- alternatives (role_vs_target):
+  1. subsystem — подсистема плагина.
+  2. in_environment — элемент рантайма Claude Code.
+  3. creation_system — часть системы создания.
+- choice (role): 1
+- rationale: hooks часть плагина, не рантайма и не создателя.
+- traces_to:
+  - `.claude/sdlc/system-context.md`
+  - `.claude/sdlc/external-systems/hooks.md`
+
 ## 2026-04-19 17:25 — фиксы аудита 17:20 (1 important + 2 note + 1 det)
 
 - context: расхождения после фазы testing — NFR coverage, traces_to, 15-слов.
