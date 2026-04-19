@@ -1,0 +1,5 @@
+
+# ai-driven-sdlc: credentials (принцип 10)
+.env
+.env.local
+.env.*.local
