@@ -15,7 +15,7 @@ updated: 2026-04-19
 
 | Фаза | Уровень SME | Выбранный метод | Выбранный инструмент | default_autonomy |
 |---|---|---|---|---|
-| vision | — | — | — | hitl |
+| vision | pet | Одностраничное описание проблемы и цели | README-as-vision | hitl |
 | requirements | — | — | — | hitl |
 | architecture | — | — | — | hitl |
 | development | — | — | — | hitl |
@@ -35,3 +35,4 @@ updated: 2026-04-19
 ## История изменений SME
 
 - 2026-04-19 — bootstrap; уровень проекта зафиксирован как pet.
+- 2026-04-19 — vision выбран: pet, README-as-vision, autonomy hitl.

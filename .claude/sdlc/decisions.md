@@ -5,6 +5,7 @@ project: ai-driven-sdlc-plugin
 updated: 2026-04-19
 ---
 
+
 # Журнал альтернатив и решений
 
 Принцип 1: альтернативы порождаются и фиксируются; выбор делает пользователь.
@@ -72,3 +73,97 @@ updated: 2026-04-19
 - rationale: MCP github уже подключён, репо публичный, Issues дают трассировку.
 - traces_to:
   - `.claude/sdlc/plugin-config.md#state_artifact`
+
+## 2026-04-19 15:00 — SME фазы vision (уровень)
+
+- context: выбор уровня SME для фазы vision в dogfooding плагина.
+- autonomy_mode: hitl
+- phase: vision
+- role: method-engineer
+- alternatives:
+  1. pet — одностраничное описание проблемы и цели без формализации.
+  2. mid — структурированная модель ценности со стейкхолдерами и метрикой.
+  3. enterprise — формальное моделирование мотивации и потока ценности.
+- choice: 1
+- rationale: соло-разработка, риски низкие, согласуется с уровнем проекта.
+- traces_to:
+  - `.claude/sdlc/profile.md`
+  - `.claude/sdlc/phases/vision/vision.md`
+
+## 2026-04-19 15:01 — SME фазы vision (инструмент)
+
+- context: выбор инструмента при уровне pet для фазы vision.
+- autonomy_mode: hitl
+- phase: vision
+- role: method-engineer
+- alternatives:
+  1. README-as-vision — корневой README несёт цель и проблему.
+  2. Elevator Pitch — одно предложение проблемы, решения, отличия.
+  3. Mission Statement — декларация миссии плагина.
+- choice: 1
+- rationale: согласуется с принципом 16; README плагина живой артефакт.
+- traces_to:
+  - `.claude/sdlc/profile.md`
+  - `.claude/sdlc/phases/vision/vision.md`
+
+## 2026-04-19 15:02 — целевой бенефициар плагина
+
+- context: определение основного получателя ценности плагина.
+- autonomy_mode: hitl
+- phase: vision
+- role: method-engineer
+- alternatives:
+  1. AI-first соло-разработчики применяют Claude Code для SDLC-осмысленной работы.
+  2. Команды с AI-агентами координируются через общий методологический каркас.
+  3. Инженеры методов настраивают SDLC-метод под другие команды.
+  4. Автор плагина как первый пользователь (dogfooding).
+- choice: 1
+- rationale: соло-разработчик — наиболее частый профиль Claude Code пользователя.
+- traces_to:
+  - `.claude/sdlc/phases/vision/vision.md` (секция 3.2)
+
+## 2026-04-19 15:03 — формулировка проблемы
+
+- context: ключевая проблема, которую решает плагин.
+- autonomy_mode: hitl
+- phase: vision
+- role: method-engineer
+- alternatives:
+  1. AI-агенты генерируют код без осмысления системы и стейкхолдеров.
+  2. Жёсткие SDLC-фреймворки не адаптируются под ситуацию проекта.
+  3. Решения между альтернативами теряются в AI-чатах без фиксации.
+- choice: 1
+- rationale: это первичный симптом; пункты 2 и 3 усугубляют, но вторичны.
+- traces_to:
+  - `.claude/sdlc/phases/vision/vision.md` (секция 3.1)
+
+## 2026-04-19 15:04 — карта альтернатив в нише
+
+- context: какие решения уже существуют для выявленной проблемы.
+- autonomy_mode: hitl
+- phase: vision
+- role: method-engineer
+- alternatives:
+  1. Ручные CLAUDE.md и slash-commands без методологического каркаса.
+  2. Классические SDLC-фреймворки без AI-интеграции и ситуативности.
+  3. AI-плагины узкого назначения без покрытия всего SDLC.
+  4. Системное мышление как теория без инструментальной поддержки в AI-среде.
+- choice: 1, 2, 3, 4
+- rationale: все четыре альтернативы присутствуют, ни одна не покрывает задачу целиком.
+- traces_to:
+  - `.claude/sdlc/phases/vision/vision.md` (секция 3.5)
+
+## 2026-04-19 15:05 — противоречия интересов стейкхолдеров
+
+- context: фиксация конфликтов, которые разрешает плагин.
+- autonomy_mode: hitl
+- phase: vision
+- role: method-engineer
+- alternatives:
+  1. Скорость против методичности — разрешается автономией HOTL/HOOTL.
+  2. Автономия против контроля — default HITL, override по задаче.
+  3. Простота против полноты — уровни SME по фазам независимо.
+- choice: 1, 2, 3
+- rationale: все три конфликта актуальны; плагин несёт механизмы для каждого.
+- traces_to:
+  - `.claude/sdlc/phases/vision/vision.md` (секция 3.7)
