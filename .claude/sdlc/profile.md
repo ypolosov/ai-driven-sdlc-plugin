@@ -19,8 +19,8 @@ updated: 2026-04-19
 | requirements | mid | Декомпозиция на проверяемые единицы с AC | User Stories + Gherkin AC | hitl |
 
 | architecture | mid | Фиксация значимых решений и многоуровневое моделирование | ADR (Nygard) | hitl |
+| testing | mid | Пирамида автотестов с покрытием как пороговым критерием | Unit + Integration + E2E | hitl |
 | development | — | — | — | hitl |
-| testing | — | — | — | hitl |
 | deployment | — | — | — | hitl |
 | operations | — | — | — | hitl |
 
@@ -39,3 +39,4 @@ updated: 2026-04-19
 - 2026-04-19 — vision выбран: pet, README-as-vision, autonomy hitl.
 - 2026-04-19 — requirements выбран: mid, User Stories + Gherkin AC, autonomy hitl.
 - 2026-04-19 — architecture выбран: mid, ADR (Nygard), autonomy hitl.
+- 2026-04-19 — testing выбран: mid, Unit + Integration + E2E, autonomy hitl.

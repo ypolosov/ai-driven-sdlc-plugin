@@ -411,3 +411,65 @@ updated: 2026-04-19
 - traces_to:
   - `.claude/sdlc/phases/architecture/architecture.md` §8 (открытые вопросы)
 
+## 2026-04-19 17:10 — SME фазы testing (уровень)
+
+- context: выбор уровня сложности для фазы testing.
+- autonomy_mode: hitl
+- phase: testing
+- role: method-engineer
+- alternatives:
+  1. pet — ручная проверка и редкие smoke-скрипты.
+  2. mid — пирамида автотестов с coverage как пороговым критерием.
+  3. enterprise — fitness-функции, mutation, chaos.
+- choice: 2
+- rationale: плагин на стадии MVP Волны 2; mid даёт гарантии без избытка.
+- traces_to:
+  - `.claude/sdlc/profile.md`
+  - `.claude/sdlc/phases/testing/testing.md`
+
+## 2026-04-19 17:11 — SME фазы testing (инструмент)
+
+- context: выбор инструментария для mid-уровня testing.
+- autonomy_mode: hitl
+- phase: testing
+- role: method-engineer
+- alternatives:
+  1. bats + shellcheck + существующие валидаторы артефактов.
+  2. Только интеграционные smoke-прогоны demo-сценариев.
+  3. bats + pytest для Python-утилит.
+- choice: 1
+- rationale: основная поверхность плагина — bash и markdown.
+- traces_to:
+  - `.claude/sdlc/phases/testing/testing.md` §3
+
+## 2026-04-19 17:12 — coverage-gate стратегия
+
+- context: выбор порога покрытия для фазы testing.
+- autonomy_mode: hitl
+- phase: testing
+- role: method-engineer
+- alternatives:
+  1. Без численного gate, только green-build всех слоёв.
+  2. ≥60% строк для bash-скриптов через kcov.
+  3. 100% AC-сценариев из requirements.md имеют автотест.
+- choice: 1
+- rationale: %coverage спорен для bash; green-build надёжнее как сигнал.
+- traces_to:
+  - `.claude/sdlc/phases/testing/testing.md` §5
+
+## 2026-04-19 17:13 — fitness-функции архитектуры
+
+- context: выбор автоматизируемых fitness-функций NFR.
+- autonomy_mode: hitl
+- phase: testing
+- role: method-engineer
+- alternatives (multi-select):
+  1. Имена инструментов только в method-tool-matrix.md (extensibility).
+  2. Hook-производительность <200ms (hooks-performance).
+  3. Consistency alpha states ↔ артефакты (determinism).
+  4. Secrets не попадают в git через gitleaks (security).
+- choice: 1, 2, 3, 4
+- rationale: покрывают 4 из 5 NFR; reversibility проверяется интеграционно.
+- traces_to:
+  - `.claude/sdlc/phases/testing/testing.md` §4
+

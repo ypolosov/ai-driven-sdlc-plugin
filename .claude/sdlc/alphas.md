@@ -20,7 +20,7 @@ updated: 2026-04-19
 | Software System | Architecture Selected | `.claude/sdlc/phases/architecture/architecture.md` | 2026-04-19 |
 | Work | Initiated | `.claude/sdlc/decisions.md#bootstrap` | 2026-04-19 |
 | Team | Seeded | `.claude/sdlc/roles.md` | 2026-04-19 |
-| Way of Working | Foundation Established | `.claude/sdlc/plugin-config.md` | 2026-04-19 |
+| Way of Working | In Use | `.claude/sdlc/phases/testing/testing.md` | 2026-04-19 |
 
 Прочерк значит: альфа ещё не продвигалась.
 
@@ -66,3 +66,13 @@ updated: 2026-04-19
 - Requirements: Bounded → Acceptable (skip: Coherent).
   - Артефакт: `.claude/sdlc/phases/architecture/architecture.md` §4 (5 NFR).
   - Мотив: NFR extensibility, reversibility, determinism, hooks-performance, security зафиксированы.
+
+### 2026-04-19 — завершение фазы testing (стратегия)
+
+- Way of Working: Foundation Established → In Use.
+  - Артефакт: `.claude/sdlc/phases/testing/testing.md` (пирамида + 4 fitness).
+  - Мотив: стратегия тестирования и fitness-функции зафиксированы.
+- Software System: без перехода; останется Architecture Selected до реализации тестов.
+  - Мотив: Demonstrable требует зелёных bats-тестов, их ещё нет.
+- Requirements: без перехода; останется Acceptable до прохождения тестов.
+  - Мотив: Addressed требует прохождения AC через автотесты.
