@@ -376,6 +376,25 @@ updated: 2026-04-19
   - `.claude/sdlc/phases/architecture/architecture.md` (секция 4)
   - ADR-003, ADR-007, ADR-006, ADR-005, ADR-008
 
+## 2026-04-19 16:50 — фиксы аудита 16:45 (3 note)
+
+- context: косметические расхождения текст↔frontmatter после architecture.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. Применить все 3 фикса автономно в Auto mode.
+  2. Оставить note как есть до ближайшей правки артефактов.
+  3. Переформулировать frontmatter артефактов под текст.
+- choice: 1
+- rationale: все три расхождения — текст §4/§6, note не блокирует.
+- traces_to:
+  - `.claude/sdlc/phases/requirements/requirements.md`
+  - `.claude/sdlc/phases/architecture/architecture.md`
+  - `.claude/sdlc/audit.md#note-01`
+  - `.claude/sdlc/audit.md#note-02`
+  - `.claude/sdlc/audit.md#note-03`
+
 ## 2026-04-19 16:33 — подсистема для /sdlc-focus после architecture
 
 - context: выбор наиболее требующей внимания подсистемы плагина.

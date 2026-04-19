@@ -3,7 +3,7 @@ name: requirements
 type: requirements
 phase: requirements
 sme_level: mid
-method: Декомпозиция на проверяемые единицы с критериями готовности
+method: Декомпозиция на проверяемые единицы с AC
 tool: User Stories + Gherkin AC
 alphas: [Requirements, Stakeholders]
 disciplines: [requirements-engineering, stakeholder-analysis]
@@ -237,7 +237,7 @@ And расхождение блокирует pre-commit
 ## 4. Трассируемость
 
 - `traces_from`: [`vision.md`](../vision/vision.md).
-- `traces_to`: `.claude/sdlc/phases/architecture/` (будет создан).
+- `traces_to`: `.claude/sdlc/phases/architecture/architecture.md` (см. frontmatter).
 - Backlog: GitHub Issues с label `requirement`.
 - Синхронизация backlog: через MCP github.
 - Каждая US привязана к принципам из CLAUDE.md плагина.

@@ -17,6 +17,7 @@ updated: 2026-04-19
 |---|---|---|---|---|
 | vision | pet | Одностраничное описание проблемы и цели | README-as-vision | hitl |
 | requirements | mid | Декомпозиция на проверяемые единицы с AC | User Stories + Gherkin AC | hitl |
+
 | architecture | mid | Фиксация значимых решений и многоуровневое моделирование | ADR (Nygard) | hitl |
 | development | — | — | — | hitl |
 | testing | — | — | — | hitl |
