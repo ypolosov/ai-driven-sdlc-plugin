@@ -31,10 +31,22 @@ meta_template: meta-templates/phase-artifact.meta.md
 - Product discovery.
 - Stakeholder analysis.
 
-## Мета-вопросы
+## Обязательный интерактивный опрос (принцип 1)
 
-Опрос делегируется `sdlc-method-engineering` с контекстом `phase: vision`.
-Дополнительно в фазе Vision задаются:
+**Skill ведёт пользователя по фазе; не заменяет его решения автогенерацией.**
+
+Шаг 0 — ДО записи любых артефактов:
+1. Вызвать `AskUserQuestion` с вопросами ниже.
+2. Показать 2–3 альтернативы по каждому выбору.
+3. Дождаться ответа пользователя; не угадывать.
+4. Auto mode среды не отменяет интерактивность.
+5. Только `/sdlc-autonomy --task hootl` разрешает пропуск опроса.
+6. Если `AskUserQuestion` недоступна — остановиться и сообщить пользователю.
+
+### Вопросы фазы Vision
+
+Сначала SME-опрос делегируется `sdlc-method-engineering` с `phase: vision`.
+Дополнительно задаются:
 1. Кто основной бенефициар целевой системы?
 2. Какую проблему решает система; что происходит без неё?
 3. Какие альтернативные решения уже существуют?
@@ -42,12 +54,13 @@ meta_template: meta-templates/phase-artifact.meta.md
 
 ## Протокол инстанцирования
 
-1. Вызвать `sdlc-method-engineering` с `phase: vision`.
-2. Получить выбранный уровень SME и инструмент.
-3. Через `context7` получить референсную структуру инструмента.
-4. Инстанцировать артефакт в `<target>/.claude/sdlc/phases/vision/<artifact>.md`.
-5. Обновить `alphas.md` через `sdlc-alpha-tracker` (продвижение Opportunity и Stakeholders).
-6. Записать решение в `decisions.md` (принцип 1).
+1. **Обязательно:** вызвать `AskUserQuestion` с блоком выше и дождаться ответов.
+2. Вызвать `sdlc-method-engineering` с `phase: vision`.
+3. Получить выбранный уровень SME и инструмент.
+4. Через `context7` получить референсную структуру инструмента.
+5. Инстанцировать артефакт в `<target>/.claude/sdlc/phases/vision/<artifact>.md`.
+6. Обновить `alphas.md` через `sdlc-alpha-tracker` (продвижение Opportunity и Stakeholders).
+7. Записать решение в `decisions.md` (принцип 1).
 
 ## Критерии готовности
 

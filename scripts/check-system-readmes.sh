@@ -51,14 +51,13 @@ for row in table_rows:
         errors += 1
         continue
     if kind == "materialized":
-        path_hint = os.path.join(target, "paths-of-materialized-systems-are-recorded-in-context")
         candidates = [
             os.path.join(target, slug, "README.sdlc.md"),
             os.path.join(target, "packages", slug, "README.sdlc.md"),
             os.path.join(target, "services", slug, "README.sdlc.md"),
-            os.path.join(target, "README.sdlc.md") if slug in ("root", "target") else None,
         ]
-        candidates = [c for c in candidates if c]
+        if role == "target" or slug in ("root", "target"):
+            candidates.append(os.path.join(target, "README.sdlc.md"))
         if not any(os.path.exists(c) for c in candidates):
             print(f"check-system-readmes: для materialized {slug} не найден README.sdlc.md", file=sys.stderr)
             errors += 1

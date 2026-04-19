@@ -45,13 +45,16 @@ tdd_scope:
 
 ### tdd_pairs
 Регулярные выражения пар source↔test.
+Backreference — `\1` (Python/sed-стиль); `$1` также поддерживается.
+Поддерживаются block-style и flow-style YAML.
 
 ```yaml
 tdd_pairs:
   - source: 'src/(.+)\.ts$'
-    test:   'tests/$1.test.ts'
+    test:   'tests/\1.test.ts'
   - source: 'src/(.+)\.py$'
-    test:   'tests/test_$1.py'
+    test:   'tests/test_\1.py'
+  - { source: 'lib/(.+)\.go$', test: 'lib/\1_test.go' }
 ```
 
 ### formatter

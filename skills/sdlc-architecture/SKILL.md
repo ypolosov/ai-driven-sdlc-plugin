@@ -31,9 +31,21 @@ meta_template: meta-templates/phase-artifact.meta.md
 - Software architecture.
 - Functional decomposition (Том 2 гл. 10: функциональный анализ vs модульный синтез).
 
-## Мета-вопросы
+## Обязательный интерактивный опрос (принцип 1)
 
-Опрос делегируется `sdlc-method-engineering` с контекстом `phase: architecture`.
+**Skill ведёт пользователя по фазе; не заменяет его решения автогенерацией.**
+
+Шаг 0 — ДО записи любых артефактов:
+1. Вызвать `AskUserQuestion` с вопросами ниже.
+2. Показать 2–3 альтернативы по каждому выбору.
+3. Дождаться ответа пользователя; не угадывать.
+4. Auto mode среды не отменяет интерактивность.
+5. Только `/sdlc-autonomy --task hootl` разрешает пропуск опроса.
+6. Если `AskUserQuestion` недоступна — остановиться и сообщить пользователю.
+
+### Вопросы фазы Architecture
+
+Сначала SME-опрос делегируется `sdlc-method-engineering` с `phase: architecture`.
 Дополнительно:
 1. Какие качественные атрибуты критичны? (производительность, безопасность, устойчивость)
 2. Где границы целевой системы? (сверить с `system-context.md`)
@@ -42,13 +54,14 @@ meta_template: meta-templates/phase-artifact.meta.md
 
 ## Протокол инстанцирования
 
-1. Вызвать `sdlc-method-engineering` с `phase: architecture`.
-2. Получить уровень и инструмент; зафиксировать в `profile.md`.
-3. Через `context7` получить референс выбранного инструмента.
-4. Инстанцировать артефакт в `<target>/.claude/sdlc/phases/architecture/`.
-5. Связать с `system-context.md`: границы, надсистема, подсистемы.
-6. Обеспечить trace-ссылки на артефакты requirements (`traces_from`).
-7. Обновить `alphas.md` через `sdlc-alpha-tracker`.
+1. **Обязательно:** вызвать `AskUserQuestion` с блоком выше и дождаться ответов.
+2. Вызвать `sdlc-method-engineering` с `phase: architecture`.
+3. Получить уровень и инструмент; зафиксировать в `profile.md`.
+4. Через `context7` получить референс выбранного инструмента.
+5. Инстанцировать артефакт в `<target>/.claude/sdlc/phases/architecture/`.
+6. Связать с `system-context.md`: границы, надсистема, подсистемы.
+7. Обеспечить trace-ссылки на артефакты requirements (`traces_from`).
+8. Обновить `alphas.md` через `sdlc-alpha-tracker`.
 
 ## Критерии готовности
 

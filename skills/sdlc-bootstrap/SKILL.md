@@ -26,7 +26,19 @@ meta_templates: [profile.meta.md, plugin-config.meta.md, alpha-state.meta.md, sy
 
 - Situational Method Engineering (`catalogs/disciplines.md`).
 
-## Мета-вопросы (опрос пользователя)
+## Обязательный интерактивный опрос (принцип 1)
+
+**Skill инициализирует проект; решения принимает пользователь, не плагин.**
+
+Шаг 0 — ДО создания `.claude/sdlc/`:
+1. Вызвать `AskUserQuestion` с вопросами ниже.
+2. Показать 2–3 альтернативы по каждому выбору.
+3. Дождаться ответа пользователя; не угадывать значения.
+4. Auto mode среды не отменяет интерактивность.
+5. Только `/sdlc-autonomy --task hootl` разрешает пропуск опроса.
+6. Если `AskUserQuestion` недоступна — остановиться и сообщить пользователю.
+
+### Вопросы bootstrap
 
 1. Какой это проект: pet / mid / enterprise по масштабу команды и рисков?
 2. Есть ли уже существующий `.claude/sdlc/` — запустить в режиме `--fail-if-exists`, `--merge` или `--force`?
@@ -43,6 +55,7 @@ meta_templates: [profile.meta.md, plugin-config.meta.md, alpha-state.meta.md, sy
 
 ## Протокол инстанцирования
 
+0. **Обязательно:** вызвать `AskUserQuestion` с блоком выше и дождаться ответов пользователя.
 1. Проверить наличие `<target>/.claude/sdlc/`; выбрать режим (принцип 14).
 2. Создать `CLAUDE.md` целевого проекта с основными правилами плагина.
 3. Создать `profile.md` по `profile.meta.md` с пустой таблицей фаз.
