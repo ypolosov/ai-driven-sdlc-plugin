@@ -473,3 +473,21 @@ updated: 2026-04-19
 - traces_to:
   - `.claude/sdlc/phases/testing/testing.md` §4
 
+## 2026-04-19 17:25 — фиксы аудита 17:20 (1 important + 2 note + 1 det)
+
+- context: расхождения после фазы testing — NFR coverage, traces_to, 15-слов.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. Применить все 4 фикса автономно в Auto mode.
+  2. Оставить issues до ручного review.
+  3. Понизить NFR reversibility до «не автоматизируется».
+- choice: 1
+- rationale: все фиксы косметические и трассировочные, не меняют решения.
+- traces_to:
+  - `.claude/sdlc/phases/architecture/architecture.md` §4
+  - `.claude/sdlc/phases/requirements/requirements.md` §4
+  - `.claude/sdlc/phases/testing/testing.md` §4
+  - `.claude/sdlc/audit.md`
+

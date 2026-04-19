@@ -13,7 +13,7 @@ traces_from:
   - ../architecture/architecture.md
 traces_to: []
 system_of_attention: ai-driven-sdlc-plugin
-fitness_functions: [tool-names-isolation, hooks-performance, alpha-evidence-consistency, secrets-not-in-git]
+fitness_functions: [tool-names-isolation, hooks-performance, alpha-evidence-consistency, secrets-not-in-git, reversibility-integration]
 created: 2026-04-19
 updated: 2026-04-19
 ---
@@ -88,6 +88,7 @@ updated: 2026-04-19
 | hooks-performance | hooks-performance | `time validate-artifact.sh` <200ms на средний артефакт | CI бенчмарк |
 | alpha-evidence-consistency | determinism | каждое состояние в `alphas.md` имеет существующий артефакт | CI + PostToolUse |
 | secrets-not-in-git | security | gitleaks по репозиторию; `.env` в `.gitignore` | pre-commit + CI |
+| reversibility-integration | reversibility | integration-сценарий AC-01.2 (`/sdlc-init` отказ без `--merge`) | CI integration |
 
 ## 5. Coverage-gate
 

@@ -12,6 +12,7 @@ traces_from:
   - ../vision/vision.md
 traces_to:
   - ../architecture/architecture.md
+  - ../testing/testing.md
 system_of_attention: ai-driven-sdlc-plugin
 backlog_store: github-issues
 volatility: high
@@ -237,7 +238,7 @@ And расхождение блокирует pre-commit
 ## 4. Трассируемость
 
 - `traces_from`: [`vision.md`](../vision/vision.md).
-- `traces_to`: `.claude/sdlc/phases/architecture/architecture.md` (см. frontmatter).
+- `traces_to`: [`architecture.md`](../architecture/architecture.md), [`testing.md`](../testing/testing.md).
 - Backlog: GitHub Issues с label `requirement`.
 - Синхронизация backlog: через MCP github.
 - Каждая US привязана к принципам из CLAUDE.md плагина.

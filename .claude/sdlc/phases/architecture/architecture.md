@@ -11,7 +11,8 @@ role: method-engineer
 traces_from:
   - ../requirements/requirements.md
   - ../vision/vision.md
-traces_to: []
+traces_to:
+  - ../testing/testing.md
 system_of_attention: ai-driven-sdlc-plugin
 nfr: [extensibility, reversibility, determinism, hooks-performance, security]
 created: 2026-04-19
@@ -82,9 +83,13 @@ updated: 2026-04-19
 | hooks-performance | Hooks не замедляют пользователя ощутимо | exit <200ms на средний артефакт |
 | security | Секреты целевого проекта не утекают в git | `.env` в `.gitignore`, нет токенов в артефактах |
 
-Покрытие NFR по ADR (через `frontmatter.nfr`):
-extensibility → ADR-001, ADR-003, ADR-004; reversibility → ADR-004, ADR-007;
-determinism → ADR-002, ADR-005, ADR-006; hooks-performance → ADR-006; security → ADR-008.
+Покрытие NFR по ADR (поле `frontmatter.nfr`):
+
+- extensibility → ADR-001, ADR-003, ADR-004.
+- reversibility → ADR-004, ADR-007.
+- determinism → ADR-002, ADR-005, ADR-006.
+- hooks-performance → ADR-006.
+- security → ADR-008.
 
 ## 5. Ключевые Architecture Decision Records
 
@@ -104,7 +109,7 @@ determinism → ADR-002, ADR-005, ADR-006; hooks-performance → ADR-006; securi
 ## 6. Трассируемость
 
 - `traces_from`: [`requirements.md`](../requirements/requirements.md) (US-01…US-08), [`vision.md`](../vision/vision.md).
-- `traces_to`: пуст; следующая фаза testing ещё не начата (TDD-first, принцип 5).
+- `traces_to`: [`testing.md`](../testing/testing.md) — fitness-функции §4 покрывают 4 из 5 NFR.
 - Подсистема `hooks` — кандидат на отдельный `/sdlc-focus` после фазы.
 
 ## 7. Критерии готовности фазы
