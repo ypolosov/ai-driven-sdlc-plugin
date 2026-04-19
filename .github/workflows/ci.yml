@@ -1,0 +1,36 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dev tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bats shellcheck shfmt
+
+      - name: Run bats unit tests
+        run: bats tests/unit/
+
+      - name: Run shellcheck on covered scripts
+        run: |
+          shellcheck scripts/validate-artifact.sh
+          shellcheck scripts/check-cross-refs.sh
+          shellcheck scripts/enforce-no-comments.sh
+          shellcheck scripts/bootstrap-dev-env.sh
+
+      - name: Run shfmt diff on covered scripts
+        run: shfmt -d -i 2 -ci scripts/validate-artifact.sh scripts/bootstrap-dev-env.sh
+
+      - name: Run deterministic checks
+        run: |
+          ./scripts/check-readme-inventory.sh
+          ./scripts/bench-hooks.sh

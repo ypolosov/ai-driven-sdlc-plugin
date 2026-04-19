@@ -37,10 +37,16 @@ tdd_scope:
 tdd_pairs:
   - source: '^scripts/validate-artifact\.sh$'
     test: 'tests/unit/validate-artifact.bats'
+  - source: '^scripts/check-cross-refs\.sh$'
+    test: 'tests/unit/check-cross-refs.bats'
+  - source: '^scripts/enforce-no-comments\.sh$'
+    test: 'tests/unit/enforce-no-comments.bats'
+  - source: '^scripts/bootstrap-dev-env\.sh$'
+    test: 'tests/unit/bootstrap-dev-env.bats'
 ```
 
-Активная пара — только для `validate-artifact.sh` (первый покрытый скрипт).
-Остальные скрипты — out of scope до написания их тестов.
+Активные пары — 4 скрипта: validate-artifact, check-cross-refs, enforce-no-comments, bootstrap-dev-env.
+Остальные 7 скриптов — out of scope до написания их тестов.
 
 ### Планируемые пары (не активны, документация)
 

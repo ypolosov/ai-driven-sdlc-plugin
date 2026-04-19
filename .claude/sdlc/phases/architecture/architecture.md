@@ -13,6 +13,7 @@ traces_from:
   - ../vision/vision.md
 traces_to:
   - ../testing/testing.md
+  - ../development/development.md
 system_of_attention: ai-driven-sdlc-plugin
 nfr: [extensibility, reversibility, determinism, hooks-performance, security]
 created: 2026-04-19
@@ -110,6 +111,7 @@ updated: 2026-04-19
 
 - `traces_from`: [`requirements.md`](../requirements/requirements.md) (US-01…US-08), [`vision.md`](../vision/vision.md).
 - `traces_to`: [`testing.md`](../testing/testing.md) — fitness-функции §4 покрывают 4 из 5 NFR.
+- `traces_to`: [`development.md`](../development/development.md) — реализация подсистем и ADR.
 - Подсистема `hooks` — кандидат на отдельный `/sdlc-focus` после фазы.
 
 ## 7. Критерии готовности фазы

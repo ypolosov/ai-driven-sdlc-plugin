@@ -11,7 +11,8 @@ role: method-engineer
 traces_from:
   - ../requirements/requirements.md
   - ../architecture/architecture.md
-traces_to: []
+traces_to:
+  - ../development/development.md
 system_of_attention: ai-driven-sdlc-plugin
 fitness_functions: [tool-names-isolation, hooks-performance, alpha-evidence-consistency, secrets-not-in-git, reversibility-integration]
 created: 2026-04-19
@@ -105,7 +106,7 @@ Numerical coverage не применяется — метрика спорна �
 - `traces_from`:
   - [`requirements.md`](../requirements/requirements.md) — через AC каждой US.
   - [`architecture.md`](../architecture/architecture.md) §4 — через fitness NFR.
-- `traces_to`: пуст; фаза development ещё не начата.
+- `traces_to`: [`development.md`](../development/development.md) — фаза development запущена, план зафиксирован.
 - Каждая US из requirements имеет минимум один integration-сценарий.
 
 ## 7. Критерии готовности фазы

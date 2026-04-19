@@ -636,3 +636,88 @@ updated: 2026-04-19
   - `tests/unit/validate-artifact.bats`
   - `scripts/validate-artifact.sh`
 
+## 2026-04-19 20:55 — фиксы аудита 20:50 (1 important + 3 note)
+
+- context: расхождения после фазы development — traces, §3.4, README inventory.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. Применить все 4 фикса автономно в Auto mode.
+  2. Оставить до ручного review.
+  3. Пересмотреть мета-шаблоны для автоматизации traces.
+- choice: 1
+- rationale: все фиксы трассировочные/документационные, не меняют решения.
+- traces_to:
+  - `.claude/sdlc/phases/testing/testing.md`
+  - `.claude/sdlc/phases/architecture/architecture.md`
+  - `.claude/sdlc/phases/development/development.md`
+  - `README.md`
+  - `.claude/sdlc/audit.md`
+
+## 2026-04-19 21:10 — расширение bats-покрытия до 4 скриптов
+
+- context: развитие пирамиды тестов после первого теста.
+- autonomy_mode: hitl
+- phase: development
+- role: method-engineer
+- alternatives:
+  1. Добавить 3 теста (check-cross-refs, enforce-no-comments, bootstrap-dev-env).
+  2. Покрыть все 11 скриптов сразу.
+  3. Остановиться на 1 тесте как MVP.
+- choice: 1
+- rationale: итеративное расширение; 21/21 зелёный; tdd_pairs активны для 4 из 11.
+- traces_to:
+  - `tests/unit/check-cross-refs.bats`
+  - `tests/unit/enforce-no-comments.bats`
+  - `tests/unit/bootstrap-dev-env.bats`
+  - `.claude/sdlc/plugin-config.md`
+
+## 2026-04-19 21:15 — CI workflow GitHub Actions
+
+- context: автоматизация зелёного прогона на push/PR.
+- autonomy_mode: hitl
+- phase: development
+- role: method-engineer
+- alternatives:
+  1. Один job lint-and-test с bats + shellcheck + shfmt + det-checks.
+  2. Matrix ubuntu + macos.
+  3. Отдельные jobs для каждого инструмента.
+- choice: 1
+- rationale: простой job на старте; matrix — open question фазы deployment.
+- traces_to:
+  - `.github/workflows/ci.yml`
+
+## 2026-04-19 21:20 — SME фазы deployment
+
+- context: выбор уровня сложности для фазы deployment.
+- autonomy_mode: hitl
+- phase: deployment
+- role: method-engineer
+- alternatives:
+  1. mid — стратегия релизов и CHANGELOG (semver + GitHub Releases + marketplace).
+  2. pet — ручной тег и push.
+  3. enterprise — release-train с semantic-release.
+- choice: 1
+- rationale: согласуется с testing=mid и development=mid; избыточно для одного разработчика.
+- traces_to:
+  - `.claude/sdlc/phases/deployment/deployment.md`
+  - `CHANGELOG.md`
+  - `.claude/sdlc/profile.md`
+
+## 2026-04-19 21:21 — канал распространения плагина
+
+- context: выбор канала публикации.
+- autonomy_mode: hitl
+- phase: deployment
+- role: method-engineer
+- alternatives:
+  1. Claude Code marketplace (основной).
+  2. GitHub Releases (артефакты).
+  3. npm/PyPI/Docker (не применимо).
+- choice: 1
+- rationale: marketplace — целевой канал для Claude Code плагинов.
+- traces_to:
+  - `.claude-plugin/marketplace.json`
+  - `.claude/sdlc/phases/deployment/deployment.md` §3.3
+

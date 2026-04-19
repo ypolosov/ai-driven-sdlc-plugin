@@ -66,7 +66,7 @@
 - `sdlc-consistency-auditor` — сквозная согласованность артефактов.
 - `sdlc-alpha-tracker` — единственный источник истины о состоянии альф.
 
-### Scripts (9)
+### Scripts (11)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
 - `enforce-tdd.sh` — мягкая блокировка записи кода без парного теста.
 - `enforce-format-lint.sh` — диспетчер форматера и линтера из `plugin-config.md`.
@@ -76,6 +76,8 @@
 - `check-system-readmes.sh` — инвентарь описаний систем внимания в целевом (Волна 2).
 - `check-memom-consistency.sh` — блокирует изменение принципов без записи в memom (Волна 2).
 - `bootstrap-target.sh` — инициализация целевого, режимы `--fail-if-exists` / `--merge` / `--force`.
+- `bench-hooks.sh` — бенчмарк 5 детерминированных hooks (NFR hooks-performance).
+- `bootstrap-dev-env.sh` — детектит pkg-manager и выводит команду установки bats/shellcheck/shfmt.
 
 ### Meta-templates (11)
 - `work-product.meta.md` — базовая схема рабочего продукта.

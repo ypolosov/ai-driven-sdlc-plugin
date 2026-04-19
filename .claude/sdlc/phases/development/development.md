@@ -11,6 +11,7 @@ role: method-engineer
 traces_from:
   - ../testing/testing.md
   - ../architecture/architecture.md
+  - ../requirements/requirements.md
 traces_to: []
 system_of_attention: ai-driven-sdlc-plugin
 created: 2026-04-19
@@ -64,9 +65,9 @@ updated: 2026-04-19
 
 ### 3.4. Первый инкремент
 
-- Установить bats-core в `vendor/bats-core/` (git submodule).
-- Написать `tests/unit/validate-artifact.bats` — 1 базовый тест.
-- Зафиксировать `BATS_LIB_PATH` в makefile или wrapper-скрипте.
+- Проверить окружение через `scripts/bootstrap-dev-env.sh` (pkg-manager detect).
+- Установить недостающие инструменты по команде из вывода скрипта.
+- Написать `tests/unit/validate-artifact.bats` — базовые кейсы.
 - Evidence для Software System: прогон `bats tests/unit/` зелёный.
 
 ### 3.5. Backlog первых итераций
@@ -100,6 +101,8 @@ updated: 2026-04-19
 
 ## 6. Открытые вопросы
 
-- Установка bats-core через submodule или vendor-copy — решить при первой реализации.
+- ~~Установка bats-core через submodule или vendor-copy — решить при первой реализации.~~
+  - Резолюция 2026-04-19: системный пакетный менеджер через `bootstrap-dev-env.sh`.
 - GitHub Issues template для `work-unit` — создать при первом issue.
 - Matrix-CI (ubuntu + macos) — отложить до deployment.
+- Расширение `tdd_pairs` scope на остальные скрипты — итеративно после покрытия.

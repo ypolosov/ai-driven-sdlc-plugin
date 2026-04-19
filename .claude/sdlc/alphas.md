@@ -95,3 +95,9 @@ updated: 2026-04-19
 - Work: Prepared → Under Control.
   - Артефакт: `tests/unit/validate-artifact.bats` (первая единица закрыта).
   - Мотив: TDD-цикл работает; shellcheck и shfmt чистые на validate-artifact.sh.
+
+### 2026-04-19 — завершение фазы deployment (стратегия)
+
+- Software System: без перехода; останется Demonstrable.
+  - Мотив: Usable требует первого успешного релиза в marketplace; план зафиксирован, релиз не выполнен.
+- Стратегия релизов: `phases/deployment/deployment.md` + `CHANGELOG.md`.
