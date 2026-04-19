@@ -473,6 +473,29 @@ updated: 2026-04-19
 - traces_to:
   - `.claude/sdlc/phases/testing/testing.md` §4
 
+## 2026-04-19 17:45 — углубление hooks (3 open → closed)
+
+- context: закрыть 3 открытых вопроса из external-systems/hooks.md §6.3.
+- autonomy_mode: auto (пользователь выбрал option 3 в dialog)
+- phase: cross-cutting (focus: hooks)
+- role: method-engineer
+- alternatives:
+  1. Реализовать бенчмарк + план tdd_pairs + fixture.
+  2. Оставить вопросы до фазы development.
+  3. Подменить бенчмарк статическими утверждениями.
+- choice: 1
+- rationale: закрывает NFR hooks-performance, создаёт базу для bats.
+- deliverables:
+  - `scripts/bench-hooks.sh` — 5 hooks замерены, все <200ms.
+  - `plugin-config.md` `tdd_pairs_planned` — план пар source↔test.
+  - `tests/fixture/minimal-target/` — валидный каркас для integration.
+- side-effect:
+  - `plugin-config.md` `command: ""` → `command:` — фикс бага парсинга в enforce-format-lint.sh.
+- traces_to:
+  - `.claude/sdlc/external-systems/hooks.md` §6.3
+  - `.claude/sdlc/phases/testing/testing.md` §8
+  - `.claude/sdlc/plugin-config.md`
+
 ## 2026-04-19 17:30 — /sdlc-focus hooks
 
 - context: перенос внимания на подсистему hooks (§8 architecture.md).

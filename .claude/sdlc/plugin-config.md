@@ -29,6 +29,7 @@ tdd_scope:
 ```
 
 Scope задаётся на фазе development через `/sdlc-phase development`.
+Включение до реализации bats-тестов заблокирует правки существующих скриптов.
 
 ## tdd_pairs
 
@@ -38,27 +39,44 @@ tdd_pairs: []
 
 Пары `source↔test` конфигурируются на фазе development.
 
+### Планируемые пары (не активны, документация)
+
+Следующая конфигурация будет активирована после реализации bats-тестов:
+
+```yaml
+tdd_pairs_planned:
+  - source: '^scripts/([a-z0-9-]+)\.sh$'
+    test: 'tests/unit/$1.bats'
+  - source: '^hooks/([a-z0-9-]+)\.json$'
+    test: 'tests/integration/hooks-$1.bats'
+```
+
+Формула: файл `scripts/check-foo.sh` требует `tests/unit/check-foo.bats`.
+Шаблон совпадает со структурой `testing.md` §3.1.
+
 ## formatter
 
 ```yaml
 formatter:
-  command: ""
+  command:
   exit_code_ok: 0
   scope_globs: []
 ```
 
 Форматер не выбран; фиксация — на фазе development (принцип 6).
+Пустое значение `command:` означает «не настроен»; hook пропускает.
 
 ## linter
 
 ```yaml
 linter:
-  command: ""
+  command:
   exit_code_ok: 0
   scope_globs: []
 ```
 
 Линтер не выбран; фиксация — на фазе development.
+Пустое значение `command:` означает «не настроен»; hook пропускает.
 
 ## no_comments_whitelist
 

@@ -78,9 +78,14 @@ updated: 2026-04-19
 
 ### 6.3. Открытые вопросы подсистемы
 
-- Бенчмарк hooks-performance <200ms не реализован.
-- Секция hooks в plugin-config.md не содержит конкретных tdd_pairs.
-- Fixture-проект для integration-тестов hooks отсутствует.
+Статус на 2026-04-19 17:45 — все 3 закрыты.
+
+- ~~Бенчмарк hooks-performance <200ms не реализован.~~
+  - Резолюция: `scripts/bench-hooks.sh`; замер avg на 5 прогонах; все 5 hooks <200ms.
+- ~~Секция hooks в plugin-config.md не содержит конкретных tdd_pairs.~~
+  - Резолюция: `tdd_pairs_planned` зафиксирован; активация после bats-тестов.
+- ~~Fixture-проект для integration-тестов hooks отсутствует.~~
+  - Резолюция: `tests/fixture/minimal-target/` проходит все детерминированные скрипты.
 
 ## 7. Приоритет при аудите
 
