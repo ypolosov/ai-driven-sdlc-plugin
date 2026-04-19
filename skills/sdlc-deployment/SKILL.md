@@ -29,9 +29,21 @@ meta_template: meta-templates/phase-artifact.meta.md
 
 - Continuous delivery.
 
-## Мета-вопросы
+## Обязательный интерактивный опрос (принцип 1)
 
-Опрос делегируется `sdlc-method-engineering` с контекстом `phase: deployment`.
+**Skill ведёт пользователя по фазе; не заменяет его решения автогенерацией.**
+
+Шаг 0 — ДО записи любых артефактов:
+1. Вызвать `AskUserQuestion` с вопросами ниже.
+2. Показать 2–3 альтернативы по каждому выбору.
+3. Дождаться ответа пользователя; не угадывать.
+4. Auto mode среды не отменяет интерактивность.
+5. Только `/sdlc-autonomy --task hootl` разрешает пропуск опроса.
+6. Если `AskUserQuestion` недоступна — остановиться и сообщить пользователю.
+
+### Вопросы фазы Deployment
+
+Сначала SME-опрос делегируется `sdlc-method-engineering` с `phase: deployment`.
 Дополнительно:
 1. Сколько сред нужно? (pet: одна; mid: staging+prod; enterprise: multi-region)
 2. Какая стратегия релиза? (manual / blue-green / canary / progressive)
@@ -40,12 +52,13 @@ meta_template: meta-templates/phase-artifact.meta.md
 
 ## Протокол инстанцирования
 
-1. Вызвать `sdlc-method-engineering` с `phase: deployment`.
-2. Получить уровень SME и инструмент CI/CD.
-3. Через `context7` получить референс выбранного инструмента.
-4. Инстанцировать артефакт описания pipeline в `phases/deployment/`.
-5. Обеспечить trace-ссылки на testing (фазы не разворачиваются без тестов).
-6. Обновить `alphas.md`.
+1. **Обязательно:** вызвать `AskUserQuestion` с блоком выше и дождаться ответов.
+2. Вызвать `sdlc-method-engineering` с `phase: deployment`.
+3. Получить уровень SME и инструмент CI/CD.
+4. Через `context7` получить референс выбранного инструмента.
+5. Инстанцировать артефакт описания pipeline в `phases/deployment/`.
+6. Обеспечить trace-ссылки на testing (фазы не разворачиваются без тестов).
+7. Обновить `alphas.md`.
 
 ## Критерии готовности
 

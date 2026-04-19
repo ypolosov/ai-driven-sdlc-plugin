@@ -43,7 +43,9 @@ body = parts[2] if len(parts) >= 3 else text
 
 body = re.sub(r"```.*?```", "", body, flags=re.DOTALL)
 body = re.sub(r"`[^`]*`", "", body)
-body = re.sub(r"\|.*?\|", "", body)
+body = "\n".join(
+    line for line in body.splitlines() if not line.lstrip().startswith("|")
+)
 
 sentences = re.split(r"(?<=[\.!\?])\s+", body)
 violations = []

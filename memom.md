@@ -45,6 +45,19 @@ source_of_truth_for_principles: CLAUDE.md
   - Добавлена таблица привязки принципов 1–17 + 4a к главам Левенчука.
 - related_commits: []
 
+## 2026-04-19 — Принцип 1: обязательность `AskUserQuestion` в skills
+- principle: 1
+- action: modify
+- before: «В HITL показывает пользователю и ждёт выбора» (описательно, без предписания инструмента).
+- after: Skills фаз и bootstrap **обязаны** вызвать `AskUserQuestion` до записи артефактов; Auto mode среды ≠ HOOTL; пропуск только через `/sdlc-autonomy --task hootl`.
+- motive: в dogfooding-сессии плагин автогенерировал артефакты без опроса пользователя; принцип 1 интерпретировался LLM как «можно угадать».
+- consequences:
+  - Добавлен «Обязательный интерактивный опрос» в 7 skills фаз, bootstrap и method-engineering.
+  - Обновлён агент `sdlc-method-engineer`: первое действие — `AskUserQuestion`.
+  - Обновлены `/sdlc-phase` и `/sdlc-init` с разделом «Интерактивность».
+  - В «Протоколах инстанцирования» шаг 0 — опрос пользователя.
+- related_commits: []
+
 ## Правила ведения
 
 - Запись создаётся **до** или **вместе** с изменением `CLAUDE.md`.

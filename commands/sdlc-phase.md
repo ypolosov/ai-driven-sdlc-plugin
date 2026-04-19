@@ -13,10 +13,17 @@ argument-hint: "<vision|requirements|architecture|development|testing|deployment
 1. Разобрать аргумент: имя фазы.
 2. Если `--reconfigure` — удалить выбор в `profile.md` для этой фазы.
 3. Активировать skill `sdlc-<phase>`.
-4. Skill делегирует SME-опрос в `sdlc-method-engineering`.
-5. По выбору пользователя инстанцировать конкретный шаблон в `<target>/.claude/sdlc/phases/<phase>/`.
-6. Обновить `alphas.md` через `sdlc-alpha-tracker`.
-7. Зафиксировать решение в `decisions.md`.
+4. Skill **обязательно** вызывает `AskUserQuestion` ДО записи артефактов (принцип 1).
+5. Skill делегирует SME-опрос в `sdlc-method-engineering`.
+6. По выбору пользователя инстанцировать конкретный шаблон в `<target>/.claude/sdlc/phases/<phase>/`.
+7. Обновить `alphas.md` через `sdlc-alpha-tracker`.
+8. Зафиксировать решение в `decisions.md`.
+
+## Интерактивность
+
+Плагин ведёт пользователя по фазе; не заменяет его решения автогенерацией.
+Auto mode среды не отменяет интерактивность.
+Пропуск опроса возможен только через `/sdlc-autonomy --task hootl`.
 
 ## Аргументы
 

@@ -31,9 +31,21 @@ meta_template: meta-templates/phase-artifact.meta.md
 - Software construction.
 - Test-driven development.
 
-## Мета-вопросы
+## Обязательный интерактивный опрос (принцип 1)
 
-Опрос делегируется `sdlc-method-engineering` с контекстом `phase: development`.
+**Skill ведёт пользователя по фазе; не заменяет его решения автогенерацией.**
+
+Шаг 0 — ДО записи любых артефактов:
+1. Вызвать `AskUserQuestion` с вопросами ниже.
+2. Показать 2–3 альтернативы по каждому выбору.
+3. Дождаться ответа пользователя; не угадывать.
+4. Auto mode среды не отменяет интерактивность.
+5. Только `/sdlc-autonomy --task hootl` разрешает пропуск опроса.
+6. Если `AskUserQuestion` недоступна — остановиться и сообщить пользователю.
+
+### Вопросы фазы Development
+
+Сначала SME-опрос делегируется `sdlc-method-engineering` с `phase: development`.
 Дополнительно фаза Development требует настроек для hooks:
 1. Какой стек/язык используется? (для TDD-пар в `plugin-config.md`)
 2. Какой форматер выбираете? (варианты из матрицы; выбор обязателен)
@@ -43,16 +55,17 @@ meta_template: meta-templates/phase-artifact.meta.md
 
 ## Протокол инстанцирования
 
-1. Вызвать `sdlc-method-engineering` с `phase: development`.
-2. Получить уровни SME для git-workflow, форматера, линтера.
-3. Записать в `plugin-config.md`:
+1. **Обязательно:** вызвать `AskUserQuestion` с блоком выше и дождаться ответов.
+2. Вызвать `sdlc-method-engineering` с `phase: development`.
+3. Получить уровни SME для git-workflow, форматера, линтера.
+4. Записать в `plugin-config.md`:
    - `tdd_pairs` по языку.
    - `tdd_scope.include`.
    - `formatter.command` и `linter.command`.
-4. Записать в `profile.md` строку фазы development.
-5. Инстанцировать артефакт развёрнутых правил разработки в `phases/development/`.
-6. Активировать hooks: `enforce-tdd.sh`, `enforce-format-lint.sh`, `enforce-no-comments.sh`.
-7. Зафиксировать в `decisions.md`.
+5. Записать в `profile.md` строку фазы development.
+6. Инстанцировать артефакт развёрнутых правил разработки в `phases/development/`.
+7. Активировать hooks: `enforce-tdd.sh`, `enforce-format-lint.sh`, `enforce-no-comments.sh`.
+8. Зафиксировать в `decisions.md`.
 
 ## Критерии готовности
 
