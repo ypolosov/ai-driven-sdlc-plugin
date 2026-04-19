@@ -24,17 +24,9 @@ updated: 2026-04-19
 
 ## 3. Состояние альф относительно системы
 
-| Альфа | Состояние | Артефакт-свидетельство |
-|---|---|---|
-| Opportunity | Identified | `.claude/sdlc/decisions.md#bootstrap` |
-| Stakeholders | Recognized | `.claude/sdlc/roles.md` |
-| Requirements | — | — |
-| Software System | — | — |
-| Work | Initiated | `.claude/sdlc/decisions.md#bootstrap` |
-| Team | Seeded | `.claude/sdlc/roles.md` |
-| Way of Working | Foundation Established | `.claude/sdlc/plugin-config.md` |
-
-Источник истины — агент `sdlc-alpha-tracker` (принцип 13).
+Актуальное состояние альф живёт в `.claude/sdlc/alphas.md`.
+Единственный источник истины — агент `sdlc-alpha-tracker` (принцип 13).
+Снэпшот таблицы здесь не дублируется во избежание рассинхрона.
 
 ## 4. Связанные артефакты SDLC
 

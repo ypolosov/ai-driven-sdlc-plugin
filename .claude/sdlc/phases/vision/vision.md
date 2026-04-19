@@ -3,13 +3,14 @@ name: vision
 type: vision
 phase: vision
 sme_level: pet
-method: Одностраничное описание проблемы и цели без формализации стейкхолдеров
+method: Одностраничное описание проблемы и цели
 tool: README-as-vision
 alphas: [Opportunity, Stakeholders]
 disciplines: [product-discovery, stakeholder-analysis]
 role: method-engineer
 traces_from: []
-traces_to: []
+traces_to:
+  - ../requirements/requirements.md
 system_of_attention: ai-driven-sdlc-plugin
 created: 2026-04-19
 updated: 2026-04-19

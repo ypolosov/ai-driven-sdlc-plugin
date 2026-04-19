@@ -16,6 +16,7 @@ updated: 2026-04-19
 | slug | title | активна | last_played_at | phases | interests | alphas |
 |---|---|---|---|---|---|---|
 | method-engineer | Инженер методов | да | 2026-04-19 | сквозная | соответствие метода ситуации, эволюция практик | Way of Working |
+| systems-thinker | Системный мыслитель | нет | — | сквозная | границы системы, надсистема, подсистемы, окружение | Software System, Opportunity |
 
 ## Текущая роль
 

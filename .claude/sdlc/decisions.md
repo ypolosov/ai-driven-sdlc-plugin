@@ -153,6 +153,37 @@ updated: 2026-04-19
 - traces_to:
   - `.claude/sdlc/phases/vision/vision.md` (секция 3.5)
 
+## 2026-04-19 15:05 — противоречия интересов стейкхолдеров
+
+- context: фиксация конфликтов, которые разрешает плагин.
+- autonomy_mode: hitl
+- phase: vision
+- role: method-engineer
+- alternatives:
+  1. Скорость против методичности — разрешается автономией HOTL/HOOTL.
+  2. Автономия против контроля — default HITL, override по задаче.
+  3. Простота против полноты — уровни SME по фазам независимо.
+- choice: 1, 2, 3
+- rationale: все три конфликта актуальны; плагин несёт механизмы для каждого.
+- traces_to:
+  - `.claude/sdlc/phases/vision/vision.md` (секция 3.7)
+
+## 2026-04-19 15:10 — выбор следующей фазы после vision
+
+- context: sdlc-continue после завершения vision, role method-engineer.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. `/sdlc-phase requirements` — декомпозиция vision в проверяемые единицы.
+  2. `/sdlc-focus` на Волну 2 — сузить границу до принципов 14-17.
+  3. `/sdlc-phase architecture` — сразу к структурным решениям, пропустив явные требования.
+  4. `/sdlc-audit` — проверить консистентность артефактов до перехода.
+- choice: 1
+- rationale: логичный порядок, Requirements альфа ещё в начальном состоянии.
+- traces_to:
+  - `.claude/sdlc/phases/requirements/` (будет создан)
+
 ## 2026-04-19 15:20 — SME фазы requirements (уровень)
 
 - context: выбор уровня SME для фазы requirements.
@@ -215,33 +246,83 @@ updated: 2026-04-19
 - traces_to:
   - `.claude/sdlc/phases/requirements/requirements.md` (поле volatility)
 
-## 2026-04-19 15:10 — выбор следующей фазы после vision
+## 2026-04-19 16:10 — фикс issue-01 (traces_to vision.md)
 
-- context: sdlc-continue после завершения vision, role method-engineer.
+- context: аудит нашёл пустой traces_to во frontmatter vision.md.
 - autonomy_mode: hitl
 - phase: cross-cutting
 - role: method-engineer
 - alternatives:
-  1. `/sdlc-phase requirements` — декомпозиция vision в проверяемые единицы.
-  2. `/sdlc-focus` на Волну 2 — сузить границу до принципов 14-17.
-  3. `/sdlc-phase architecture` — сразу к структурным решениям, пропустив явные требования.
-  4. `/sdlc-audit` — проверить консистентность артефактов до перехода.
+  1. Заполнить traces_to в frontmatter ссылкой на requirements.md.
+  2. Убрать упоминание traces_to из §4 vision.md.
+  3. Добавить правило в sdlc-artifact-validator.
 - choice: 1
-- rationale: логичный порядок, Requirements альфа ещё в начальном состоянии.
+- rationale: минимальная правка; frontmatter становится машинно-читаемым.
 - traces_to:
-  - `.claude/sdlc/phases/requirements/` (будет создан)
+  - `.claude/sdlc/phases/vision/vision.md`
+  - `.claude/sdlc/audit.md#issue-01`
 
-## 2026-04-19 15:05 — противоречия интересов стейкхолдеров
+## 2026-04-19 16:11 — фикс issue-02 (таблица альф в README.sdlc.md)
 
-- context: фиксация конфликтов, которые разрешает плагин.
+- context: устаревшая таблица альф в README системы внимания.
 - autonomy_mode: hitl
-- phase: vision
+- phase: cross-cutting
 - role: method-engineer
 - alternatives:
-  1. Скорость против методичности — разрешается автономией HOTL/HOOTL.
-  2. Автономия против контроля — default HITL, override по задаче.
-  3. Простота против полноты — уровни SME по фазам независимо.
-- choice: 1, 2, 3
-- rationale: все три конфликта актуальны; плагин несёт механизмы для каждого.
+  1. Синхронизировать таблицу с alphas.md при каждом продвижении.
+  2. Заменить таблицу ссылкой на alphas.md и sdlc-alpha-tracker.
+  3. Добавить check в check-system-readmes.sh.
+- choice: 2
+- rationale: соответствует принципу 13 единого источника истины.
 - traces_to:
-  - `.claude/sdlc/phases/vision/vision.md` (секция 3.7)
+  - `README.sdlc.md`
+  - `.claude/sdlc/audit.md#issue-02`
+
+## 2026-04-19 16:12 — фикс issue-03 (роль systems-thinker)
+
+- context: роль systems-thinker упоминается в US-04 и US-07, но не в roles.md.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. Добавить systems-thinker как неактивную в roles.md.
+  2. Убрать атрибут Роль из US-04, US-07.
+  3. Оставить как note до явного переключения роли.
+- choice: 1
+- rationale: устраняет висячий указатель; роль может быть активирована позже.
+- traces_to:
+  - `.claude/sdlc/roles.md`
+  - `.claude/sdlc/audit.md#issue-03`
+
+## 2026-04-19 16:13 — фикс issue-04 (хронология decisions.md)
+
+- context: запись 15:10 была физически между 15:23 и 15:05.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. Отсортировать записи по timestamp.
+  2. Разрешить логическую группировку в decisions.meta.md.
+  3. Оставить как note.
+- choice: 1
+- rationale: хронология критична для трассировки; минимальный риск.
+- traces_to:
+  - `.claude/sdlc/decisions.md`
+  - `.claude/sdlc/audit.md#issue-04`
+
+## 2026-04-19 16:14 — фикс issue-05 (формулировка method vision)
+
+- context: разные формулировки method в profile.md и vision.md.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. Сократить строку в vision.md до копии profile.md.
+  2. Расширить строку в profile.md до полной формулировки.
+  3. Добавить нормализатор сравнения в валидатор.
+- choice: 1
+- rationale: profile.md — центральный артефакт, менять его ради косметики нежелательно.
+- traces_to:
+  - `.claude/sdlc/phases/vision/vision.md`
+  - `.claude/sdlc/audit.md#issue-05`
+
