@@ -552,3 +552,87 @@ updated: 2026-04-19
   - `.claude/sdlc/system-context.md`
   - `README.sdlc.md`
 
+## 2026-04-19 18:05 — SME фазы development (уровень)
+
+- context: выбор уровня сложности для фазы development.
+- autonomy_mode: hitl
+- phase: development
+- role: method-engineer
+- alternatives:
+  1. mid — TDD с CI и линтерами (bats + shellcheck + shfmt + GitHub Actions).
+  2. pet — только bats-unit без CI.
+  3. enterprise — полный pipeline с coverage и release.
+- choice: 1
+- rationale: соответствует testing=mid и принципам 5, 6; избыточно для одного разработчика.
+- traces_to:
+  - `.claude/sdlc/phases/development/development.md`
+  - `.claude/sdlc/profile.md`
+
+## 2026-04-19 18:06 — метод Work (гибрид)
+
+- context: организация работ для альфы Work на фазе development.
+- autonomy_mode: hitl
+- phase: development
+- role: method-engineer
+- alternatives:
+  1. Итерации по open questions артефактов (альфы + GitHub Issues через MCP).
+  2. Kanban с TODO.md (противоречит принципу 3).
+  3. GitHub Issues без связки с альфами.
+- choice: 1 (гибрид — уточнение пользователя).
+- rationale: альфы = макросостояние методологии; Issues = micro-units реализации; evidence двунаправленный.
+- traces_to:
+  - `.claude/sdlc/plugin-config.md` (state_artifact=mcp/github)
+  - `.claude/sdlc/alphas.md`
+
+## 2026-04-19 18:07 — первый инкремент development
+
+- context: что реализовать в первой итерации фазы development.
+- autonomy_mode: hitl
+- phase: development
+- role: method-engineer
+- alternatives:
+  1. Установить bats-core и написать первый bats-тест.
+  2. Настроить CI GitHub Actions workflow.
+  3. Только зафиксировать development.md без кода.
+- choice: 1
+- rationale: первый тест продвигает Software System к Demonstrable; CI требует хотя бы одного теста.
+- traces_to:
+  - `tests/unit/validate-artifact.bats`
+  - `scripts/bootstrap-dev-env.sh`
+
+## 2026-04-19 18:08 — bootstrap окружения
+
+- context: установка bats/shellcheck/shfmt; ограничение Auto mode на install.
+- autonomy_mode: hitl
+- phase: development
+- role: method-engineer
+- alternatives:
+  1. Bash-скрипт `bootstrap-dev-env.sh` (детектит apt/brew/pacman/dnf).
+  2. Vendor-бинарники в `vendor/bin/`.
+  3. Devcontainer (отложено).
+- choice: 1
+- rationale: пользователь указал — для начала достаточно bash-скрипта инициализации стека.
+- traces_to:
+  - `scripts/bootstrap-dev-env.sh`
+  - `.claude/sdlc/phases/development/development.md` §3.4
+
+## 2026-04-19 18:30 — зелёный прогон bats + продвижение альф
+
+- context: пользователь установил bats/shellcheck/shfmt и запустил `bats tests/unit/`.
+- autonomy_mode: hitl
+- phase: development
+- role: method-engineer
+- alternatives:
+  1. Принять 6/6 зелёных как evidence для Software System=Demonstrable и Work=Under Control.
+  2. Требовать CI workflow до продвижения.
+  3. Требовать тесты для всех 9 скриптов до продвижения.
+- choice: 1
+- rationale: первый работающий тест демонстрирует исполняемость; расширение покрытия — следующая итерация.
+- side_effects:
+  - Удалена неиспользуемая переменная `body` в validate-artifact.sh (SC2034).
+  - Форматер shfmt обновлён с флагом `-ci` (case indent).
+- traces_to:
+  - `.claude/sdlc/alphas.md`
+  - `tests/unit/validate-artifact.bats`
+  - `scripts/validate-artifact.sh`
+

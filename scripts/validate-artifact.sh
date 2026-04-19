@@ -6,7 +6,7 @@ tool_name="$(printf '%s' "$payload" | python3 -c 'import sys,json;d=json.load(sy
 file_path="$(printf '%s' "$payload" | python3 -c 'import sys,json;d=json.load(sys.stdin);print((d.get("tool_input") or {}).get("file_path",""))')"
 
 case "$tool_name" in
-  Write|Edit) ;;
+  Write | Edit) ;;
   *) exit 0 ;;
 esac
 
@@ -27,8 +27,6 @@ frontmatter="$(awk 'BEGIN{inside=0} /^---[[:space:]]*$/{inside++; next} inside==
 if [ -z "$frontmatter" ]; then
   errors+=("Отсутствует YAML frontmatter")
 fi
-
-body="$(awk 'BEGIN{inside=0; body_started=0} /^---[[:space:]]*$/{inside++; next} inside==2{body_started=1; print}' "$file_path")"
 
 python3 - "$file_path" <<'PY' || true
 import re

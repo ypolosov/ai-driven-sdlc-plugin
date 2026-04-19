@@ -28,16 +28,19 @@ tdd_scope:
   exclude: []
 ```
 
-Scope задаётся на фазе development через `/sdlc-phase development`.
-Включение до реализации bats-тестов заблокирует правки существующих скриптов.
+Пустой include означает «применимо ко всем файлам»; фильтрация идёт через `tdd_pairs`.
+Расширение scope — по мере покрытия скриптов bats-тестами.
 
 ## tdd_pairs
 
 ```yaml
-tdd_pairs: []
+tdd_pairs:
+  - source: '^scripts/validate-artifact\.sh$'
+    test: 'tests/unit/validate-artifact.bats'
 ```
 
-Пары `source↔test` конфигурируются на фазе development.
+Активная пара — только для `validate-artifact.sh` (первый покрытый скрипт).
+Остальные скрипты — out of scope до написания их тестов.
 
 ### Планируемые пары (не активны, документация)
 
@@ -58,25 +61,26 @@ tdd_pairs_planned:
 
 ```yaml
 formatter:
-  command:
+  command: 'shfmt -d -i 2 -ci'
   exit_code_ok: 0
-  scope_globs: []
+  scope_globs: ['scripts/validate-artifact.sh']
 ```
 
-Форматер не выбран; фиксация — на фазе development (принцип 6).
-Пустое значение `command:` означает «не настроен»; hook пропускает.
+Выбран shfmt; scope сужен до покрытых bats-тестами скриптов.
+Установка shfmt — задача bootstrap-dev-env скрипта целевого проекта.
+Расширение scope — по мере добавления bats-тестов.
 
 ## linter
 
 ```yaml
 linter:
-  command:
+  command: 'shellcheck'
   exit_code_ok: 0
-  scope_globs: []
+  scope_globs: ['scripts/validate-artifact.sh']
 ```
 
-Линтер не выбран; фиксация — на фазе development.
-Пустое значение `command:` означает «не настроен»; hook пропускает.
+Выбран shellcheck; scope совпадает с формateром.
+Установка shellcheck — задача bootstrap-dev-env скрипта целевого проекта.
 
 ## no_comments_whitelist
 

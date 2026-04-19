@@ -17,8 +17,8 @@ updated: 2026-04-19
 | Opportunity | Value Established | `.claude/sdlc/phases/vision/vision.md` | 2026-04-19 |
 | Stakeholders | Involved | `.claude/sdlc/phases/requirements/requirements.md` | 2026-04-19 |
 | Requirements | Acceptable | `.claude/sdlc/phases/architecture/architecture.md` | 2026-04-19 |
-| Software System | Architecture Selected | `.claude/sdlc/phases/architecture/architecture.md` | 2026-04-19 |
-| Work | Initiated | `.claude/sdlc/decisions.md#bootstrap` | 2026-04-19 |
+| Software System | Demonstrable | `tests/unit/validate-artifact.bats` | 2026-04-19 |
+| Work | Under Control | `tests/unit/validate-artifact.bats` | 2026-04-19 |
 | Team | Seeded | `.claude/sdlc/roles.md` | 2026-04-19 |
 | Way of Working | In Use | `.claude/sdlc/phases/testing/testing.md` | 2026-04-19 |
 
@@ -76,3 +76,22 @@ updated: 2026-04-19
   - Мотив: Demonstrable требует зелёных bats-тестов, их ещё нет.
 - Requirements: без перехода; останется Acceptable до прохождения тестов.
   - Мотив: Addressed требует прохождения AC через автотесты.
+
+### 2026-04-19 — фаза development (план + первый тест)
+
+- Work: Initiated → Prepared.
+  - Артефакт: `.claude/sdlc/phases/development/development.md` (план TDD + backlog 6 единиц).
+  - Артефакт: `scripts/bootstrap-dev-env.sh` (bash-скрипт проверки окружения).
+  - Артефакт: `tests/unit/validate-artifact.bats` (первый тест, 6 кейсов).
+  - Мотив: план, ресурсы и первый тест зафиксированы; env-bootstrap отложен.
+- Software System: без перехода; останется Architecture Selected.
+  - Мотив: Demonstrable требует зелёного прогона bats; инструменты не установлены.
+
+### 2026-04-19 — первый зелёный прогон bats
+
+- Software System: Architecture Selected → Demonstrable.
+  - Артефакт: `tests/unit/validate-artifact.bats` (6/6 зелёных).
+  - Мотив: исполняемая функциональность продемонстрирована тестом.
+- Work: Prepared → Under Control.
+  - Артефакт: `tests/unit/validate-artifact.bats` (первая единица закрыта).
+  - Мотив: TDD-цикл работает; shellcheck и shfmt чистые на validate-artifact.sh.
