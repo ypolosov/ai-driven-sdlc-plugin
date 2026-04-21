@@ -819,6 +819,27 @@ updated: 2026-04-19
   - `CLAUDE.md` (секция «Двухволновое MVP»)
   - GitHub milestones
 
+## 2026-04-21 — актуализация README под состояние v0.2.1
+
+- context: README рассинхронизирован с состоянием; принцип 16 не соблюдался в коммитах development/deployment/operations.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. A — минимальный фикс: только исправить ошибки (счётчик принципов, статус).
+  2. B — полная актуализация под состояние: счётчик, статус, Tests & CI, Поддержка, backlog, инвентарь.
+  3. C — реструктуризация под user-journey: меняет vision README; требует `/sdlc-phase vision --reconfigure`.
+- choice: 2
+- rationale: A оставляет принцип 16 нарушенным; C — vision-решение, выходит за рамки sync. B ровно закрывает gap без перепроектирования.
+- follow_ups:
+  - Кандидат на work-unit: усиление `check-readme-inventory.sh` (ловить tests/, workflows, CHANGELOG, ISSUE_TEMPLATE).
+  - Кандидат на работу: C как отдельная итерация Волны 4 при появлении внешних пользователей.
+- traces_to:
+  - `README.md`
+  - `.claude/sdlc/phases/vision/vision.md`
+  - `CHANGELOG.md` 0.2.0, 0.2.1
+  - CLAUDE.md принципы 1, 9, 16
+
 ## 2026-04-19 22:32 — объём pilot-issues
 
 - context: дымовой тест backlog-процесса.

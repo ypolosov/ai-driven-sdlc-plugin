@@ -4,11 +4,12 @@
 Плагин technology-agnostic; выбор уровня сложности и инструментов — за пользователем.
 Решения фиксируются как артефакты Claude Code в целевом проекте, не в плагине.
 
-## Статус: Волна 2 (dogfooding-ready)
+## Статус
 
-Принципы 1–17 + 4a.
-Волна 1 — каркас для сценария 1 (todo-list).
-Волна 2 — memom, README систем внимания, сценарий 2 (dogfooding).
+Текущая версия: **v0.2.1** (апрель 2026).
+Волна 1 и Волна 2 закрыты; Волна 3 в работе — см. [milestones](https://github.com/ypolosov/ai-driven-sdlc-plugin/milestones).
+Альфа Software System: **Usable** — плагин устанавливается через marketplace.
+Конституция плагина: 17 принципов + 4a, см. [CLAUDE.md](CLAUDE.md).
 
 ## Опорные источники
 
@@ -24,6 +25,8 @@
 ```
 
 Или через локальный marketplace в настройках Claude Code.
+Последние релизы — [GitHub Releases](https://github.com/ypolosov/ai-driven-sdlc-plugin/releases).
+История версий — [CHANGELOG.md](CHANGELOG.md).
 
 ## Рекомендуемые MCP-плагины
 
@@ -114,6 +117,52 @@
 ### Memom (Волна 2)
 - `memom.md` — журнал эволюции принципов плагина (принцип 15).
 
+### GitHub Issue Templates (4)
+- `.github/ISSUE_TEMPLATE/bug.yml` — сообщение о баге.
+- `.github/ISSUE_TEMPLATE/feature.yml` — предложение функциональности.
+- `.github/ISSUE_TEMPLATE/question.yml` — вопрос или уточнение.
+- `.github/ISSUE_TEMPLATE/work-unit.yml` — единица работы для альфы Work.
+
+### CI и корневые документы
+- `.github/workflows/ci.yml` — один job: bats + shellcheck + shfmt + детерминированные проверки.
+- `CHANGELOG.md` — история версий по Keep a Changelog + SemVer.
+- `SUPPORT.md` — канал обратной связи и политика ответа.
+
+## Tests & CI
+
+Пирамида автотестов по фазе testing (уровень mid).
+
+- Unit (bats-core) — `tests/unit/` (4 файла, 21 кейс, 100% зелёный):
+  - `validate-artifact.bats` — 6 кейсов на поведение валидатора.
+  - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
+  - `enforce-no-comments.bats` — 6 кейсов на запрет комментариев.
+  - `bootstrap-dev-env.bats` — 3 кейса на детектор пакетного менеджера.
+- Фикстура — `tests/fixture/minimal-target/` (валидный каркас для integration).
+- Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.
+- CI — `.github/workflows/ci.yml` запускает всё на push/PR.
+- Покрыто тестами 4 из 11 скриптов; расширение — backlog Волны 3.
+
+Подготовка dev-окружения — `bash scripts/bootstrap-dev-env.sh`.
+
+## Backlog и работа
+
+Единица работы — альфа **Work** (Essence).
+State-артефакт Work — **GitHub Issues** (решение принципа 9, см. `decisions.md`).
+
+- Шаблон — `.github/ISSUE_TEMPLATE/work-unit.yml`.
+- Labels — `work-unit`, `wave-1..5`, `documentation`, `bug`, `feature`, `question`, `epic`, `investigation`.
+- Milestones — по волнам: Wave 1 (закрыта), Wave 2 (закрыта), Wave 3 (идёт), Wave 4, Wave 5.
+- Backlog — [открытые issues](https://github.com/ypolosov/ai-driven-sdlc-plugin/issues).
+
+Продвижение альфы фиксирует `sdlc-alpha-tracker` с artifact-evidence.
+
+## Поддержка и обратная связь
+
+- Канал 1 — [GitHub Issues](https://github.com/ypolosov/ai-driven-sdlc-plugin/issues) со структурированными yml-шаблонами.
+- Канал 2 — email для чувствительных сообщений, см. [SUPPORT.md](SUPPORT.md).
+- Политика ответа и SLA — `SUPPORT.md`.
+- Известные ограничения и планы — `CHANGELOG.md` секция Unreleased.
+
 ## Демо-сценарии
 
 Живут отдельно в проекте доклада: `/home/ypolosov/DEV/GITS/talk-ai-driven-sdlc/demo/`.
@@ -122,7 +171,7 @@
 
 ## Как читать плагин
 
-- `CLAUDE.md` — конституция плагина (13 принципов + 4a).
+- `CLAUDE.md` — конституция плагина (17 принципов + 4a).
 - `catalogs/**` — терминологический каркас.
 - `meta-templates/**` — схемы рабочих продуктов.
 - `skills/**/SKILL.md` — методические инструкции фаз и сквозных дисциплин.
@@ -130,6 +179,7 @@
 - `agents/**.md` — субагенты с изолированным контекстом.
 - `scripts/**.sh` — детерминированные проверки.
 - `hooks/hooks.json` — порядок срабатывания проверок.
+- `.claude/sdlc/**` — артефакты SDLC самого плагина (dogfooding, принцип 12).
 
 ## Правила работы над плагином
 
@@ -137,6 +187,8 @@
 - Код без комментариев (принцип 4a).
 - Артефакты на русском, каждое утверждение ≤ 15 слов.
 - Плагин — не место для конкретных шаблонов инструментов.
+- Изменение принципа в `CLAUDE.md` требует записи в `memom.md` (принцип 15).
+- Изменение публичной поверхности требует обновления README в том же коммите (принцип 16).
 
 ## Лицензия
 
