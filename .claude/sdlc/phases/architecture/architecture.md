@@ -15,9 +15,9 @@ traces_to:
   - ../testing/testing.md
   - ../development/development.md
 system_of_attention: ai-driven-sdlc-plugin
-nfr: [extensibility, reversibility, determinism, hooks-performance, security]
+nfr: [extensibility, reversibility, determinism, hooks-performance, security, reliability, maintainability]
 created: 2026-04-19
-updated: 2026-04-19
+updated: 2026-04-30
 ---
 
 # Архитектура плагина ai-driven-sdlc
@@ -47,7 +47,7 @@ updated: 2026-04-19
 |---|---|---|
 | Интерактивный опрос пользователя | skills фаз | Way of Working |
 | Выбор метода и инструмента (SME) | sdlc-method-engineer | Way of Working |
-| Хранение состояния альф | sdlc-alpha-tracker | все альфы |
+| Хранение состояния альф | sdlc-alpha-tracker + essence-alpha-mcp | все альфы |
 | Перенос фокуса внимания | sdlc-focus | Software System |
 | Аудит консистентности | sdlc-consistency-auditor | Way of Working |
 | Валидация артефактов | scripts hooks | Way of Working |
@@ -85,6 +85,8 @@ updated: 2026-04-19
 | determinism | Проверяемые задачи выполняют скрипты, не LLM | принцип 6 |
 | hooks-performance | Hooks не замедляют пользователя ощутимо | exit <200ms на средний артефакт |
 | security | Секреты целевого проекта не утекают в git | `.env` в `.gitignore`, нет токенов в артефактах |
+| reliability | Переходы альф валидируются формальной state machine | `essence_validate_consistency` зелёный |
+| maintainability | Каталог альф вынесен в reusable npm-пакет | `@ypolosov/essence-alpha-mcp` обновляется независимо |
 
 Покрытие NFR по ADR (поле `frontmatter.nfr`):
 
@@ -93,6 +95,8 @@ updated: 2026-04-19
 - determinism → ADR-002, ADR-005, ADR-006.
 - hooks-performance → ADR-006.
 - security → ADR-008.
+- reliability → ADR-009.
+- maintainability → ADR-009.
 
 ## 5. Ключевые Architecture Decision Records
 
@@ -108,6 +112,7 @@ updated: 2026-04-19
 | [ADR-006](adr/ADR-006-deterministic-over-llm.md) | Детерминированное приоритетнее LLM | Accepted |
 | [ADR-007](adr/ADR-007-artifact-path-convention.md) | Артефакты в `.claude/sdlc/` | Accepted |
 | [ADR-008](adr/ADR-008-secrets-outside-git.md) | Секреты целевого проекта вне git | Accepted |
+| [ADR-009](adr/ADR-009-essence-alpha-mcp-integration.md) | Авторитативный backend альф через essence-alpha-mcp | Accepted |
 
 ## 6. Трассируемость
 

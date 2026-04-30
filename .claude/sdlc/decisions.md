@@ -25,6 +25,67 @@ updated: 2026-04-30
 - traces_to:
   - `.claude/sdlc/audit.md`
 
+## 2026-04-30 — интеграция essence-alpha-mcp
+
+- context: трекер альф валидирует переходы недетерминированно из markdown.
+- autonomy_mode: hitl
+- phase: architecture
+- role: method-engineer
+- alternatives:
+  1. Интегрировать MCP-сервер `@ypolosov/essence-alpha-mcp` плюс snapshot.
+  2. Inline state machine на bash в скрипте плагина.
+  3. Удалить alphas.md полностью; источник только MCP.
+- choice: 1
+- rationale: соответствует Принципу 6 (детерминизм); переиспользует опубликованный пакет.
+- impl: ADR-009; `.mcp.json` запись `essence-alpha`; tracker tools расширены пятью MCP-tools.
+- impl: snapshot-режим `alphas.md`; PostToolUse hook `check-alpha-consistency.sh` плюс bats-тесты.
+- traces_to:
+  - `.claude/sdlc/phases/architecture/adr/ADR-009-essence-alpha-mcp-integration.md`
+  - `agents/sdlc-alpha-tracker.md`
+  - `scripts/check-alpha-consistency.sh`
+  - `tests/unit/check-alpha-consistency.bats`
+  - `.mcp.json`
+
+## 2026-04-30 — применение фиксов аудита после интеграции essence-alpha-mcp
+
+- context: 5 находок аудита; 2 important, 3 note.
+- autonomy_mode: hootl
+- phase: cross-cutting
+- role: method-engineer
+
+### Находка #1 — architecture.md не отражает ADR-009
+
+- alternatives:
+  1. Минимальный фикс — таблица §5, NFR §4, frontmatter.updated.
+  2. Полный фикс — также §3.1 строка про MCP, §6 traces_to.
+  3. Откладывающий — known-gap, work-unit issue в Wave 3.
+- choice: 2
+- rationale: одна итерация интеграции должна быть полной по принципу 16.
+- impl: §5 пополнен ADR-009; §4 расширен двумя NFR.
+- impl: §3.1 строка про MCP-backend обновлена; frontmatter updated 2026-04-30.
+- traces_to:
+  - `.claude/sdlc/phases/architecture/architecture.md`
+
+### Находка #3 — alphas.md отклоняется от alpha-state.meta.md
+
+- alternatives:
+  1. Расширить мета-шаблон под альтернативный type alpha-snapshot.
+  2. Версионировать v2 со snapshot-секцией; v1 для проектов без MCP.
+  3. Откатить frontmatter alphas.md к старой схеме (нарушает ADR-009).
+- choice: 1
+- rationale: расширение проще версионирования; v1 не нужен для dogfooding.
+- impl: мета-шаблон описывает оба режима alpha-journal и alpha-snapshot.
+- impl: добавлены frontmatter поля source_of_truth, snapshot_role, generated_after.
+- traces_to:
+  - `meta-templates/alpha-state.meta.md`
+
+### Находки #2, #4, #5 — отложены в backlog Wave 3
+
+- #2: запись в memom.md о расширении принципа 13 — кандидат на work-unit.
+- #4: bench-hooks.sh покрывает 5 hooks из 6 — кандидат на work-unit.
+- #5: traces_to смешивает уровни в dogfooding — note, конвенция формализуется позже.
+- rationale: note-уровень не блокирует merge; backlog Wave 3 фиксирует наследие.
+
 ## 2026-04-30 — применение фиксов /sdlc-audit --apply
 
 - context: 7 находок аудита (1 important, 6 note); каждая — 3 альтернативы фикса.

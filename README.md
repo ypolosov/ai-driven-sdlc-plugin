@@ -34,9 +34,11 @@
 
 - `context7@claude-plugins-official` — референсная документация инструментов (обязательно для SME-опроса).
 - `github@claude-plugins-official` — GitHub Issues как state_artifact для альфы Work (опционально, mid+).
+- `@ypolosov/essence-alpha-mcp` v0.1.0+ — детерминированный backend трекера альф (см. ADR-009).
 
 Плагин не ship'ит собственный `context7` — используйте dedicated плагин.
 Плагин ship'ит минимальный `github` MCP в `.mcp.json` как fallback.
+Плагин ship'ит запись `essence-alpha` в `.mcp.json`; пакет тянется через `npx`.
 
 ## Быстрый старт
 
@@ -79,7 +81,7 @@
 - `sdlc-consistency-auditor` — сквозная согласованность артефактов.
 - `sdlc-alpha-tracker` — единственный источник истины о состоянии альф.
 
-### Scripts (11)
+### Scripts (12)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
 - `enforce-tdd.sh` — мягкая блокировка записи кода без парного теста.
 - `enforce-format-lint.sh` — диспетчер форматера и линтера из `plugin-config.md`.
@@ -88,6 +90,7 @@
 - `check-readme-inventory.sh` — сверка имён в README плагина со структурой (Волна 2).
 - `check-system-readmes.sh` — инвентарь описаний систем внимания в целевом (Волна 2).
 - `check-memom-consistency.sh` — блокирует изменение принципов без записи в memom (Волна 2).
+- `check-alpha-consistency.sh` — валидирует БД essence-alpha-mcp при записи snapshot.
 - `bootstrap-target.sh` — инициализация целевого, режимы `--fail-if-exists` / `--merge` / `--force`.
 - `bench-hooks.sh` — бенчмарк 5 детерминированных hooks (NFR hooks-performance).
 - `bootstrap-dev-env.sh` — детектит pkg-manager и выводит команду установки bats/shellcheck/shfmt.
@@ -112,7 +115,7 @@
 - `catalogs/method-tool-matrix.md` — матрица «метод → примеры инструментов».
 
 ### Hooks (1 файл)
-- `hooks/hooks.json` — PreToolUse TDD (soft); PostToolUse порядок: validator → check-cross-refs → format/lint → no-comments → check-system-readmes.
+- `hooks/hooks.json` — PreToolUse TDD (soft); PostToolUse порядок: validator → check-cross-refs → format/lint → no-comments → check-system-readmes → check-alpha-consistency.
 
 ### Memom (Волна 2)
 - `memom.md` — журнал эволюции принципов плагина (принцип 15).
@@ -132,15 +135,16 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (4 файла, 21 кейс, 100% зелёный):
-  - `validate-artifact.bats` — 6 кейсов на поведение валидатора.
+- Unit (bats-core) — `tests/unit/` (5 файлов, 27 кейсов, 100% зелёный):
+  - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 6 кейсов на запрет комментариев.
   - `bootstrap-dev-env.bats` — 3 кейса на детектор пакетного менеджера.
+  - `check-alpha-consistency.bats` — 5 кейсов на валидатор БД essence-alpha.
 - Фикстура — `tests/fixture/minimal-target/` (валидный каркас для integration).
 - Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.
 - CI — `.github/workflows/ci.yml` запускает всё на push/PR.
-- Покрыто тестами 4 из 11 скриптов; расширение — backlog Волны 3.
+- Покрыто тестами 5 из 12 скриптов; расширение — backlog Волны 3.
 
 Подготовка dev-окружения — `bash scripts/bootstrap-dev-env.sh`.
 

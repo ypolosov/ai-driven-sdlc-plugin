@@ -2,7 +2,7 @@
 name: adr-index
 type: adr-index
 project: ai-driven-sdlc-plugin
-updated: 2026-04-19
+updated: 2026-04-30
 ---
 
 # Индекс Architecture Decision Records
@@ -22,6 +22,7 @@ updated: 2026-04-19
 | ADR-006 | Детерминированное приоритетнее LLM | Accepted | determinism, hooks-performance |
 | ADR-007 | Артефакты в .claude/sdlc/ | Accepted | reversibility |
 | ADR-008 | Секреты целевого проекта вне git | Accepted | security |
+| ADR-009 | Авторитативный backend альф через essence-alpha-mcp | Accepted | reliability, maintainability |
 
 ## Правила ведения
 
