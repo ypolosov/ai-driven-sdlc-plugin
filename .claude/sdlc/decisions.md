@@ -10,6 +10,22 @@ updated: 2026-04-30
 
 Принцип 1: альтернативы порождаются и фиксируются; выбор делает пользователь.
 
+## 2026-04-30 — следующий шаг по /sdlc-continue (после PR #22)
+
+- context: PR #22 интеграции essence-alpha-mcp ждёт review/merge.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. Ждать merge PR #22; новые изменения после merge.
+  2. Wave 3 / operations — собирать feedback, продвигать Opportunity → Addressed.
+  3. Wave 3 / development — расширение tdd_pairs на оставшиеся 6 скриптов.
+  4. Wave 3 / memom-запись о принципе 13 после ADR-009.
+- choice: 1
+- rationale: параллельная ветка рискует конфликтами с PR #22.
+- traces_to:
+  - PR #22
+
 ## 2026-04-30 — следующий шаг по /sdlc-continue
 
 - context: все 7 фаз инстанцированы; v0.2.0 релизнут; аудит >10 дней не запускался.
