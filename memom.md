@@ -23,7 +23,7 @@ source_of_truth_for_principles: CLAUDE.md
 - after: <новая формулировка или null>
 - motive: <причина изменения>
 - consequences: <что меняется в артефактах, скриптах, командах>
-- related_commits: [<хеши>]
+- related_commits: [<хеши>] или [PR #N, PR #M] до merge
 ```
 
 ## Журнал
@@ -57,6 +57,20 @@ source_of_truth_for_principles: CLAUDE.md
   - Обновлены `/sdlc-phase` и `/sdlc-init` с разделом «Интерактивность».
   - В «Протоколах инстанцирования» шаг 0 — опрос пользователя.
 - related_commits: []
+
+## 2026-05-01 — Принцип 13: детерминированный backend через essence-alpha-mcp
+- principle: 13
+- action: modify
+- before: «Единственный источник истины о состоянии альф — sdlc-alpha-tracker; другие агенты обращаются к трекеру, не читают alphas.md напрямую» (без указания backend трекера).
+- after: дополнено: «Авторитативный backend трекера — `@ypolosov/essence-alpha-mcp` (см. ADR-009). Markdown `alphas.md` — PR-видимый snapshot; журнал переходов живёт в БД».
+- motive: ADR-009 ввёл MCP-сервер как формальную state machine OMG Essence; markdown остался как snapshot. Принцип 13 не отражал смену backend.
+- consequences:
+  - Уточнена формулировка принципа 13 в `CLAUDE.md`.
+  - `agents/sdlc-alpha-tracker.md` использует MCP-tools; markdown пишется атомарно.
+  - `meta-templates/alpha-state.meta.md` поддерживает оба режима journal/snapshot.
+  - PostToolUse hook `check-alpha-consistency.sh` валидирует БД при записи snapshot.
+  - `scripts/seed-essence-alpha.sh` bootstrap-ит БД для существующих проектов.
+- related_commits: [PR #22, PR #23]
 
 ## Правила ведения
 

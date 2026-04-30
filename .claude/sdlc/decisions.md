@@ -10,6 +10,59 @@ updated: 2026-04-30
 
 Принцип 1: альтернативы порождаются и фиксируются; выбор делает пользователь.
 
+## 2026-05-01 — расширение bench-hooks 5→8 (Стадия B)
+
+- context: NFR hooks-performance не покрывал 3 hooks.
+- autonomy_mode: hootl
+- phase: testing
+- role: method-engineer
+- alternatives:
+  1. Расширить bench до 8 hooks с per-hook payload (выбрано).
+  2. Per-hook threshold override; cross-refs допускается выше 200ms.
+  3. Уточнить текст README про неполное покрытие; не трогать скрипт.
+- choice: 1
+- rationale: NFR должно покрывать все hooks для честной fitness-оценки.
+- impl: bench-hooks.sh +3 cases; payload per hook; SC2155 fix.
+- impl: latency-snapshot 8 hooks записан в testing.md §7a.
+- traces_to:
+  - `scripts/bench-hooks.sh`
+  - `.claude/sdlc/phases/testing/testing.md` §7a
+
+## 2026-05-01 — memom запись о принципе 13 (Стадия B)
+
+- context: ADR-009 расширил семантику принципа 13 без записи в memom.md.
+- autonomy_mode: hootl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. memom.md запись + уточнение CLAUDE.md принцип 13 (выбрано).
+  2. Только memom.md без правки CLAUDE.md; принцип формально не менялся.
+  3. Не трогать; принцип не модифицирован формально.
+- choice: 1
+- rationale: backend трекера — структурный аспект принципа 13.
+- impl: CLAUDE.md принцип 13 расширен двумя предложениями.
+- impl: memom.md новая запись 2026-05-01 с before/after/motive.
+- traces_to:
+  - `CLAUDE.md` §13
+  - `memom.md` запись 2026-05-01
+
+## 2026-05-01 — продвижение Way of Working через MCP (Стадия B)
+
+- context: первая полезная нагрузка на MCP-инфраструктуру после seed.
+- autonomy_mode: hootl
+- phase: testing
+- role: method-engineer
+- alternatives:
+  1. Way of Working In Use → Working Well через MCP (выбрано).
+  2. Не продвигать; ждать external feedback.
+  3. Только до In Place; Working Well после soak.
+- choice: 1
+- rationale: fitness-метрики 8 hooks подтверждают зрелость практики.
+- impl: 2 advance через `essence_advance_alpha` (In Use → In Place → Working Well).
+- impl: snapshot alphas.md обновлён.
+- traces_to:
+  - `.claude/sdlc/alphas.md` журнал MCP-продвижений
+
 ## 2026-04-30 — bootstrap БД essence-alpha-mcp (Стадия A)
 
 - context: после PR #22 БД пустая; 0 переходов; эксплуатация = 0.

@@ -3,7 +3,7 @@ name: system-context
 type: attention-context
 project: ai-driven-sdlc-plugin
 current_focus: essence-alpha-mcp
-updated: 2026-04-30
+updated: 2026-05-01
 ---
 
 # Реестр систем внимания
@@ -55,3 +55,10 @@ updated: 2026-04-30
 - Граница: npm-пакет `@ypolosov/essence-alpha-mcp`.
 - Описание системы: `.claude/sdlc/external-systems/essence-alpha-mcp.md`.
 - Мотив: bootstrap БД, эксплуатация, релиз v0.3.0 (см. ADR-009).
+
+### 2026-05-01 — фоновый фокус на hooks (Стадия B)
+
+- focus остаётся `essence-alpha-mcp`; `hooks` затронут косвенно.
+- Расширение bench-hooks 5→8 потребовало доступа к подсистеме `hooks`.
+- Описание `external-systems/hooks.md` уже существует с Волны 2.
+- focus_count для hooks без инкремента (Стадия B без отдельного `/sdlc-focus`).

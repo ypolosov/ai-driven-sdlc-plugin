@@ -151,6 +151,8 @@ Per-task override ephemeral и не сохраняется в файлах.
 Аудит запускается PostToolUse (async) и вручную через `/sdlc-audit`.
 Единственный источник истины о состоянии альф — `sdlc-alpha-tracker`.
 Другие агенты обращаются к трекеру, не читают `alphas.md` напрямую.
+Авторитативный backend трекера — `@ypolosov/essence-alpha-mcp` (см. ADR-009).
+Markdown `alphas.md` — PR-видимый snapshot; журнал переходов живёт в БД.
 
 ### 14. Конвенция пути артефактов SDLC
 

@@ -16,7 +16,7 @@ traces_to:
 system_of_attention: ai-driven-sdlc-plugin
 fitness_functions: [tool-names-isolation, hooks-performance, alpha-evidence-consistency, secrets-not-in-git, reversibility-integration]
 created: 2026-04-19
-updated: 2026-04-19
+updated: 2026-05-01
 ---
 
 # Стратегия тестирования плагина ai-driven-sdlc
@@ -118,11 +118,32 @@ Numerical coverage не применяется — метрика спорна �
 - Трассировка на requirements и architecture присутствует (§6).
 - Альфа Software System готова к Demonstrable при реализации тестов.
 
+## 7a. Latency-метрики hooks (2026-05-01)
+
+Замер `scripts/bench-hooks.sh` после расширения с 5 до 8 hooks.
+Threshold NFR `hooks-performance`: 200ms.
+
+| Hook | avg_ms | Threshold | Статус |
+|---|---|---|---|
+| check-memom-consistency | 12 | 200 | ok |
+| check-cross-refs | 113 | 200 | ok |
+| enforce-no-comments | 167 | 200 | ok |
+| check-readme-inventory | 40 | 200 | ok |
+| check-system-readmes | 36 | 200 | ok |
+| validate-artifact | 116 | 200 | ok |
+| check-alpha-consistency | 117 | 200 | ok |
+| enforce-format-lint | 191 | 200 | ok |
+
+Все 8 hooks проходят NFR-порог; `enforce-format-lint` ближайший к границе.
+Замер на 5 прогонах; среднее по runs.
+
 ## 8. Открытые вопросы
 
 - Реализация bats-тестов — задача фазы development.
 - ~~Бенчмарк hooks-performance требует фикстуры «средний артефакт».~~
   - Резолюция 2026-04-19: `scripts/bench-hooks.sh` на `testing.md` как samples; все <200ms.
+- ~~Bench не покрывает 3 hooks (check-alpha-consistency, enforce-no-comments, enforce-format-lint).~~
+  - Резолюция 2026-05-01: bench расширен до 8 hooks; все <200ms (см. §7a).
 - Gitleaks конфиг — настроить при первом CI-прогоне.
 - ~~Тестовая фикстура для integration-сценариев не создана.~~
   - Резолюция 2026-04-19: `tests/fixture/minimal-target/` — валидный минимальный каркас.
