@@ -2,13 +2,28 @@
 name: decisions
 type: decision-journal
 project: ai-driven-sdlc-plugin
-updated: 2026-04-19
+updated: 2026-04-30
 ---
 
 
 # Журнал альтернатив и решений
 
 Принцип 1: альтернативы порождаются и фиксируются; выбор делает пользователь.
+
+## 2026-04-30 — следующий шаг по /sdlc-continue
+
+- context: все 7 фаз инстанцированы; v0.2.0 релизнут; аудит >10 дней не запускался.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. Запустить /sdlc-audit — сквозная проверка консистентности перед новой итерацией.
+  2. Расширить TDD-покрытие скриптов — bats-тесты для оставшихся 7 скриптов.
+  3. Запустить /sdlc-phase operations Wave 3 — обратная связь, продвижение Opportunity к Addressed.
+- choice: 1
+- rationale: аудит давно не запускался; быстрый низкорисковый шаг перед новой итерацией.
+- traces_to:
+  - `.claude/sdlc/audit.md`
 
 ## 2026-04-19 14:40 — bootstrap SDLC-каркаса плагина
 
