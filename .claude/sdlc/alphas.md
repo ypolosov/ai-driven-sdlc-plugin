@@ -1,14 +1,19 @@
 ---
 name: alphas
-type: alpha-journal
+type: alpha-snapshot
 project: ai-driven-sdlc-plugin
 updated: 2026-04-30
+source_of_truth: mcp://essence-alpha
+snapshot_role: pr-visible-mirror
+generated_after: mcp-write
 ---
 
-# Журнал состояний альф
+# Snapshot состояний альф
 
-Единственный источник истины — агент `sdlc-alpha-tracker`.
-Прямое чтение файла другими агентами запрещено (принцип 13).
+Авторитативный backend — MCP-сервер `essence-alpha` (см. ADR-009).
+Этот файл — PR-видимый snapshot текущих состояний альф.
+Журнал переходов живёт в БД через `essence_list_transitions`.
+Прямое чтение этого файла другими агентами запрещено (принцип 13).
 
 ## Текущее состояние альф
 
@@ -17,7 +22,7 @@ updated: 2026-04-30
 | Opportunity | Value Established | `.claude/sdlc/phases/vision/vision.md` | 2026-04-19 |
 | Stakeholders | Involved | `.claude/sdlc/phases/requirements/requirements.md` | 2026-04-19 |
 | Requirements | Acceptable | `.claude/sdlc/phases/architecture/architecture.md` | 2026-04-19 |
-| Software System | Usable | `CHANGELOG.md#0.2.1` (release v0.2.1) | 2026-04-21 |
+| Software System | Usable | `CHANGELOG.md#0.2.1` | 2026-04-21 |
 | Work | Under Control | `tests/unit/validate-artifact.bats` | 2026-04-19 |
 | Team | Seeded | `.claude/sdlc/roles.md` | 2026-04-19 |
 | Way of Working | In Use | `.claude/sdlc/phases/testing/testing.md` | 2026-04-19 |
@@ -26,94 +31,12 @@ updated: 2026-04-30
 
 ## Журнал переходов
 
-### 2026-04-19 — bootstrap каркаса SDLC
+Журнал делегирован MCP-серверу `essence-alpha`.
+Получение через `mcp__essence_alpha__essence_list_transitions(alpha=<kebab-id>)`.
+Исторический журнал до 2026-04-30 — out of scope MVP интеграции.
 
-- Way of Working: Principles Established → Foundation Established.
-  - Артефакт: `.claude/sdlc/plugin-config.md` + SME-профиль.
-- Team: — → Seeded.
-  - Артефакт: `.claude/sdlc/roles.md` с активной ролью method-engineer.
-- Stakeholders: — → Recognized.
-  - Артефакт: `.claude/sdlc/roles.md`.
-- Work: — → Initiated.
-  - Артефакт: запись `bootstrap` в `decisions.md`.
-- Opportunity: — → Identified.
-  - Артефакт: dogfooding плагина зафиксирован в bootstrap.
+## Bootstrap БД
 
-### 2026-04-19 — завершение фазы vision
-
-- Opportunity: Identified → Value Established (skip: Solution Needed).
-  - Артефакт: `.claude/sdlc/phases/vision/vision.md` (секции 3.1–3.6).
-  - Мотив: проблема, бенефициар, решение и отличие зафиксированы.
-- Stakeholders: Recognized → Represented.
-  - Артефакт: `.claude/sdlc/phases/vision/vision.md` (секция 3.4).
-  - Мотив: ключевые стейкхолдеры с интересами перечислены.
-
-### 2026-04-19 — завершение фазы requirements
-
-- Requirements: — → Bounded (skip: Conceived).
-  - Артефакт: `.claude/sdlc/phases/requirements/requirements.md` (8 US с Gherkin AC).
-  - Мотив: объём MVP Волны 2 зафиксирован и декомпозирован.
-- Stakeholders: Represented → Involved.
-  - Артефакт: `.claude/sdlc/phases/requirements/requirements.md` (AC каждой US).
-  - Мотив: интересы стейкхолдеров учтены в критериях приёмки.
-
-### 2026-04-19 — завершение фазы architecture
-
-- Software System: — → Architecture Selected.
-  - Артефакт: `.claude/sdlc/phases/architecture/architecture.md` + 8 ADR в `adr/`.
-  - Мотив: функциональная декомпозиция и значимые решения зафиксированы.
-  - Примечание: первое состояние альфы, skip неприменим.
-- Requirements: Bounded → Acceptable (skip: Coherent).
-  - Артефакт: `.claude/sdlc/phases/architecture/architecture.md` §4 (5 NFR).
-  - Мотив: NFR extensibility, reversibility, determinism, hooks-performance, security зафиксированы.
-
-### 2026-04-19 — завершение фазы testing (стратегия)
-
-- Way of Working: Foundation Established → In Use.
-  - Артефакт: `.claude/sdlc/phases/testing/testing.md` (пирамида + 4 fitness).
-  - Мотив: стратегия тестирования и fitness-функции зафиксированы.
-- Software System: без перехода; останется Architecture Selected до реализации тестов.
-  - Мотив: Demonstrable требует зелёных bats-тестов, их ещё нет.
-- Requirements: без перехода; останется Acceptable до прохождения тестов.
-  - Мотив: Addressed требует прохождения AC через автотесты.
-
-### 2026-04-19 — фаза development (план + первый тест)
-
-- Work: Initiated → Prepared.
-  - Артефакт: `.claude/sdlc/phases/development/development.md` (план TDD + backlog 6 единиц).
-  - Артефакт: `scripts/bootstrap-dev-env.sh` (bash-скрипт проверки окружения).
-  - Артефакт: `tests/unit/validate-artifact.bats` (первый тест, 6 кейсов).
-  - Мотив: план, ресурсы и первый тест зафиксированы; env-bootstrap отложен.
-- Software System: без перехода; останется Architecture Selected.
-  - Мотив: Demonstrable требует зелёного прогона bats; инструменты не установлены.
-
-### 2026-04-19 — первый зелёный прогон bats
-
-- Software System: Architecture Selected → Demonstrable.
-  - Артефакт: `tests/unit/validate-artifact.bats` (6/6 зелёных).
-  - Мотив: исполняемая функциональность продемонстрирована тестом.
-- Work: Prepared → Under Control.
-  - Артефакт: `tests/unit/validate-artifact.bats` (первая единица закрыта).
-  - Мотив: TDD-цикл работает; shellcheck и shfmt чистые на validate-artifact.sh.
-
-### 2026-04-19 — завершение фазы deployment (стратегия)
-
-- Software System: без перехода; останется Demonstrable.
-  - Мотив: Usable требует первого успешного релиза в marketplace; план зафиксирован, релиз не выполнен.
-- Стратегия релизов: `phases/deployment/deployment.md` + `CHANGELOG.md`.
-
-### 2026-04-19 — завершение фазы operations (стратегия)
-
-- Software System: без перехода; останется Demonstrable.
-  - Мотив: Usable требует реального использования пользователями, канал обратной связи готов.
-- Opportunity: без перехода; останется Value Established.
-  - Мотив: Addressed требует внешнего пользователя, подтвердившего ценность.
-- Стратегия поддержки: `phases/operations/operations.md` + 3 issue templates + `SUPPORT.md`.
-
-### 2026-04-19 — релиз v0.2.0
-
-- Software System: Demonstrable → Usable.
-  - Артефакт: `CHANGELOG.md` секция `[0.2.0]` + GitHub Release v0.2.0.
-  - Мотив: система установима и пригодна к использованию внешними стейкхолдерами через marketplace.
-- Opportunity: без перехода; останется Value Established.
-  - Мотив: Addressed требует подтверждения ценности от внешнего пользователя.
+При первом старте БД пустая.
+Bootstrap текущих состояний — отдельная задача (см. ADR-009 Out of scope).
+До bootstrap'а snapshot и БД могут расходиться.

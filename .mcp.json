@@ -8,6 +8,18 @@
         "@modelcontextprotocol/server-github"
       ],
       "env": {}
+    },
+    "essence-alpha": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ypolosov/essence-alpha-mcp",
+        "serve"
+      ],
+      "env": {
+        "ESSENCE_ALPHA_DB": "${CLAUDE_PROJECT_DIR}/.claude/sdlc/essence-alpha.db"
+      }
     }
   }
 }

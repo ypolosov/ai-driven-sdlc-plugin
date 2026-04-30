@@ -2,7 +2,7 @@
 name: plugin-config
 type: hooks-config
 version: 1
-updated: 2026-04-19
+updated: 2026-04-30
 ---
 
 # Технический конфиг hooks
@@ -43,10 +43,12 @@ tdd_pairs:
     test: 'tests/unit/enforce-no-comments.bats'
   - source: '^scripts/bootstrap-dev-env\.sh$'
     test: 'tests/unit/bootstrap-dev-env.bats'
+  - source: '^scripts/check-alpha-consistency\.sh$'
+    test: 'tests/unit/check-alpha-consistency.bats'
 ```
 
-Активные пары — 4 скрипта: validate-artifact, check-cross-refs, enforce-no-comments, bootstrap-dev-env.
-Остальные 7 скриптов — out of scope до написания их тестов.
+Активные пары — 5 скриптов: validate-artifact, check-cross-refs, enforce-no-comments, bootstrap-dev-env, check-alpha-consistency.
+Остальные 6 скриптов — out of scope до написания их тестов.
 
 ### Планируемые пары (не активны, документация)
 

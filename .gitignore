@@ -3,3 +3,9 @@
 .env
 .env.local
 .env.*.local
+
+# ai-driven-sdlc: essence-alpha-mcp local SQLite state
+.claude/sdlc/essence-alpha.db
+.claude/sdlc/essence-alpha.db-journal
+.claude/sdlc/essence-alpha.db-wal
+.claude/sdlc/essence-alpha.db-shm
