@@ -37,6 +37,6 @@ generated_after: mcp-write
 
 ## Bootstrap БД
 
-При первом старте БД пустая.
-Bootstrap текущих состояний — отдельная задача (см. ADR-009 Out of scope).
-До bootstrap'а snapshot и БД могут расходиться.
+БД заселена 2026-04-30 через `scripts/seed-essence-alpha.sh`.
+Записан 21 переход; `essence_validate_consistency` возвращает ok.
+Snapshot и БД синхронизированы по итогам Стадии A.

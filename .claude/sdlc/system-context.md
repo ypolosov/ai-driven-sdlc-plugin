@@ -2,8 +2,8 @@
 name: system-context
 type: attention-context
 project: ai-driven-sdlc-plugin
-current_focus: ai-driven-sdlc-plugin
-updated: 2026-04-19
+current_focus: essence-alpha-mcp
+updated: 2026-04-30
 ---
 
 # Реестр систем внимания
@@ -18,11 +18,13 @@ updated: 2026-04-19
 |---|---|---|---|---|
 | ai-driven-sdlc-plugin | target | materialized | 2026-04-19 | 2 |
 | hooks | subsystem | logical | 2026-04-19 | 1 |
+| essence-alpha-mcp | in_environment | logical | 2026-04-30 | 1 |
 
 ## Пояснения
 
-`current_focus=ai-driven-sdlc-plugin` — внимание возвращено на целевую систему.
-`role_vs_target` остаётся относительно корня проекта (ai-driven-sdlc-plugin=target, dogfooding, принцип 12).
+`current_focus=essence-alpha-mcp` — внимание на внешней зависимости (in_environment).
+Целевая система остаётся `ai-driven-sdlc-plugin` (dogfooding, принцип 12).
+`role_vs_target` указывается относительно корня плагина для каждой записи.
 Надсистему, подсистемы и окружение фиксируйте через `/sdlc-focus` по мере необходимости.
 
 ## Журнал фокусировок
@@ -46,3 +48,10 @@ updated: 2026-04-19
 - Граница: корень репозитория.
 - Описание системы: `README.sdlc.md` в корне проекта.
 - Мотив: подготовка к `/sdlc-phase development` для всего плагина.
+
+### 2026-04-30 — фокус на essence-alpha-mcp (in_environment)
+
+- focus: `essence-alpha-mcp` (kind=logical).
+- Граница: npm-пакет `@ypolosov/essence-alpha-mcp`.
+- Описание системы: `.claude/sdlc/external-systems/essence-alpha-mcp.md`.
+- Мотив: bootstrap БД, эксплуатация, релиз v0.3.0 (см. ADR-009).

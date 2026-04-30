@@ -10,6 +10,56 @@ updated: 2026-04-30
 
 Принцип 1: альтернативы порождаются и фиксируются; выбор делает пользователь.
 
+## 2026-04-30 — bootstrap БД essence-alpha-mcp (Стадия A)
+
+- context: после PR #22 БД пустая; 0 переходов; эксплуатация = 0.
+- autonomy_mode: hitl
+- phase: development
+- role: method-engineer
+- alternatives:
+  1. Seed-script через CLI с цепочкой переходов (выбрано).
+  2. Inline в hook check-alpha-consistency.sh.
+  3. Manual advance per альфа в Claude-сессии.
+- choice: 1
+- rationale: детерминирован, идемпотентен, переиспользуем для новых проектов.
+- impl: `scripts/seed-essence-alpha.sh` + 4 bats-кейса; 21 переход, validate ok.
+- traces_to:
+  - `scripts/seed-essence-alpha.sh`
+  - `tests/unit/seed-essence-alpha.bats`
+  - `.claude/sdlc/external-systems/essence-alpha-mcp.md`
+  - `.claude/sdlc/system-context.md`
+
+## 2026-04-30 — фокус на essence-alpha-mcp (in_environment)
+
+- context: Стадия A плана — нужен sidecar для logical-системы.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. logical sidecar в external-systems/ (выбрано).
+  2. materialized README.sdlc.md в репо essence-alpha-mcp.
+  3. transient-фокус без описания (`/sdlc-focus --transient`).
+- choice: 1
+- rationale: пакет — внешняя зависимость, не подсистема плагина.
+- traces_to:
+  - `.claude/sdlc/external-systems/essence-alpha-mcp.md`
+
+## 2026-04-30 — расширение sidecar essence-alpha-mcp за §1-5
+
+- context: аудит Стадии A — sidecar содержит §6-8 сверх мета-шаблона.
+- autonomy_mode: hootl
+- phase: cross-cutting
+- role: method-engineer
+- alternatives:
+  1. Перенести §6 «Контракт MCP» в `agents/sdlc-alpha-tracker.md`.
+  2. Обновить `system-readme.meta.md` — добавить опциональные секции.
+  3. Оставить sidecar; зафиксировать осознанное расширение (выбрано).
+- choice: 3
+- rationale: контракт MCP уместен рядом с описанием системы.
+- impl: backlog Wave 3 — версионирование `system-readme.meta.md` v2.
+- traces_to:
+  - `.claude/sdlc/external-systems/essence-alpha-mcp.md` §6-8
+
 ## 2026-04-30 — следующий шаг по /sdlc-continue (после PR #22)
 
 - context: PR #22 интеграции essence-alpha-mcp ждёт review/merge.
