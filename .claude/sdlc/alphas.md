@@ -2,7 +2,7 @@
 name: alphas
 type: alpha-journal
 project: ai-driven-sdlc-plugin
-updated: 2026-04-19
+updated: 2026-04-30
 ---
 
 # Журнал состояний альф
@@ -17,7 +17,7 @@ updated: 2026-04-19
 | Opportunity | Value Established | `.claude/sdlc/phases/vision/vision.md` | 2026-04-19 |
 | Stakeholders | Involved | `.claude/sdlc/phases/requirements/requirements.md` | 2026-04-19 |
 | Requirements | Acceptable | `.claude/sdlc/phases/architecture/architecture.md` | 2026-04-19 |
-| Software System | Usable | `CHANGELOG.md#0.2.0` (release v0.2.0) | 2026-04-19 |
+| Software System | Usable | `CHANGELOG.md#0.2.1` (release v0.2.1) | 2026-04-21 |
 | Work | Under Control | `tests/unit/validate-artifact.bats` | 2026-04-19 |
 | Team | Seeded | `.claude/sdlc/roles.md` | 2026-04-19 |
 | Way of Working | In Use | `.claude/sdlc/phases/testing/testing.md` | 2026-04-19 |

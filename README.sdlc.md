@@ -20,7 +20,7 @@ updated: 2026-04-19
 
 - `role_vs_target`: target.
 - `last_focused_at`: 2026-04-19.
-- `focus_count`: 1.
+- `focus_count`: 2.
 
 ## 3. Состояние альф относительно системы
 

@@ -58,3 +58,19 @@ payload() {
   [ "$status" -ne 0 ]
   [[ "$output" == *"frontmatter"* ]] || [[ "$stderr" == *"frontmatter"* ]] || [ -n "$output$stderr" ]
 }
+
+@test "numbered heading does not create false 15-word violation" {
+  mkdir -p "$TMP_DIR/.claude/sdlc"
+  {
+    printf -- '---\n'
+    printf 'name: sample\n'
+    printf 'type: test\n'
+    printf -- '---\n\n'
+    printf '## 6. Открытые вопросы\n\n'
+    printf -- '- Установка bats-core через submodule или vendor-copy — резолюция нужна позже до перехода фазы\n'
+    printf -- '- Резолюция 2026-04-19: системный пакетный менеджер через bootstrap-dev-env\n'
+  } > "$TMP_DIR/.claude/sdlc/numbered.md"
+  run bash -c "printf '%s' '$(payload Write "$TMP_DIR/.claude/sdlc/numbered.md")' | '$SCRIPT' 2>&1"
+  [ "$status" -eq 0 ]
+  [[ "$output" != *"VIOLATIONS_15W"* ]]
+}

@@ -3,9 +3,11 @@ name: audit
 type: audit-report
 project: ai-driven-sdlc-plugin
 run_at: 2026-04-30 21:50
+applied_at: 2026-04-30 22:30
 auditor: sdlc-consistency-auditor
-status: warn
+status: pass
 issues_count: 7
+issues_resolved: 7
 ---
 
 # Отчёт сквозного аудита SDLC-артефактов
@@ -154,12 +156,27 @@ issues_count: 7
 
 ## 6. Финальный статус
 
-**warn** — 7 расхождений (1 important + 6 note); ни одно не блокирует merge.
+**pass** — все 7 находок устранены или закрыты как false positive 2026-04-30.
 
-### Рекомендуемый порядок устранения
+### Применённые фиксы
 
-1. Находка #2 (important) — заполнить фикстуру или явно отложить с записью в `decisions.md`.
-2. Находка #4 — синхронизация `focus_count` (быстрый автоматизируемый фикс).
-3. Находка #5 — приведение `operations.md` к фактическим 4 templates.
-4. Находка #3 — таксономия materialized/logical.
-5. Находки #1, #6, #7 — мелкие уточнения; могут быть закрыты в Волне 3 пакетно.
+| # | Уровень | Действие | Артефакт |
+|---|---|---|---|
+| #1 | note | Парсер `validate-artifact.sh` улучшен; добавлен bats-тест на numbered heading | `scripts/validate-artifact.sh`, `tests/unit/validate-artifact.bats` |
+| #2 | important | Закрыто как false positive аудитора; фикстура уже заполнена 8 артефактами | `tests/fixture/minimal-target/` |
+| #3 | note | §3.2 переименована в «Структурные подсистемы»; колонка `kind`, hooks=logical | `phases/architecture/architecture.md` |
+| #4 | note | `focus_count: 2` обновлён в frontmatter и §2 | `README.sdlc.md` |
+| #5 | note | DoD приведён к 4 templates; frontmatter `updated: 2026-04-30` | `phases/operations/operations.md` |
+| #6 | note | Evidence Software System → CHANGELOG.md#0.2.1, дата 2026-04-21 | `.claude/sdlc/alphas.md` |
+| #7 | note | AC-05.2 переформулирован: помечается в audit.md, merge блокируется CI gate | `phases/requirements/requirements.md` |
+
+Дополнительно: историческая запись в `decisions.md` (rationale 23 слова) разбита на 3 утверждения для соблюдения принципа 4.
+
+Открытый бэклог (work-unit candidates):
+
+- Integration bats-тест на `tests/fixture/minimal-target/` (последствие #2).
+- Детерминированная синхронизация `focus_count` через `/sdlc-focus` или `check-system-readmes.sh` (последствие #4).
+- Расширение `tdd_pairs` на оставшиеся 7 скриптов.
+- Уточнение валидатора 15-слов для inline-bold AC-разделителей (отложено как known-limitation).
+
+Все решения зафиксированы в `decisions.md` 2026-04-30.

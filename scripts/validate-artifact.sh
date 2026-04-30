@@ -42,20 +42,36 @@ body = parts[2] if len(parts) >= 3 else text
 body = re.sub(r"```.*?```", "", body, flags=re.DOTALL)
 body = re.sub(r"`[^`]*`", "", body)
 body = "\n".join(
-    line for line in body.splitlines() if not line.lstrip().startswith("|")
+    line
+    for line in body.splitlines()
+    if not line.lstrip().startswith(("|", "#"))
 )
 
-sentences = re.split(r"(?<=[\.!\?])\s+", body)
+bullet_re = re.compile(r"^\s*[-*]\s+")
 violations = []
-for s in sentences:
-    s_clean = s.strip()
-    if not s_clean:
-        continue
-    if s_clean.startswith("#") or s_clean.startswith("-") or s_clean.startswith("*"):
-        continue
-    words = re.findall(r"\S+", s_clean)
-    if len(words) > 15:
-        violations.append((len(words), s_clean[:80]))
+
+
+def collect_violations(text):
+    for paragraph in re.split(r"\n\s*\n", text):
+        for s in re.split(r"(?<=[\.!\?])\s+", paragraph):
+            s_clean = s.strip()
+            if not s_clean:
+                continue
+            words = re.findall(r"\S+", s_clean)
+            if len(words) > 15:
+                violations.append((len(words), s_clean[:80]))
+
+
+non_bullet_lines = []
+for line in body.splitlines():
+    if bullet_re.match(line):
+        bullet_text = bullet_re.sub("", line).strip()
+        if bullet_text:
+            collect_violations(bullet_text)
+    else:
+        non_bullet_lines.append(line)
+
+collect_violations("\n".join(non_bullet_lines))
 
 if violations:
     print("VIOLATIONS_15W", file=sys.stderr)

@@ -54,17 +54,19 @@ updated: 2026-04-19
 | Чтение состояния | sdlc-state-reader | Work |
 | Документация систем внимания | system-readme.meta | Software System |
 
-### 3.2. Подсистемы плагина (materialized)
+### 3.2. Структурные подсистемы плагина
 
-| Подсистема | Назначение | Входит в |
-|---|---|---|
-| `skills/` | Интерактивные фазы SDLC | Плагин |
-| `commands/` | Точки входа `/sdlc-*` | Плагин |
-| `agents/` | LLM-агенты (tracker, auditor, reader, method-engineer, validator) | Плагин |
-| `scripts/` | Детерминированные проверки и bootstrap | Плагин |
-| `hooks/` | Регистрация PreToolUse/PostToolUse | Плагин |
-| `catalogs/` | alphas, disciplines, roles, method-tool-matrix | Плагин |
-| `meta-templates/` | Схемы артефактов | Плагин |
+| Подсистема | Kind | Назначение | Входит в |
+|---|---|---|---|
+| `skills/` | materialized | Интерактивные фазы SDLC | Плагин |
+| `commands/` | materialized | Точки входа `/sdlc-*` | Плагин |
+| `agents/` | materialized | LLM-агенты (tracker, auditor, reader, method-engineer, validator) | Плагин |
+| `scripts/` | materialized | Детерминированные проверки и bootstrap | Плагин |
+| `hooks/` | logical | Регистрация PreToolUse/PostToolUse через настройки Claude Code | Плагин |
+| `catalogs/` | materialized | alphas, disciplines, roles, method-tool-matrix | Плагин |
+| `meta-templates/` | materialized | Схемы артефактов | Плагин |
+
+Категория `kind` — по принципу 17 (`materialized` = собственный пакет/директория, `logical` = регистрация в чужом конфиге).
 
 ### 3.3. Граф создания (Том 2 гл. 8)
 

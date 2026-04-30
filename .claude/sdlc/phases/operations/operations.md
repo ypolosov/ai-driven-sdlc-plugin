@@ -14,7 +14,7 @@ traces_from:
 traces_to: []
 system_of_attention: ai-driven-sdlc-plugin
 created: 2026-04-19
-updated: 2026-04-19
+updated: 2026-04-30
 ---
 
 # Стратегия фазы operations плагина ai-driven-sdlc
@@ -91,7 +91,7 @@ Milestones: `Wave 1` (closed), `Wave 2` (closed), `Wave 3` (текущий backl
 ## 5. Критерии готовности фазы
 
 - Артефакт `operations.md` валиден.
-- 3 issue templates созданы и работают.
+- 4 issue templates созданы и работают: bug, feature, question, work-unit.
 - `SUPPORT.md` в корне репозитория.
 - `CHANGELOG.md` процесс (из deployment.md) согласован с issue triage.
 - Альфа Opportunity может достичь Addressed при первом внешнем пользователе.

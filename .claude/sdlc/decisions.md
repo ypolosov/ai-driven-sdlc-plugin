@@ -25,6 +25,99 @@ updated: 2026-04-30
 - traces_to:
   - `.claude/sdlc/audit.md`
 
+## 2026-04-30 — применение фиксов /sdlc-audit --apply
+
+- context: 7 находок аудита (1 important, 6 note); каждая — 3 альтернативы фикса.
+- autonomy_mode: hitl
+- phase: cross-cutting
+- role: method-engineer
+
+### Находка #1 — false positive парсера ≤15 слов
+
+- alternatives:
+  1. Улучшить regex в validate-artifact.sh (учесть буллеты и заголовки).
+  2. Добавить точки в проблемные буллеты в deployment.md и development.md.
+  3. Документировать known-limitation в plugin-config.md.
+- choice: 1
+- rationale: фикс корня устраняет класс багов; обходные пути не масштабируются.
+- impl: добавлен failing-тест `numbered heading does not create false 15-word violation`. Парсер разделяет на параграфы, обрабатывает буллеты отдельно, фильтрует заголовки. Все 7 bats-тестов зелёные. Прогон по всем артефактам — 0 violations.
+- traces_to:
+  - `scripts/validate-artifact.sh`
+  - `tests/unit/validate-artifact.bats`
+
+### Находка #2 — пустая фикстура tests/fixture/minimal-target/
+
+- alternatives:
+  1. Заполнить фикстуру минимальными артефактами.
+  2. Отложить до Волны 3 с записью в decisions.md.
+  3. Генерировать через bootstrap-target.sh в bats setup().
+- choice: 1
+- rationale: при проверке выяснилось — фикстура УЖЕ содержит 8 артефактов. Аудитор не заглянул глубже `.claude/`. Находка — false positive.
+- follow_up: создать work-unit issue на integration-тест, использующий фикстуру.
+
+### Находка #3 — типизация подсистемы hooks
+
+- alternatives:
+  1. Обновить architecture.md §3.2 — пометить hooks как logical, переименовать секцию.
+  2. Поднять hooks до materialized.
+  3. Уточнить определение в meta-templates/system-readme.meta.md.
+- choice: 1
+- rationale: hooks физически живут в настройках Claude Code, не в репо плагина. Logical корректнее.
+- impl: §3.2 переименована в «Структурные подсистемы»; добавлена колонка `kind`; hooks помечен `logical`.
+- traces_to:
+  - `.claude/sdlc/phases/architecture/architecture.md`
+
+### Находка #4 — рассинхрон focus_count
+
+- alternatives:
+  1. Обновить README.sdlc.md focus_count до 2.
+  2. Убрать focus_count из system-readme полностью.
+  3. Добавить check-system-readmes.sh --sync-focus-count.
+- choice: 1
+- rationale: быстрый ручной фикс; автоматизация — отдельная итерация.
+- impl: README.sdlc.md `focus_count: 2` в frontmatter и §2.
+- follow_up: кандидат на work-unit — детерминированная синхронизация в `/sdlc-focus`.
+
+### Находка #5 — operations.md 3 vs 4 templates
+
+- alternatives:
+  1. Привести operations.md к 4 templates (включить work-unit).
+  2. Перенести work-unit в backlog (вне operations).
+  3. Принять 4 templates с обоснованием в decisions.md.
+- choice: 1
+- rationale: реальность — 4 templates; артефакт должен это отражать.
+- impl: §5 DoD обновлён на «4 issue templates: bug, feature, question, work-unit». Frontmatter updated 2026-04-30.
+- traces_to:
+  - `.claude/sdlc/phases/operations/operations.md`
+
+### Находка #6 — alpha-evidence Software System
+
+- alternatives:
+  1. Обновить alphas.md на v0.2.1 без изменения состояния.
+  2. Оставить 0.2.0 как момент перехода, добавить колонку last_release.
+  3. Подтвердить через sdlc-alpha-tracker как patch-only.
+- choice: 1
+- rationale: прямое обновление evidence отражает текущий релиз без правки мета-шаблона.
+- impl: alphas.md строка Software System → CHANGELOG.md#0.2.1 (release v0.2.1), 2026-04-21.
+- traces_to:
+  - `.claude/sdlc/alphas.md`
+
+### Находка #7 — AC-05.2 vs async PostToolUse
+
+- alternatives:
+  1. Переформулировать AC-05.2 на «помечает в audit.md, блокирует merge через CI».
+  2. Добавить PreToolUse-блокировку для критичных артефактов.
+  3. Принять текущее через CI gate с трассой.
+- choice: 1
+- rationale: PostToolUse семантически не блокирует; формулировка приведена к реальности.
+- impl: requirements.md AC-05.2 переформулирован. Заменено «блокирует противоречивые записи». Новые And: «расхождения помечаются в audit.md», «merge блокируется через CI gate».
+- traces_to:
+  - `.claude/sdlc/phases/requirements/requirements.md`
+
+### Сводка
+
+Применены 6 фиксов: #1, #3, #4, #5, #6, #7. Находка #2 закрыта как false positive аудитора. Финальный статус аудита — `pass`. Все артефакты SDLC прошли валидатор.
+
 ## 2026-04-19 14:40 — bootstrap SDLC-каркаса плагина
 
 - context: инициализация dogfooding плагина как целевой системы.
@@ -845,7 +938,7 @@ updated: 2026-04-30
   2. B — полная актуализация под состояние: счётчик, статус, Tests & CI, Поддержка, backlog, инвентарь.
   3. C — реструктуризация под user-journey: меняет vision README; требует `/sdlc-phase vision --reconfigure`.
 - choice: 2
-- rationale: A оставляет принцип 16 нарушенным; C — vision-решение, выходит за рамки sync. B ровно закрывает gap без перепроектирования.
+- rationale: A оставляет принцип 16 нарушенным. C — vision-решение, выходит за рамки sync. B ровно закрывает gap без перепроектирования.
 - follow_ups:
   - Кандидат на work-unit: усиление `check-readme-inventory.sh` (ловить tests/, workflows, CHANGELOG, ISSUE_TEMPLATE).
   - Кандидат на работу: C как отдельная итерация Волны 4 при появлении внешних пользователей.
