@@ -2,67 +2,71 @@
 name: audit
 type: audit-report
 project: ai-driven-sdlc-plugin
-run_at: 2026-04-30 23:50
-applied_at: 2026-04-30 23:55
+run_at: 2026-05-01 09:00
+applied_at: 2026-05-01 09:10
 auditor: sdlc-consistency-auditor
 status: pass
 issues_count: 3
-issues_resolved: 3
+issues_resolved: 2
+issues_closed_as_fp: 1
 ---
 
 # Отчёт сквозного аудита SDLC-артефактов
 
 ## 1. Резюме
 
-Прогон в рамках Стадии A плана `essence-alpha-mcp-serene-ember`.
-Bootstrap БД essence-alpha-mcp выполнен через `seed-essence-alpha.sh`.
-Записан 21 переход; `essence_validate_consistency` ok=true.
-Все детерминированные проверки чистые: 31/31 bats, 0 violations validate, cross-refs OK, readme-inventory OK, alpha-consistency OK.
+Прогон в рамках Стадии B плана `essence-alpha-mcp-serene-ember`.
+Расширен `bench-hooks.sh` 5→8 hooks (NFR `hooks-performance`).
+Добавлена memom-запись о принципе 13 (закрывает находку #2 предыдущего аудита).
+Первое реальное продвижение Way of Working через MCP: In Use → In Place → Working Well.
 
-Найдено 3 расхождения; все применены автономно (HOOTL fix). Финальный статус — **pass**.
+Все детерминированные проверки чистые: 31/31 bats, 0 violations validate, cross-refs OK, readme-inventory OK, memom-consistency OK, bench-hooks 8/8 <200ms.
+
+Найдено 3 расхождения уровня note: 2 применены, 1 закрыта как false positive.
+Финальный статус — **pass**.
 
 ## 2. Проверки
 
 | Проверка | Статус | Детали |
 |---|---|---|
-| Трассируемость фаз | pass | decisions ссылается на seed-script, bats, sidecar, system-context |
-| Соответствие уровню SME | pass | development=mid; bats + shfmt + shellcheck соблюдены |
-| Альфы ↔ артефакты (через MCP) | pass | snapshot отражает заселение БД 2026-04-30 |
-| System-context ↔ архитектура | pass | пояснения переписаны под current_focus=essence-alpha-mcp |
+| Трассируемость фаз | pass | testing.md §7a сохраняет traces_from на architecture.md §4 |
+| Соответствие уровню SME | pass | testing=mid; пирамида + fitness + coverage-gate |
+| Альфы ↔ артефакты (через MCP) | pass | Way of Working = Working Well; журнал MCP-продвижений зафиксирован |
+| System-context ↔ архитектура | pass | журнал фокусировок дополнен записью Стадии B |
 | Осиротевшие ссылки | pass | check-cross-refs OK |
 | Правило ≤15 слов | pass | validate-artifact 0 violations |
-| TDD-семантика (seed-essence-alpha) | pass | 4 кейса покрывают dry-run, idempotency, цепочку, fail |
-| README инвентарь (принцип 16) | pass | Scripts 13, 6 bats-файлов, 31 кейс, coverage 6/13 |
-| Принцип 17 (sidecar logical) | pass | расширение §6-8 зафиксировано в decisions |
-| Memom-консистентность | pass | принципы CLAUDE.md не менялись в Стадии A |
+| TDD-семантика | pass | 31/31 bats; пары source↔test зафиксированы |
+| README инвентарь (принцип 16) | pass | bench-hooks описание 5→8 hooks |
+| Memom-консистентность | pass | принцип 13 + memom синхронны |
 
 ## 3. Найденные расхождения
 
-### Находка #1 — `alphas.md` §«Bootstrap БД» противоречил факту
+### Note-01 — даты `2026-05-01` в decisions.md и memom.md
 
-- **Критичность:** important
-- **Локация:** `.claude/sdlc/alphas.md` строки 38-42
-- **Описание:** Snapshot говорил «БД пустая, bootstrap отложен», но MCP подтверждает 7 альф продвинуты, 21 переход, validate ok.
+- **Критичность:** note (false positive).
+- **Локация:** memom.md, decisions.md секции Стадии B.
+- **Описание:** Аудитор посчитал даты «будущим». Реальный currentDate среды — 2026-05-01.
+- **Резолюция:** false positive; даты корректны.
 
-### Находка #2 — несогласованность `current_focus` и пояснительного текста
+### Note-02 — system-context.md не отражает работу со Стадии B
 
-- **Критичность:** note
-- **Локация:** `.claude/sdlc/system-context.md` §«Пояснения»
-- **Описание:** frontmatter `current_focus: essence-alpha-mcp`, но текст описывал прежний фокус на плагине.
+- **Критичность:** note.
+- **Локация:** `.claude/sdlc/system-context.md` журнал фокусировок.
+- **Описание:** Стадия B затронула подсистему hooks (расширение bench), но запись в журнале отсутствовала.
 
-### Находка #3 — sidecar расширен §6-8 сверх мета-шаблона
+### Note-03 — `related_commits` содержит PR-номера, не SHA
 
-- **Критичность:** note
-- **Локация:** `.claude/sdlc/external-systems/essence-alpha-mcp.md` §6-8
-- **Описание:** `system-readme.meta.md` декларирует 5 обязательных секций; добавлены контракт MCP, ограничения, приоритет.
+- **Критичность:** note.
+- **Локация:** `memom.md` запись 2026-05-01 строка `related_commits`.
+- **Описание:** Формат записи требовал хеши; PR-ссылки были pre-merge state.
 
 ## 4. Применённые фиксы
 
 | # | Уровень | Действие | Артефакт |
 |---|---|---|---|
-| #1 | important | Переписана секция «Bootstrap БД»: указан факт seed 2026-04-30 | `.claude/sdlc/alphas.md` |
-| #2 | note | §«Пояснения» обновлена под current_focus=essence-alpha-mcp | `.claude/sdlc/system-context.md` |
-| #3 | note | Зафиксировано осознанное расширение в decisions; backlog v2 шаблона | `.claude/sdlc/decisions.md` |
+| Note-01 | note (FP) | Закрыто как false positive — currentDate совпадает с датой записи | — |
+| Note-02 | note | Журнал фокусировок дополнен записью 2026-05-01 без смены current_focus | `.claude/sdlc/system-context.md` |
+| Note-03 | note | Формат записи memom.md формализован: разрешены PR-ссылки до merge | `memom.md` |
 
 ## 5. Привязка к альфам
 
@@ -76,12 +80,10 @@ Bootstrap БД essence-alpha-mcp выполнен через `seed-essence-alpha
 | Software System | Usable | `CHANGELOG.md` |
 | Work | Under Control | `tests/unit/validate-artifact.bats` |
 | Team | Seeded | `roles.md` |
-| Way of Working | In Use | `phases/testing/testing.md` |
+| Way of Working | **Working Well** | `phases/testing/testing.md` §7a |
 
-Все 7 свидетельств физически присутствуют; БД заселена и согласована.
+`essence_validate_consistency` ok=true; БД содержит 23 перехода (21 seed + 2 Стадия B).
 
 ## 6. Финальный статус
 
-**pass** — все 3 находки применены автономно.
-Расширение `system-readme.meta.md` (последствие #3) — backlog Wave 3.
-Stage A готова к PR-A.
+**pass** — 2 note применены, 1 закрыта как FP. Stage B готова к PR-B.

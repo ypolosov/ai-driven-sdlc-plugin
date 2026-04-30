@@ -93,7 +93,7 @@
 - `check-alpha-consistency.sh` — валидирует БД essence-alpha-mcp при записи snapshot.
 - `seed-essence-alpha.sh` — bootstrap БД essence-alpha-mcp с цепочками переходов.
 - `bootstrap-target.sh` — инициализация целевого, режимы `--fail-if-exists` / `--merge` / `--force`.
-- `bench-hooks.sh` — бенчмарк 5 детерминированных hooks (NFR hooks-performance).
+- `bench-hooks.sh` — бенчмарк 8 детерминированных hooks (NFR hooks-performance).
 - `bootstrap-dev-env.sh` — детектит pkg-manager и выводит команду установки bats/shellcheck/shfmt.
 
 ### Meta-templates (11)
