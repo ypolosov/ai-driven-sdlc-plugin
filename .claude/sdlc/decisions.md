@@ -10,6 +10,59 @@ updated: 2026-04-30
 
 Принцип 1: альтернативы порождаются и фиксируются; выбор делает пользователь.
 
+## 2026-05-02 — релиз v0.3.0 (Стадия C)
+
+- context: завершение цикла essence-alpha-mcp; bump 0.2.1 → 0.3.0.
+- autonomy_mode: hootl
+- phase: deployment
+- role: method-engineer
+- alternatives:
+  1. Minor 0.3.0 (выбрано) — новый MCP-сервер + ADR + script = feature.
+  2. Patch 0.2.2 — рискованно, нарушает SemVer.
+  3. RC 0.3.0-rc.1 — лишний цикл для dogfooding.
+- choice: 1
+- rationale: новый authoritative backend трекера — major feature.
+- impl: plugin.json 0.3.0; CHANGELOG секция [0.3.0]; release-notes файл.
+- impl: deployment.md §5a release log; ветка release/v0.3.0.
+- traces_to:
+  - `.claude-plugin/plugin.json`
+  - `CHANGELOG.md` секция [0.3.0]
+  - `release-notes-v0.3.0.md`
+  - `.claude/sdlc/phases/deployment/deployment.md` §5a
+
+## 2026-05-02 — фиксы аудита Стадии C
+
+- context: 5 находок (2 important, 3 note); все применены.
+- autonomy_mode: hootl
+- phase: deployment
+- role: method-engineer
+
+### Находка #1 — evidence Software System устарел
+
+- alternatives:
+  1. Refresh через MCP (regress + advance) с CHANGELOG#0.3.0 (выбрано).
+  2. Manual edit snapshot без MCP-журнала.
+  3. Отложить до Стадии D.
+- choice: 1
+- rationale: атомарность через MCP сохраняет журнал переходов.
+- impl: regress Usable→Demonstrable; advance Demonstrable→Usable с новым URI.
+
+### Находка #2 — release-notes-v0.3.0.md контракт
+
+- alternatives:
+  1. .gitignore release-notes-v*.md; передавать через --notes-file (выбрано).
+  2. Коммитить в docs/releases/ как permanent артефакт.
+  3. Inline тело через CHANGELOG-фрагмент.
+- choice: 1
+- rationale: временный артефакт; gh передаёт через файл.
+- impl: `.gitignore` дополнен паттерном `release-notes-v*.md`.
+
+### Находки #3, #4, #5 — note
+
+- #3 CHANGELOG ≤15 слов — историческая запись неприкосновенна.
+- #4 ссылка на ADR — переписана как relative markdown link.
+- #5 опечатка Pakage→Package — исправлена.
+
 ## 2026-05-01 — расширение bench-hooks 5→8 (Стадия B)
 
 - context: NFR hooks-performance не покрывал 3 hooks.
