@@ -5,6 +5,33 @@
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-05-01
+
+### Added
+- Интеграция MCP-сервера `@ypolosov/essence-alpha-mcp` как authoritative backend трекера альф (ADR-009).
+- `scripts/check-alpha-consistency.sh` — PostToolUse hook валидации БД essence-alpha.
+- `scripts/seed-essence-alpha.sh` — bootstrap БД с цепочками переходов OMG Essence.
+- `tests/unit/check-alpha-consistency.bats` (5 кейсов), `tests/unit/seed-essence-alpha.bats` (4 кейса).
+- ADR-009 essence-alpha-mcp integration; NFR `reliability` и `maintainability`.
+- `external-systems/essence-alpha-mcp.md` — sidecar logical-системы (Принцип 17).
+- `meta-templates/alpha-state.meta.md`: режим `alpha-snapshot` плюс поля `source_of_truth`, `snapshot_role`, `generated_after`.
+- `phases/testing/testing.md` §7a — снимок latency 8 hooks.
+
+### Changed
+- `alphas.md` сжат до PR-видимого snapshot; журнал переходов делегирован MCP-БД.
+- `agents/sdlc-alpha-tracker.md`: 6 MCP-tools; маппинг PascalCase ↔ kebab-case.
+- `scripts/bench-hooks.sh` расширен с 5 до 8 hooks (+ check-alpha-consistency, enforce-no-comments, enforce-format-lint).
+- `phases/architecture/architecture.md`: ADR-009 в §5; NFR reliability/maintainability в §4.
+- `CLAUDE.md` принцип 13: дополнено упоминанием MCP-backend и snapshot-роли markdown.
+- `memom.md`: запись `2026-05-01 — Принцип 13: детерминированный backend через essence-alpha-mcp`.
+- `plugin-config.md`: 6 активных tdd_pairs (было 4 в 0.2.1).
+- README: scripts 11→13, bats 4→6 файлов, 21→31 кейс, MCP инвентарь.
+- Альфа Way of Working продвинута через MCP до **Working Well** (была In Use).
+
+### Fixed
+- `validate-artifact.sh` парсер ≤15 слов: false positive на нумерованных заголовках.
+- 7 находок аудита 2026-04-30 (issue templates, focus_count, evidence-version).
+
 ## [0.2.1] — 2026-04-19
 
 ### Fixed
@@ -59,7 +86,8 @@
 - Принципы Волны 1 (1-13 + 4a).
 - Демо-сценарий на todo-list.
 
-[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.1.1...v0.1.2

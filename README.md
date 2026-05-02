@@ -6,9 +6,10 @@
 
 ## Статус
 
-Текущая версия: **v0.2.1** (апрель 2026).
+Текущая версия: **v0.3.0** (май 2026).
 Волна 1 и Волна 2 закрыты; Волна 3 в работе — см. [milestones](https://github.com/ypolosov/ai-driven-sdlc-plugin/milestones).
 Альфа Software System: **Usable** — плагин устанавливается через marketplace.
+Альфа Way of Working: **Working Well** — fitness 8 hooks <200ms; самоприменение SDLC.
 Конституция плагина: 17 принципов + 4a, см. [CLAUDE.md](CLAUDE.md).
 
 ## Опорные источники

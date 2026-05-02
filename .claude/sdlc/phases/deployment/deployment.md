@@ -15,7 +15,7 @@ traces_to:
   - ../operations/operations.md
 system_of_attention: ai-driven-sdlc-plugin
 created: 2026-04-19
-updated: 2026-04-19
+updated: 2026-05-01
 ---
 
 # Стратегия фазы deployment плагина ai-driven-sdlc
@@ -95,6 +95,17 @@ updated: 2026-04-19
 - Release gate зафиксирован (§3.5).
 - Готов к первому релизу через процесс §3.2.
 - Альфа Software System может достичь Usable после первого успешного релиза.
+
+## 5a. Release log
+
+### 2026-05-01 — релиз v0.3.0
+
+- highlight: интеграция `@ypolosov/essence-alpha-mcp` как authoritative backend.
+- bump: minor (новый MCP-сервер + ADR-009 + script + 2 NFR).
+- artifacts: `release-notes-v0.3.0.md`, CHANGELOG секция [0.3.0], git tag.
+- alphas: Way of Working продвинута через MCP до Working Well.
+- breaking: нет; обратная совместимость snapshot-формата сохранена.
+- bootstrap для existing проектов: `bash scripts/seed-essence-alpha.sh`.
 
 ## 6. Открытые вопросы
 
