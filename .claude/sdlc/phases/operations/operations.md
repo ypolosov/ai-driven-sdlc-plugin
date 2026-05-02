@@ -14,7 +14,7 @@ traces_from:
 traces_to: []
 system_of_attention: ai-driven-sdlc-plugin
 created: 2026-04-19
-updated: 2026-04-30
+updated: 2026-05-02
 ---
 
 # Стратегия фазы operations плагина ai-driven-sdlc
@@ -95,6 +95,23 @@ Milestones: `Wave 1` (closed), `Wave 2` (closed), `Wave 3` (текущий backl
 - `SUPPORT.md` в корне репозитория.
 - `CHANGELOG.md` процесс (из deployment.md) согласован с issue triage.
 - Альфа Opportunity может достичь Addressed при первом внешнем пользователе.
+
+## 5a. Soak-периоды релизов
+
+### Soak v0.3.0 (2026-05-02 → 2026-05-09)
+
+- Релиз: v0.3.0 essence-alpha-mcp authoritative backend.
+- Канал feedback: GitHub Issues label `essence-alpha-feedback`.
+- Метрики soak (manual weekly):
+  - Внешние установки v0.3.0 через GitHub Insights.
+  - Issue с label `essence-alpha-feedback`.
+  - `essence_validate_consistency` ok-стабильность.
+  - `bench-hooks.sh` latency 8 hooks <200ms.
+- Цель soak — ≥1 external feedback подтверждающего value.
+- При успехе: продвинуть Software System Usable → Ready через MCP.
+- При успехе: продвинуть Opportunity Value Established → Addressed через MCP.
+- При critical issue: patch v0.3.1 через `/sdlc-phase deployment`.
+- Финальный аудит: `/sdlc-audit` после soak; запись итогов в decisions.md.
 
 ## 6. Открытые вопросы
 
