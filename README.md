@@ -10,7 +10,7 @@
 Волны 1–2 закрыты; Волна 3 идёт; Волна 4 (multi-agent extension) развёртывается через PR-цепочку A→G.
 Альфа Software System: **Usable** — плагин устанавливается через marketplace.
 Альфа Way of Working: **Working Well** — fitness 8 hooks <200ms; самоприменение SDLC.
-Конституция плагина: 20 принципов (1–17 + 4a + 18, 19, 19a Волны 4), см. [CLAUDE.md](CLAUDE.md).
+Конституция плагина: 22 принципа (1–17 + 4a + 18/19/19a Волны 4 + 20/21 Волны 5), см. [CLAUDE.md](CLAUDE.md).
 
 ## Опорные источники
 
@@ -35,17 +35,15 @@
 
 - `context7@claude-plugins-official` — референсная документация инструментов (обязательно для SME-опроса).
 - `github@claude-plugins-official` — GitHub Issues как state_artifact для альфы Work (опционально, mid+).
-- `@ypolosov/essence-alpha-mcp` v0.1.1+ — детерминированный backend трекера альф (см. ADR-009).
+- `@ypolosov/sdlc-state-rag` — единый backend альф + RAG + decisions + audit + sync (см. ADR-011, Волна 5).
 
 Плагин не ship'ит собственный `context7` — используйте dedicated плагин.
 Плагин ship'ит минимальный `github` MCP в `.mcp.json` как fallback.
-Плагин ship'ит запись `essence-alpha` в `.mcp.json` и ожидает глобально установленный CLI:
+Плагин ship'ит запись `sdlc-state-rag` в `.mcp.json`; backend per-target через `${SDLC_STATE_RAG_DSN}` из `<target>/.env`.
 
-```bash
-npm install -g @ypolosov/essence-alpha-mcp
-```
-
-Прямой запуск через `essence-alpha-mcp serve` (вместо `npx -y`) даёт мгновенный старт сервера и стабильный health-check Claude Code (npx с пустым кэшем + cold install 127 deps превышает таймаут проверки).
+`@ypolosov/essence-alpha-mcp` (ADR-009) **deprecated** в Волне 5; superseded by ADR-011.
+Логика OMG Essence 1.2 state machine реализована **внутри** `sdlc-state-rag` (TypeScript).
+`essence-alpha-mcp` удалён из `.mcp.json` плагина и не рекомендуется новым targets.
 
 ## Быстрый старт
 
@@ -109,7 +107,7 @@ npm install -g @ypolosov/essence-alpha-mcp
 - `check-tool-binding.sh` — валидирует категории `tool-bindings.md` целевого (Волна 4).
 - `detect-credentials.sh` — проверяет `.env` и обязательные ключи привязок (Волна 4).
 
-### Meta-templates (13)
+### Meta-templates (14)
 - `work-product.meta.md` — базовая схема рабочего продукта.
 - `phase-artifact.meta.md` — схема любого артефакта фазы.
 - `profile.meta.md` — схема SME-выбора целевого.
@@ -123,6 +121,7 @@ npm install -g @ypolosov/essence-alpha-mcp
 - `credentials.meta.md` — схема `.env.example` + правила `.gitignore`.
 - `target-roles.meta.md` — схема `role-extensions.md` целевого (Волна 4, ADR-015).
 - `tool-binding.meta.md` — схема `tool-bindings.md` целевого (Волна 4, ADR-013).
+- `sdlc-state-rag-contract.meta.md` — контракт MCP-сервера sdlc-state-rag (Волна 5, ADR-011).
 
 ### Catalogs (5)
 - `catalogs/alphas.md` — определения альф SDLC.
@@ -152,18 +151,19 @@ npm install -g @ypolosov/essence-alpha-mcp
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (9 файлов, 60 кейсов):
+- Unit (bats-core) — `tests/unit/` (9 файлов, 62 кейса):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 6 кейсов на запрет комментариев.
   - `bootstrap-dev-env.bats` — 3 кейса на детектор пакетного менеджера.
-  - `check-alpha-consistency.bats` — 5 кейсов на валидатор БД essence-alpha.
+  - `check-alpha-consistency.bats` — 7 кейсов на валидатор БД (Wave 5: +SDLC_STATE_RAG_VALIDATE_CMD и deprecation).
   - `seed-essence-alpha.bats` — 4 кейса на bootstrap БД через цепочки.
   - `check-tool-binding.bats` — 9 кейсов на проверку категорий tool-bindings (Волна 4).
   - `target-roles-schema.bats` — 14 кейсов на схему ролей и target-roles (Волна 4).
   - `detect-credentials.bats` — 6 кейсов на проверку `.env` и обязательных ключей (Волна 4).
-- Integration (bats-core) — `tests/integration/` (1 файл, 20 кейсов):
+- Integration (bats-core) — `tests/integration/` (2 файла, 40 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
+  - `sdlc-state-rag-contract.bats` — 20 кейсов на контракт sdlc-state-rag, deprecation ADR-009, переключение трекера (Волна 5, ADR-011).
 - Фикстуры — `tests/fixture/minimal-target/`, `tests/fixture/mid-target/` (валидные каркасы).
 - Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.
 - CI — `.github/workflows/ci.yml` запускает всё на push/PR.
