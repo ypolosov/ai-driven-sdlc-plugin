@@ -48,3 +48,21 @@ payload() {
   run bash -c "printf '%s' '$(payload Write "$TMP_DIR/missing.sh" "$TMP_DIR")' | '$SCRIPT'"
   [ "$status" -eq 0 ]
 }
+
+@test "TypeScript file with @ts-ignore is whitelisted (Wave 5)" {
+  printf 'const x = 1;\n// @ts-ignore\nexport { x };\n' > "$TMP_DIR/file.ts"
+  run bash -c "printf '%s' '$(payload Write "$TMP_DIR/file.ts" "$TMP_DIR")' | '$SCRIPT'"
+  [ "$status" -eq 0 ]
+}
+
+@test "TypeScript file with eslint-disable is whitelisted (Wave 5)" {
+  printf 'const x = 1;\n// eslint-disable-next-line no-unused-vars\nexport { x };\n' > "$TMP_DIR/file.ts"
+  run bash -c "printf '%s' '$(payload Write "$TMP_DIR/file.ts" "$TMP_DIR")' | '$SCRIPT'"
+  [ "$status" -eq 0 ]
+}
+
+@test "TypeScript file with regular comment is still flagged (Wave 5)" {
+  printf 'const x = 1;\n// just a comment\nexport { x };\n' > "$TMP_DIR/file.ts"
+  run bash -c "printf '%s' '$(payload Write "$TMP_DIR/file.ts" "$TMP_DIR")' | '$SCRIPT'"
+  [ "$status" -ne 0 ]
+}

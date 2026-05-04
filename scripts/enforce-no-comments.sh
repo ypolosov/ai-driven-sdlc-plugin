@@ -31,6 +31,10 @@ whitelist+=('^\s*# type: ignore')
 whitelist+=('^\s*//go:build')
 whitelist+=('^\s*# pylint: disable')
 whitelist+=('^\s*/// <reference')
+whitelist+=('^\s*// @ts-')
+whitelist+=('^\s*// eslint-')
+whitelist+=('^\s*/\* eslint-')
+whitelist+=('^\s*// biome-ignore')
 
 if [ -f "$config" ]; then
   while IFS= read -r pat; do
