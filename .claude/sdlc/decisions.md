@@ -10,6 +10,25 @@ updated: 2026-04-30
 
 Принцип 1: альтернативы порождаются и фиксируются; выбор делает пользователь.
 
+## 2026-05-02 — soak setup для v0.3.0 (Стадия D)
+
+- context: release v0.3.0 опубликован; стартует soak 7 дней.
+- autonomy_mode: hootl
+- phase: operations
+- role: method-engineer
+- alternatives:
+  1. Soak 7 дней + label essence-alpha-feedback (выбрано).
+  2. Soak 30 дней — слишком долго для pet-уровня SME.
+  3. Без soak; продвинуть альфы сразу — нечестно без эксплуатации.
+- choice: 1
+- rationale: 7 дней — баланс между fairness и темпом.
+- impl: GitHub label `essence-alpha-feedback` создан.
+- impl: operations.md §5a soak план; метрики и условия advance.
+- impl: финальный аудит `/sdlc-audit` отложен до 2026-05-09.
+- traces_to:
+  - GitHub label essence-alpha-feedback
+  - `.claude/sdlc/phases/operations/operations.md` §5a
+
 ## 2026-05-02 — релиз v0.3.0 (Стадия C)
 
 - context: завершение цикла essence-alpha-mcp; bump 0.2.1 → 0.3.0.
