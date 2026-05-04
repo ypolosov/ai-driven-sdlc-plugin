@@ -13,10 +13,12 @@ updated: 2026-04-30
 
 ## 1. Назначение и границы
 
-Внешний npm-пакет `@ypolosov/essence-alpha-mcp` v0.1.0+.
+Внешний npm-пакет `@ypolosov/essence-alpha-mcp` v0.1.1+.
 Предоставляет детерминированную state machine 7 альф OMG Essence 1.2.
-Запускается через `npx -y` как stdio MCP-сервер либо CLI.
+Устанавливается глобально (`npm install -g`) и запускается как `essence-alpha-mcp serve` (stdio MCP) либо CLI.
 Граница — npm-пакет; код в репо `github.com/ypolosov/essence-alpha-mcp`.
+
+В v0.1.0 был баг ранний-exit stdio-сервера (исправлен в v0.1.1) — минимальная поддерживаемая версия v0.1.1.
 
 ## 2. Текущий фокус
 
