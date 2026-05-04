@@ -9,14 +9,15 @@
       ],
       "env": {}
     },
-    "essence-alpha": {
+    "sdlc-state-rag": {
       "type": "stdio",
-      "command": "essence-alpha-mcp",
+      "command": "npx",
       "args": [
-        "serve"
+        "-y",
+        "@ypolosov/sdlc-state-rag"
       ],
       "env": {
-        "ESSENCE_ALPHA_DB": "${CLAUDE_PROJECT_DIR}/.claude/sdlc/essence-alpha.db"
+        "SDLC_STATE_RAG_DSN": "${SDLC_STATE_RAG_DSN}"
       }
     }
   }

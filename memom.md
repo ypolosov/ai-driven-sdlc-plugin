@@ -111,6 +111,46 @@ source_of_truth_for_principles: CLAUDE.md
   - Конфликтует с принципом 13 (нет): альфы по-прежнему через `sdlc-alpha-tracker`.
 - related_commits: [PR #32]
 
+## 2026-05-05 — Волна 5: введён принцип 20 (worker по SME, единый RDB)
+- principle: 20
+- action: add
+- before: null
+- after: Pet — нет worker'а; mid — cron-workflow; enterprise — cron + webhooks. Горячие данные хранятся в единой БД `sdlc-state-rag` (PostgreSQL+pgvector) per-target. Markdown — только PR-видимый snapshot. Pet — embedded pglite v0.4; mid — shared PostgreSQL; enterprise — managed cloud.
+- motive: SQLite single-writer не подходит для team-сценариев. Векторный поиск pgvector нужен для RAG-домена. Worker-pattern должен соответствовать масштабу (pet=ничего, enterprise=cron+webhooks).
+- consequences:
+  - Добавлен `meta-templates/sdlc-state-rag-contract.meta.md` (5 доменов).
+  - Расширен `plugin-config.meta.md` секцией `workers`.
+  - ADR-011 (sdlc-state-rag) supersedes ADR-009 (essence-alpha-mcp).
+  - Готовится ADR-012 (worker pattern) в PR-F.
+- related_commits: [PR #33]
+
+## 2026-05-05 — Волна 5: введён принцип 21 (per-target БД, concurrent-safe)
+- principle: 21
+- action: add
+- before: null
+- after: Каждая целевая система имеет свой instance `sdlc-state-rag`. Connection-string в `<target>/.env`. SQLite запрещён для team-проектов. Mutating операции через PostgreSQL транзакции. Альфы продвигаются с row-level lock. Композитные tools обеспечивают атомарность.
+- motive: команды работают над проектом параллельно; нужна concurrent-safe state machine. MCP stateless — для атомарности нужны композитные tools, не cross-call transaction_token.
+- consequences:
+  - `.mcp.json` плагина: `essence-alpha` удалён, добавлен `sdlc-state-rag`.
+  - `agents/sdlc-alpha-tracker.md` использует `state_*` tools вместо `essence_*`.
+  - Композитные tools `state_advance_with_decision`, `state_regress_with_audit`, `rag_upsert_with_sync_event`.
+  - `SERIALIZABLE` для критических переходов; `SELECT … FOR UPDATE` на альфах.
+  - Bats-фикстуры используют `SDLC_STATE_RAG_VALIDATE_CMD` (rename из `ESSENCE_ALPHA_VALIDATE_CMD`).
+- related_commits: [PR #33]
+
+## 2026-05-05 — Принцип 13: backend переключён на sdlc-state-rag
+- principle: 13
+- action: modify
+- before: «Авторитативный backend трекера — `@ypolosov/essence-alpha-mcp` (см. ADR-009). Markdown `alphas.md` — PR-видимый snapshot; журнал переходов живёт в БД».
+- after: «Авторитативный backend трекера — `@ypolosov/sdlc-state-rag` (см. ADR-011). OMG Essence 1.2 state machine реализована внутри сервера (TypeScript, не внешний backend). Markdown `alphas.md` — PR-видимый snapshot; журнал переходов и RAG-домены живут в БД».
+- motive: Wave 5 объединяет 5 доменов в одной БД per-target. Деаутентификация двух MCP-серверов. ADR-009 → Deprecated.
+- consequences:
+  - Принцип 13 формулируется через `sdlc-state-rag`, не `essence-alpha-mcp`.
+  - `.mcp.json` плагина обновлён.
+  - `agents/sdlc-alpha-tracker.md` использует новые tools.
+  - ADR-009 → Deprecated (`superseded_by: ADR-011`).
+- related_commits: [PR #33]
+
 ## Правила ведения
 
 - Запись создаётся **до** или **вместе** с изменением `CLAUDE.md`.
