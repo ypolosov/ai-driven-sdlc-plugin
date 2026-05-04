@@ -28,23 +28,18 @@ teardown() {
 
 @test "check-tool-binding script exists and is executable" {
   SCRIPT="$PLUGIN_ROOT/scripts/check-tool-binding.sh"
-  if [ -f "$SCRIPT" ]; then
-    [ -x "$SCRIPT" ]
-  else
-    skip "check-tool-binding.sh not yet implemented (PR-C)"
-  fi
+  [ -f "$SCRIPT" ]
+  [ -x "$SCRIPT" ]
 }
 
 @test "check-tool-binding rejects unknown category id" {
   SCRIPT="$PLUGIN_ROOT/scripts/check-tool-binding.sh"
-  [ -f "$SCRIPT" ] || skip "check-tool-binding.sh not yet implemented (PR-C)"
-
   cat >"$TMPDIR_TARGET/.claude/sdlc/tool-bindings.md" <<'EOF'
 ---
 name: tool-bindings
 type: tool-binding-registry
 version: 1
-updated: 2026-05-04
+updated: 2026-05-05
 ---
 
 bindings:
@@ -58,14 +53,12 @@ EOF
 
 @test "check-tool-binding accepts valid category id" {
   SCRIPT="$PLUGIN_ROOT/scripts/check-tool-binding.sh"
-  [ -f "$SCRIPT" ] || skip "check-tool-binding.sh not yet implemented (PR-C)"
-
   cat >"$TMPDIR_TARGET/.claude/sdlc/tool-bindings.md" <<'EOF'
 ---
 name: tool-bindings
 type: tool-binding-registry
 version: 1
-updated: 2026-05-04
+updated: 2026-05-05
 ---
 
 bindings:
@@ -75,4 +68,59 @@ EOF
 
   run "$SCRIPT" "$TMPDIR_TARGET"
   [ "$status" -eq 0 ]
+}
+
+@test "check-tool-binding accepts all 7 valid categories" {
+  SCRIPT="$PLUGIN_ROOT/scripts/check-tool-binding.sh"
+  cat >"$TMPDIR_TARGET/.claude/sdlc/tool-bindings.md" <<'EOF'
+---
+name: tool-bindings
+type: tool-binding-registry
+version: 1
+updated: 2026-05-05
+---
+
+bindings:
+  - category: issue-tracker
+    mcp_server: any-mcp
+  - category: knowledge-base
+    mcp_server: any-mcp
+  - category: vcs
+    mcp_server: any-mcp
+  - category: chat
+    mcp_server: any-mcp
+  - category: observability
+    mcp_server: any-mcp
+  - category: cd-platform
+    mcp_server: any-mcp
+  - category: test-management
+    mcp_server: any-mcp
+EOF
+
+  run "$SCRIPT" "$TMPDIR_TARGET"
+  [ "$status" -eq 0 ]
+}
+
+@test "check-tool-binding rejects when file missing" {
+  SCRIPT="$PLUGIN_ROOT/scripts/check-tool-binding.sh"
+  run "$SCRIPT" "$TMPDIR_TARGET"
+  [ "$status" -ne 0 ]
+}
+
+@test "check-tool-binding rejects when category line is malformed" {
+  SCRIPT="$PLUGIN_ROOT/scripts/check-tool-binding.sh"
+  cat >"$TMPDIR_TARGET/.claude/sdlc/tool-bindings.md" <<'EOF'
+---
+name: tool-bindings
+type: tool-binding-registry
+version: 1
+updated: 2026-05-05
+---
+
+bindings:
+  - mcp_server: any-mcp
+EOF
+
+  run "$SCRIPT" "$TMPDIR_TARGET"
+  [ "$status" -ne 0 ]
 }
