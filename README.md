@@ -103,7 +103,7 @@ npm install -g @ypolosov/essence-alpha-mcp
 - `bench-hooks.sh` — бенчмарк 8 детерминированных hooks (NFR hooks-performance).
 - `bootstrap-dev-env.sh` — детектит pkg-manager и выводит команду установки bats/shellcheck/shfmt.
 
-### Meta-templates (11)
+### Meta-templates (12)
 - `work-product.meta.md` — базовая схема рабочего продукта.
 - `phase-artifact.meta.md` — схема любого артефакта фазы.
 - `profile.meta.md` — схема SME-выбора целевого.
@@ -115,6 +115,7 @@ npm install -g @ypolosov/essence-alpha-mcp
 - `audit-report.meta.md` — схема отчёта `/sdlc-audit`.
 - `system-readme.meta.md` — схема описания системы внимания (Волна 2).
 - `credentials.meta.md` — схема `.env.example` + правила `.gitignore`.
+- `target-roles.meta.md` — схема `role-extensions.md` целевого (Волна 4, ADR-015).
 
 ### Catalogs (5)
 - `catalogs/alphas.md` — определения альф SDLC.
@@ -144,7 +145,7 @@ npm install -g @ypolosov/essence-alpha-mcp
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (7 файлов, 37 кейсов):
+- Unit (bats-core) — `tests/unit/` (8 файлов, 51 кейс):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 6 кейсов на запрет комментариев.
@@ -152,6 +153,7 @@ npm install -g @ypolosov/essence-alpha-mcp
   - `check-alpha-consistency.bats` — 5 кейсов на валидатор БД essence-alpha.
   - `seed-essence-alpha.bats` — 4 кейса на bootstrap БД через цепочки.
   - `check-tool-binding.bats` — 6 кейсов на проверку категорий tool-bindings (Волна 4).
+  - `target-roles-schema.bats` — 14 кейсов на схему ролей и target-roles (Волна 4).
 - Фикстура — `tests/fixture/minimal-target/` (валидный каркас для integration).
 - Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.
 - CI — `.github/workflows/ci.yml` запускает всё на push/PR.

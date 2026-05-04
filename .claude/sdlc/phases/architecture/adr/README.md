@@ -2,7 +2,7 @@
 name: adr-index
 type: adr-index
 project: ai-driven-sdlc-plugin
-updated: 2026-04-30
+updated: 2026-05-05
 ---
 
 # Индекс Architecture Decision Records
@@ -23,6 +23,7 @@ updated: 2026-04-30
 | ADR-007 | Артефакты в .claude/sdlc/ | Accepted | reversibility |
 | ADR-008 | Секреты целевого проекта вне git | Accepted | security |
 | ADR-009 | Авторитативный backend альф через essence-alpha-mcp | Accepted | reliability, maintainability |
+| ADR-015 | Security-engineer как абстрактная роль и поля agent_kind/tool_categories | Accepted | security, maintainability |
 
 ## Правила ведения
 
