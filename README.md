@@ -6,11 +6,11 @@
 
 ## Статус
 
-Текущая версия: **v0.3.0** (май 2026).
-Волна 1 и Волна 2 закрыты; Волна 3 в работе — см. [milestones](https://github.com/ypolosov/ai-driven-sdlc-plugin/milestones).
+Текущая версия: **v0.3.1** (май 2026).
+Волны 1–2 закрыты; Волна 3 идёт; Волна 4 (multi-agent extension) развёртывается через PR-цепочку A→G.
 Альфа Software System: **Usable** — плагин устанавливается через marketplace.
 Альфа Way of Working: **Working Well** — fitness 8 hooks <200ms; самоприменение SDLC.
-Конституция плагина: 17 принципов + 4a, см. [CLAUDE.md](CLAUDE.md).
+Конституция плагина: 20 принципов (1–17 + 4a + 18, 19, 19a Волны 4), см. [CLAUDE.md](CLAUDE.md).
 
 ## Опорные источники
 
@@ -83,13 +83,14 @@ npm install -g @ypolosov/essence-alpha-mcp
 - `/sdlc-artifact` — **internal**, вызывается skills, не пользователем.
 - `/sdlc-tools` — управление привязками категорий инструментов (Волна 4).
 
-### Agents (6)
+### Agents (7)
 - `sdlc-method-engineer` — подбор метода и инструментов под проект.
 - `sdlc-state-reader` — чтение state-артефакта целевого.
 - `sdlc-artifact-validator` — механическая валидация одного артефакта.
 - `sdlc-consistency-auditor` — сквозная согласованность артефактов.
 - `sdlc-alpha-tracker` — единственный источник истины о состоянии альф.
 - `sdlc-tool-router` — маршрутизация запросов по категориям к MCP-серверам (Волна 4).
+- `sdlc-context-aggregator` — фасад консолидации контекста с провенансом (Волна 4, ADR-010).
 
 ### Scripts (15)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
@@ -161,7 +162,9 @@ npm install -g @ypolosov/essence-alpha-mcp
   - `check-tool-binding.bats` — 9 кейсов на проверку категорий tool-bindings (Волна 4).
   - `target-roles-schema.bats` — 14 кейсов на схему ролей и target-roles (Волна 4).
   - `detect-credentials.bats` — 6 кейсов на проверку `.env` и обязательных ключей (Волна 4).
-- Фикстура — `tests/fixture/minimal-target/` (валидный каркас для integration).
+- Integration (bats-core) — `tests/integration/` (1 файл, 20 кейсов):
+  - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
+- Фикстуры — `tests/fixture/minimal-target/`, `tests/fixture/mid-target/` (валидные каркасы).
 - Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.
 - CI — `.github/workflows/ci.yml` запускает всё на push/PR.
 - Покрыто тестами 6 из 13 скриптов; расширение — backlog Волны 3.
