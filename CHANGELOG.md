@@ -5,6 +5,8 @@
 
 ## [Unreleased]
 
+## [0.3.1] — 2026-05-04
+
 ### Fixed
 - `.mcp.json` для `essence-alpha`: `npx -y @ypolosov/essence-alpha-mcp` заменён на прямой `essence-alpha-mcp serve`. NPX cold-fetch (127 deps) превышал таймаут health-check Claude Code, плагиновая запись отображалась как Failed to connect даже на исправной версии CLI.
 - Скрипты `seed-essence-alpha.sh` и `check-alpha-consistency.sh`: дефолт `ESSENCE_ALPHA_CMD` / `ESSENCE_ALPHA_VALIDATE_CMD` переключён с `npx -y` на прямой бинарник.
@@ -94,7 +96,8 @@
 - Принципы Волны 1 (1-13 + 4a).
 - Демо-сценарий на todo-list.
 
-[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.1.2...v0.2.0
