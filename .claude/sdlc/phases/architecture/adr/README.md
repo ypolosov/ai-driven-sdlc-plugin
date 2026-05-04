@@ -24,6 +24,7 @@ updated: 2026-05-05
 | ADR-008 | Секреты целевого проекта вне git | Accepted | security |
 | ADR-009 | Авторитативный backend альф через essence-alpha-mcp | Accepted | reliability, maintainability |
 | ADR-015 | Security-engineer как абстрактная роль и поля agent_kind/tool_categories | Accepted | security, maintainability |
+| ADR-016 | Маршрутизатор инструментов и реестр привязок tool-bindings | Accepted | security, maintainability, extensibility |
 
 ## Правила ведения
 
