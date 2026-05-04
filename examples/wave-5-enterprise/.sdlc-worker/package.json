@@ -1,0 +1,18 @@
+{
+  "name": "wave-5-enterprise-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "build": "tsc -p ."
+  },
+  "dependencies": {
+    "@mastra/core": "^0.1.0",
+    "@mastra/pg": "^0.1.0",
+    "@mastra/rag": "^0.1.0",
+    "@ypolosov/sdlc-state-rag": "^0.1.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}

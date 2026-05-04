@@ -28,6 +28,7 @@ updated: 2026-05-05
 | ADR-010 | Multi-agent topology — aggregator-фасад поверх tool-router'а | Accepted | reliability, maintainability, security |
 | ADR-011 | Единый sdlc-state-rag backend (PostgreSQL+pgvector + embedded OMG Essence) | Accepted | reliability, maintainability, security, performance |
 | ADR-012 | Worker pattern по уровню SME, LLM-loop только HOOTL-override | Accepted | reliability, performance, maintainability |
+| ADR-014 | Enterprise dogfooding и worker-runtime через .sdlc-worker | Accepted | reliability, maintainability, security |
 
 ## Правила ведения
 

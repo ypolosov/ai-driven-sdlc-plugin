@@ -109,7 +109,7 @@
 - `detect-credentials.sh` — проверяет `.env` и обязательные ключи привязок (Волна 4).
 - `check-rag-config.sh` — валидирует `rag-config.md` целевого и worker.kind ↔ SME (Волна 5, ADR-012).
 
-### Meta-templates (15)
+### Meta-templates (16)
 - `work-product.meta.md` — базовая схема рабочего продукта.
 - `phase-artifact.meta.md` — схема любого артефакта фазы.
 - `profile.meta.md` — схема SME-выбора целевого.
@@ -125,6 +125,7 @@
 - `tool-binding.meta.md` — схема `tool-bindings.md` целевого (Волна 4, ADR-013).
 - `sdlc-state-rag-contract.meta.md` — контракт MCP-сервера sdlc-state-rag (Волна 5, ADR-011).
 - `rag-config.meta.md` — схема `rag-config.md` целевого и worker'ов (Волна 5, ADR-012).
+- `webhooks.meta.md` — схема `webhooks.md` целевого для enterprise (Волна 5, ADR-014).
 
 ### Catalogs (5)
 - `catalogs/alphas.md` — определения альф SDLC.
@@ -154,10 +155,10 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (10 файлов, 70 кейсов):
+- Unit (bats-core) — `tests/unit/` (10 файлов, 73 кейса):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
-  - `enforce-no-comments.bats` — 6 кейсов на запрет комментариев.
+  - `enforce-no-comments.bats` — 9 кейсов (включая TypeScript whitelist Wave 5).
   - `bootstrap-dev-env.bats` — 3 кейса на детектор пакетного менеджера.
   - `check-alpha-consistency.bats` — 7 кейсов на валидатор БД (Wave 5: +SDLC_STATE_RAG_VALIDATE_CMD и deprecation).
   - `seed-essence-alpha.bats` — 4 кейса на bootstrap БД через цепочки.
@@ -199,6 +200,9 @@ State-артефакт Work — **GitHub Issues** (решение принцип
 Живут отдельно в проекте доклада: `/home/ypolosov/DEV/GITS/talk-ai-driven-sdlc/demo/`.
 - `01-target-todo-list.md` — плагин применяется к стороннему проекту `todo-list`.
 - `02-dogfooding-extend-plugin.md` — плагин применяется к самому себе (dogfooding).
+
+Примеры в репозитории плагина:
+- `examples/wave-5-enterprise/` — enterprise-target с PgVector + cron + webhooks (Волна 5, ADR-014).
 
 ## Как читать плагин
 
