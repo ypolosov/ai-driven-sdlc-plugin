@@ -31,9 +31,10 @@ jobs:
           shellcheck scripts/bootstrap-dev-env.sh
           shellcheck scripts/check-tool-binding.sh
           shellcheck scripts/detect-credentials.sh
+          shellcheck scripts/check-rag-config.sh
 
       - name: Run shfmt diff on covered scripts
-        run: shfmt -d -i 2 -ci scripts/validate-artifact.sh scripts/bootstrap-dev-env.sh scripts/check-tool-binding.sh scripts/detect-credentials.sh
+        run: shfmt -d -i 2 -ci scripts/validate-artifact.sh scripts/bootstrap-dev-env.sh scripts/check-tool-binding.sh scripts/detect-credentials.sh scripts/check-rag-config.sh
 
       - name: Run deterministic checks
         env:

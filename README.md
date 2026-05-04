@@ -70,7 +70,7 @@
 - `sdlc-operations` — фаза Operations.
 - `sdlc-integrations` — подключение внешних SDLC-инструментов целевого (Волна 4).
 
-### Commands (9)
+### Commands (10)
 - `/sdlc-init` — bootstrap в целевом проекте.
 - `/sdlc-continue` — спросить роль, предложить фазу.
 - `/sdlc-focus` — сменить целевую систему внимания.
@@ -80,6 +80,7 @@
 - `/sdlc-audit` — сквозная проверка консистентности.
 - `/sdlc-artifact` — **internal**, вызывается skills, не пользователем.
 - `/sdlc-tools` — управление привязками категорий инструментов (Волна 4).
+- `/sdlc-rag` — управление RAG-индексом через sdlc-state-rag (Волна 5).
 
 ### Agents (7)
 - `sdlc-method-engineer` — подбор метода и инструментов под проект.
@@ -90,7 +91,7 @@
 - `sdlc-tool-router` — маршрутизация запросов по категориям к MCP-серверам (Волна 4).
 - `sdlc-context-aggregator` — фасад консолидации контекста с провенансом (Волна 4, ADR-010).
 
-### Scripts (15)
+### Scripts (16)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
 - `enforce-tdd.sh` — мягкая блокировка записи кода без парного теста.
 - `enforce-format-lint.sh` — диспетчер форматера и линтера из `plugin-config.md`.
@@ -99,15 +100,16 @@
 - `check-readme-inventory.sh` — сверка имён в README плагина со структурой (Волна 2).
 - `check-system-readmes.sh` — инвентарь описаний систем внимания в целевом (Волна 2).
 - `check-memom-consistency.sh` — блокирует изменение принципов без записи в memom (Волна 2).
-- `check-alpha-consistency.sh` — валидирует БД essence-alpha-mcp при записи snapshot.
-- `seed-essence-alpha.sh` — bootstrap БД essence-alpha-mcp с цепочками переходов.
+- `check-alpha-consistency.sh` — валидирует БД sdlc-state-rag при записи snapshot (Волна 5).
+- `seed-essence-alpha.sh` — bootstrap БД essence-alpha-mcp (legacy, deprecated).
 - `bootstrap-target.sh` — инициализация целевого, режимы `--fail-if-exists` / `--merge` / `--force`.
 - `bench-hooks.sh` — бенчмарк 8 детерминированных hooks (NFR hooks-performance).
 - `bootstrap-dev-env.sh` — детектит pkg-manager и выводит команду установки bats/shellcheck/shfmt.
 - `check-tool-binding.sh` — валидирует категории `tool-bindings.md` целевого (Волна 4).
 - `detect-credentials.sh` — проверяет `.env` и обязательные ключи привязок (Волна 4).
+- `check-rag-config.sh` — валидирует `rag-config.md` целевого и worker.kind ↔ SME (Волна 5, ADR-012).
 
-### Meta-templates (14)
+### Meta-templates (15)
 - `work-product.meta.md` — базовая схема рабочего продукта.
 - `phase-artifact.meta.md` — схема любого артефакта фазы.
 - `profile.meta.md` — схема SME-выбора целевого.
@@ -122,6 +124,7 @@
 - `target-roles.meta.md` — схема `role-extensions.md` целевого (Волна 4, ADR-015).
 - `tool-binding.meta.md` — схема `tool-bindings.md` целевого (Волна 4, ADR-013).
 - `sdlc-state-rag-contract.meta.md` — контракт MCP-сервера sdlc-state-rag (Волна 5, ADR-011).
+- `rag-config.meta.md` — схема `rag-config.md` целевого и worker'ов (Волна 5, ADR-012).
 
 ### Catalogs (5)
 - `catalogs/alphas.md` — определения альф SDLC.
@@ -151,7 +154,7 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (9 файлов, 62 кейса):
+- Unit (bats-core) — `tests/unit/` (10 файлов, 70 кейсов):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 6 кейсов на запрет комментариев.
@@ -161,6 +164,7 @@
   - `check-tool-binding.bats` — 9 кейсов на проверку категорий tool-bindings (Волна 4).
   - `target-roles-schema.bats` — 14 кейсов на схему ролей и target-roles (Волна 4).
   - `detect-credentials.bats` — 6 кейсов на проверку `.env` и обязательных ключей (Волна 4).
+  - `check-rag-config.bats` — 8 кейсов на схему rag-config и worker.kind ↔ SME (Волна 5).
 - Integration (bats-core) — `tests/integration/` (2 файла, 40 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
   - `sdlc-state-rag-contract.bats` — 20 кейсов на контракт sdlc-state-rag, deprecation ADR-009, переключение трекера (Волна 5, ADR-011).
