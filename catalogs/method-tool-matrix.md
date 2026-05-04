@@ -81,6 +81,46 @@ Skill `sdlc-method-engineering` объединяет матрицу плагин
 | mid | Метрики, журналирование, оповещения с задокументированной процедурой реагирования | Prometheus + Grafana • Alertmanager • Runbook + Postmortem template |
 | enterprise | Полная наблюдаемость и управление инцидентами по SLO с бюджетом ошибок | SLO/SLI + Error Budget • On-call ротация (PagerDuty) • FinOps / Observability stack |
 
+## 8. Knowledge-base (категория)
+
+| Уровень | Метод (абстрактно) | Примеры инструментов |
+|---|---|---|
+| pet | README и плоские markdown файлы в репозитории | README.md • docs/ • GitHub Wiki |
+| mid | Структурированная база с разделами и ссылками между страницами | Confluence • Notion • Outline |
+| enterprise | Корпоративная база с контролем доступа и версионированием контента | Confluence Cloud Premium • Bloomfire • Document360 |
+
+## 9. Chat (категория)
+
+| Уровень | Метод (абстрактно) | Примеры инструментов |
+|---|---|---|
+| pet | Один канал переписки без формальной структуры | Telegram • Direct messages • Email-thread |
+| mid | Каналы и треды с интеграциями уведомлений от инструментов | Slack • Discord • Microsoft Teams |
+| enterprise | Корпоративные коммуникации с DLP, аудитом и compliance | Slack Enterprise Grid • Microsoft Teams + Purview • Mattermost |
+
+## 10. Observability (категория)
+
+| Уровень | Метод (абстрактно) | Примеры инструментов |
+|---|---|---|
+| pet | Логи в stdout и внешний uptime-монитор | Stdout logs • UptimeRobot • Health-check endpoint |
+| mid | Метрики, логи и алерты с задокументированной процедурой реагирования | Prometheus + Grafana + Loki • Alertmanager + runbook • Better Stack |
+| enterprise | Полная наблюдаемость SLO/SLI с распределёнными трейсами и FinOps | Datadog • New Relic • Honeycomb + Tempo |
+
+## 11. CD-platform (категория)
+
+| Уровень | Метод (абстрактно) | Примеры инструментов |
+|---|---|---|
+| pet | Ручное развёртывание одной командой в одну среду | deploy.sh • docker-compose up • rsync |
+| mid | Автоматизированный конвейер с несколькими средами и blue-green | GitHub Actions deploy job • Octopus Deploy • Spinnaker |
+| enterprise | Декларативная доставка с прогрессивным выкатом и feature-флагами | ArgoCD • Flux • Harness Progressive Delivery |
+
+## 12. Embedders для RAG (Wave 5)
+
+| Уровень | Метод (абстрактно) | Примеры инструментов |
+|---|---|---|
+| pet | Локальный embedder без сетевого вызова | sentence-transformers all-MiniLM-L6-v2 • bge-small-en • nomic-embed-text |
+| mid | Облачный embedder с приемлемой ценой и стабильным качеством | OpenAI text-embedding-3-small • Voyage voyage-3-lite • Cohere embed-english-light-v3 |
+| enterprise | Высокоточный или мультимодальный embedder для compliance-данных | OpenAI text-embedding-3-large • Voyage voyage-3-large • Cohere embed-multilingual-v3 |
+
 ## State-артефакт (принцип 9)
 
 | Уровень | Метод | Примеры реализации |
