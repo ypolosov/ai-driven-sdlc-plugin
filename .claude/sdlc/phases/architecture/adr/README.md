@@ -25,6 +25,7 @@ updated: 2026-05-05
 | ADR-009 | Авторитативный backend альф через essence-alpha-mcp | Accepted | reliability, maintainability |
 | ADR-015 | Security-engineer как абстрактная роль и поля agent_kind/tool_categories | Accepted | security, maintainability |
 | ADR-016 | Маршрутизатор инструментов и реестр привязок tool-bindings | Accepted | security, maintainability, extensibility |
+| ADR-010 | Multi-agent topology — aggregator-фасад поверх tool-router'а | Accepted | reliability, maintainability, security |
 
 ## Правила ведения
 

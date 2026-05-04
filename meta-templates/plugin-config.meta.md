@@ -101,6 +101,53 @@ system_readme_ttl_days: 30
 Если `last_focused_at` старше N дней, `sdlc-consistency-auditor` понижает приоритет расхождений по системе.
 Значение по умолчанию — 30 дней.
 
+### tool_bindings (Волна 4, опционально)
+
+Реестр привязок «категория → MCP-сервер».
+В pet — inline; в mid+ — ссылка на отдельный `tool-bindings.md`.
+
+```yaml
+tool_bindings:
+  inline:
+    - category: vcs
+      mcp_server: github
+      env_keys: [GITHUB_TOKEN]
+  ref: .claude/sdlc/tool-bindings.md
+```
+
+Поля `inline` и `ref` взаимоисключающие.
+В pet `inline` несёт 1–2 категории; в mid+ `ref` указывает на файл по `tool-binding.meta.md`.
+
+### rag_ref (Волна 4 каркас, активно в Волне 5)
+
+Ссылка на конфиг RAG-системы целевого.
+
+```yaml
+rag_ref:
+  enabled: true | false
+  config_path: .claude/sdlc/rag-config.md
+```
+
+При `enabled: false` агент `sdlc-context-aggregator` обязан опросить MCP-серверы по `tool-bindings` (принцип 19a).
+При `enabled: true` aggregator делает RAG-запросы перед опросом MCP.
+Дефолт — `enabled: false` (применимо к большинству mid и всем pet).
+
+### workers (Волна 5, опционально)
+
+Конфигурация worker'ов синхронизации.
+
+```yaml
+workers:
+  cron:
+    enabled: false
+    schedule: '0 * * * *'
+  webhooks:
+    enabled: false
+    endpoints: []
+```
+
+Подробности — в `meta-templates/rag-config.meta.md` (Волна 5).
+
 ## Правила
 
 - Без `state_artifact` агент `sdlc-state-reader` падает с понятным сообщением.
