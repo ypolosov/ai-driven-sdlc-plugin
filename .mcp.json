@@ -11,10 +11,8 @@
     },
     "essence-alpha": {
       "type": "stdio",
-      "command": "npx",
+      "command": "essence-alpha-mcp",
       "args": [
-        "-y",
-        "@ypolosov/essence-alpha-mcp",
         "serve"
       ],
       "env": {

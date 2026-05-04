@@ -16,7 +16,7 @@ principles: [6, 13]
 Markdown не даёт детерминированной валидации переходов state machine.
 OMG Essence — формальная state machine 7 альф SDLC.
 Класс багов: «agent забыл состояние», «evidence_uri ссылается в никуда», «журнал рассинхронизирован».
-Опубликован npm-пакет `@ypolosov/essence-alpha-mcp` v0.1.0.
+Опубликован npm-пакет `@ypolosov/essence-alpha-mcp` v0.1.1 (минимальная поддерживаемая; v0.1.0 имел баг ранний-exit stdio).
 
 ## Решение
 

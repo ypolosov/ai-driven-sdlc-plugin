@@ -35,11 +35,17 @@
 
 - `context7@claude-plugins-official` — референсная документация инструментов (обязательно для SME-опроса).
 - `github@claude-plugins-official` — GitHub Issues как state_artifact для альфы Work (опционально, mid+).
-- `@ypolosov/essence-alpha-mcp` v0.1.0+ — детерминированный backend трекера альф (см. ADR-009).
+- `@ypolosov/essence-alpha-mcp` v0.1.1+ — детерминированный backend трекера альф (см. ADR-009).
 
 Плагин не ship'ит собственный `context7` — используйте dedicated плагин.
 Плагин ship'ит минимальный `github` MCP в `.mcp.json` как fallback.
-Плагин ship'ит запись `essence-alpha` в `.mcp.json`; пакет тянется через `npx`.
+Плагин ship'ит запись `essence-alpha` в `.mcp.json` и ожидает глобально установленный CLI:
+
+```bash
+npm install -g @ypolosov/essence-alpha-mcp
+```
+
+Прямой запуск через `essence-alpha-mcp serve` (вместо `npx -y`) даёт мгновенный старт сервера и стабильный health-check Claude Code (npx с пустым кэшем + cold install 127 deps превышает таймаут проверки).
 
 ## Быстрый старт
 

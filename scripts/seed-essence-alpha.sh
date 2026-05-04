@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cmd="${ESSENCE_ALPHA_CMD:-npx -y @ypolosov/essence-alpha-mcp}"
+cmd="${ESSENCE_ALPHA_CMD:-essence-alpha-mcp}"
 repo_root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 dry_run=0
 

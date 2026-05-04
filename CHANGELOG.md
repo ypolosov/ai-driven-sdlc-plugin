@@ -5,6 +5,14 @@
 
 ## [Unreleased]
 
+### Fixed
+- `.mcp.json` для `essence-alpha`: `npx -y @ypolosov/essence-alpha-mcp` заменён на прямой `essence-alpha-mcp serve`. NPX cold-fetch (127 deps) превышал таймаут health-check Claude Code, плагиновая запись отображалась как Failed to connect даже на исправной версии CLI.
+- Скрипты `seed-essence-alpha.sh` и `check-alpha-consistency.sh`: дефолт `ESSENCE_ALPHA_CMD` / `ESSENCE_ALPHA_VALIDATE_CMD` переключён с `npx -y` на прямой бинарник.
+
+### Changed
+- README §MCP-серверы: требование `npm install -g @ypolosov/essence-alpha-mcp` (минимум v0.1.1) перед использованием плагина.
+- ADR-009 / external-systems/essence-alpha-mcp.md: минимум v0.1.1 (исправлен ранний-exit stdio сервера в v0.1.0).
+
 ## [0.3.0] — 2026-05-01
 
 ### Added

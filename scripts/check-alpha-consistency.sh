@@ -16,7 +16,7 @@ case "$file_path" in
   *) exit 0 ;;
 esac
 
-cmd="${ESSENCE_ALPHA_VALIDATE_CMD:-npx -y @ypolosov/essence-alpha-mcp validate}"
+cmd="${ESSENCE_ALPHA_VALIDATE_CMD:-essence-alpha-mcp validate}"
 log_file="$(mktemp)"
 trap 'rm -f "$log_file"' EXIT
 
