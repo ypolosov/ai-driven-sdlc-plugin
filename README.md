@@ -57,7 +57,7 @@ npm install -g @ypolosov/essence-alpha-mcp
 
 ## Инвентарь
 
-### Skills (12)
+### Skills (13)
 - `sdlc-bootstrap` — инициализация целевого проекта, выбор профиля.
 - `sdlc-focus` — перенос внимания: над/под/окружение/создание.
 - `sdlc-autonomy` — установка уровня автономности на задачу/фазу.
@@ -70,8 +70,9 @@ npm install -g @ypolosov/essence-alpha-mcp
 - `sdlc-testing` — фаза Testing.
 - `sdlc-deployment` — фаза Deployment.
 - `sdlc-operations` — фаза Operations.
+- `sdlc-integrations` — подключение внешних SDLC-инструментов целевого (Волна 4).
 
-### Commands (8)
+### Commands (9)
 - `/sdlc-init` — bootstrap в целевом проекте.
 - `/sdlc-continue` — спросить роль, предложить фазу.
 - `/sdlc-focus` — сменить целевую систему внимания.
@@ -80,15 +81,17 @@ npm install -g @ypolosov/essence-alpha-mcp
 - `/sdlc-status` — показать альфы и профиль.
 - `/sdlc-audit` — сквозная проверка консистентности.
 - `/sdlc-artifact` — **internal**, вызывается skills, не пользователем.
+- `/sdlc-tools` — управление привязками категорий инструментов (Волна 4).
 
-### Agents (5)
+### Agents (6)
 - `sdlc-method-engineer` — подбор метода и инструментов под проект.
 - `sdlc-state-reader` — чтение state-артефакта целевого.
 - `sdlc-artifact-validator` — механическая валидация одного артефакта.
 - `sdlc-consistency-auditor` — сквозная согласованность артефактов.
 - `sdlc-alpha-tracker` — единственный источник истины о состоянии альф.
+- `sdlc-tool-router` — маршрутизация запросов по категориям к MCP-серверам (Волна 4).
 
-### Scripts (13)
+### Scripts (15)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
 - `enforce-tdd.sh` — мягкая блокировка записи кода без парного теста.
 - `enforce-format-lint.sh` — диспетчер форматера и линтера из `plugin-config.md`.
@@ -102,8 +105,10 @@ npm install -g @ypolosov/essence-alpha-mcp
 - `bootstrap-target.sh` — инициализация целевого, режимы `--fail-if-exists` / `--merge` / `--force`.
 - `bench-hooks.sh` — бенчмарк 8 детерминированных hooks (NFR hooks-performance).
 - `bootstrap-dev-env.sh` — детектит pkg-manager и выводит команду установки bats/shellcheck/shfmt.
+- `check-tool-binding.sh` — валидирует категории `tool-bindings.md` целевого (Волна 4).
+- `detect-credentials.sh` — проверяет `.env` и обязательные ключи привязок (Волна 4).
 
-### Meta-templates (12)
+### Meta-templates (13)
 - `work-product.meta.md` — базовая схема рабочего продукта.
 - `phase-artifact.meta.md` — схема любого артефакта фазы.
 - `profile.meta.md` — схема SME-выбора целевого.
@@ -116,6 +121,7 @@ npm install -g @ypolosov/essence-alpha-mcp
 - `system-readme.meta.md` — схема описания системы внимания (Волна 2).
 - `credentials.meta.md` — схема `.env.example` + правила `.gitignore`.
 - `target-roles.meta.md` — схема `role-extensions.md` целевого (Волна 4, ADR-015).
+- `tool-binding.meta.md` — схема `tool-bindings.md` целевого (Волна 4, ADR-013).
 
 ### Catalogs (5)
 - `catalogs/alphas.md` — определения альф SDLC.
@@ -145,15 +151,16 @@ npm install -g @ypolosov/essence-alpha-mcp
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (8 файлов, 51 кейс):
+- Unit (bats-core) — `tests/unit/` (9 файлов, 60 кейсов):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 6 кейсов на запрет комментариев.
   - `bootstrap-dev-env.bats` — 3 кейса на детектор пакетного менеджера.
   - `check-alpha-consistency.bats` — 5 кейсов на валидатор БД essence-alpha.
   - `seed-essence-alpha.bats` — 4 кейса на bootstrap БД через цепочки.
-  - `check-tool-binding.bats` — 6 кейсов на проверку категорий tool-bindings (Волна 4).
+  - `check-tool-binding.bats` — 9 кейсов на проверку категорий tool-bindings (Волна 4).
   - `target-roles-schema.bats` — 14 кейсов на схему ролей и target-roles (Волна 4).
+  - `detect-credentials.bats` — 6 кейсов на проверку `.env` и обязательных ключей (Волна 4).
 - Фикстура — `tests/fixture/minimal-target/` (валидный каркас для integration).
 - Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.
 - CI — `.github/workflows/ci.yml` запускает всё на push/PR.
