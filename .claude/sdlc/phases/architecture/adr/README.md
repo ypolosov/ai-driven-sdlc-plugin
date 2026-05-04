@@ -22,10 +22,11 @@ updated: 2026-05-05
 | ADR-006 | Детерминированное приоритетнее LLM | Accepted | determinism, hooks-performance |
 | ADR-007 | Артефакты в .claude/sdlc/ | Accepted | reversibility |
 | ADR-008 | Секреты целевого проекта вне git | Accepted | security |
-| ADR-009 | Авторитативный backend альф через essence-alpha-mcp | Accepted | reliability, maintainability |
+| ADR-009 | Авторитативный backend альф через essence-alpha-mcp | Deprecated (superseded by ADR-011) | reliability, maintainability |
 | ADR-015 | Security-engineer как абстрактная роль и поля agent_kind/tool_categories | Accepted | security, maintainability |
 | ADR-016 | Маршрутизатор инструментов и реестр привязок tool-bindings | Accepted | security, maintainability, extensibility |
 | ADR-010 | Multi-agent topology — aggregator-фасад поверх tool-router'а | Accepted | reliability, maintainability, security |
+| ADR-011 | Единый sdlc-state-rag backend (PostgreSQL+pgvector + embedded OMG Essence) | Accepted | reliability, maintainability, security, performance |
 
 ## Правила ведения
 
