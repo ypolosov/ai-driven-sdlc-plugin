@@ -116,11 +116,12 @@ npm install -g @ypolosov/essence-alpha-mcp
 - `system-readme.meta.md` — схема описания системы внимания (Волна 2).
 - `credentials.meta.md` — схема `.env.example` + правила `.gitignore`.
 
-### Catalogs (4)
+### Catalogs (5)
 - `catalogs/alphas.md` — определения альф SDLC.
 - `catalogs/disciplines.md` — дисциплины, закреплённые за фазами.
 - `catalogs/roles.md` — роли и их методы, интересы.
 - `catalogs/method-tool-matrix.md` — матрица «метод → примеры инструментов».
+- `catalogs/tool-categories.md` — 7 агностических категорий инструментов SDLC (Волна 4, ADR-013).
 
 ### Hooks (1 файл)
 - `hooks/hooks.json` — PreToolUse TDD (soft); PostToolUse порядок: validator → check-cross-refs → format/lint → no-comments → check-system-readmes → check-alpha-consistency.
@@ -143,13 +144,14 @@ npm install -g @ypolosov/essence-alpha-mcp
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (6 файлов, 31 кейс, 100% зелёный):
+- Unit (bats-core) — `tests/unit/` (7 файлов, 37 кейсов):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 6 кейсов на запрет комментариев.
   - `bootstrap-dev-env.bats` — 3 кейса на детектор пакетного менеджера.
   - `check-alpha-consistency.bats` — 5 кейсов на валидатор БД essence-alpha.
   - `seed-essence-alpha.bats` — 4 кейса на bootstrap БД через цепочки.
+  - `check-tool-binding.bats` — 6 кейсов на проверку категорий tool-bindings (Волна 4).
 - Фикстура — `tests/fixture/minimal-target/` (валидный каркас для integration).
 - Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.
 - CI — `.github/workflows/ci.yml` запускает всё на push/PR.
