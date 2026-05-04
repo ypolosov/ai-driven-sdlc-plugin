@@ -72,6 +72,45 @@ source_of_truth_for_principles: CLAUDE.md
   - `scripts/seed-essence-alpha.sh` bootstrap-ит БД для существующих проектов.
 - related_commits: [PR #22, PR #23]
 
+## 2026-05-05 — Волна 4: введён принцип 18 (категории и абстрактные роли)
+- principle: 18
+- action: add
+- before: null
+- after: Плагин оперирует 7 категориями инструментов и 9 абстрактными ролями. Связи «категория → MCP» и «абстрактная роль → конкретная роль» живут в целевом. Hooks и агенты не упоминают конкретные продукты или должности.
+- motive: enterprise-проекты содержат 9+ конкретных ролей (BO, BD, FD, QE, CR, CA, RM, UX-UI, SE) и многократно больше инструментов. Плагин должен оставаться agnostic; конкретика — в целевом.
+- consequences:
+  - Добавлены `catalogs/tool-categories.md` (PR-A), `meta-templates/target-roles.meta.md` (PR-B), `meta-templates/tool-binding.meta.md` (PR-C).
+  - Добавлен `agents/sdlc-tool-router.md` (PR-C) и `agents/sdlc-context-aggregator.md` (PR-D).
+  - Расширены `catalogs/roles.md` (поля `tool_categories`, `agent_kind`) и `meta-templates/plugin-config.meta.md` (секции `tool_bindings`, `rag_ref`).
+  - Добавлены команда `/sdlc-tools` и skill `sdlc-integrations`.
+  - ADR-013, ADR-015, ADR-016, ADR-010.
+- related_commits: [PR #29, PR #30, PR #31]
+
+## 2026-05-05 — Волна 4: введён принцип 19 (контекст как услуга агента)
+- principle: 19
+- action: add
+- before: null
+- after: Skills получают контекст только через `sdlc-context-aggregator`. Агрегатор соединяет RAG + state-reader + targeted MCP с провенансом каждого фрагмента. При конфликте провенансов — обязательный AskUserQuestion (HITL/HOTL) и запись альтернатив в `decisions.md` (HOOTL).
+- motive: skills в multi-agent сценариях получают данные из 3+ источников; без единого фасада неизбежны дубли логики и потеря провенанса.
+- consequences:
+  - `agents/sdlc-context-aggregator.md` стал единственным фасадом.
+  - Запрет skills вызывать MCP-серверы напрямую (через router агрегатор).
+  - Каждый фрагмент в ответе несёт `provenance` (source, fetched_at, intent).
+  - Конфликты явно отображены в поле `conflicts`.
+- related_commits: [PR #32]
+
+## 2026-05-05 — Волна 4: введён принцип 19a (опрос инструментов до RAG)
+- principle: 19a
+- action: add
+- before: null
+- after: При `rag.enabled=false` `sdlc-context-aggregator` ОБЯЗАН опросить актуальные MCP/API/CLI всех `tool-bindings`, релевантных intent'у. Запрещено отвечать без провенанса фрагментов. Запрещено полагаться на устаревший snapshot из `.claude/sdlc/`. Aggregator не читает `alphas.md` напрямую — только через `sdlc-alpha-tracker` (соблюдает принцип 13).
+- motive: до Wave 5 RAG отсутствует у большинства проектов (все pet, многие mid). Без принципа 19a aggregator может вернуть устаревшие данные из markdown-snapshot'ов.
+- consequences:
+  - `agents/sdlc-context-aggregator.md` содержит явный шаг «MCP-опрос обязателен при rag_enabled=false».
+  - Integration-тест в фикстуре `mid-target/` проверяет MCP-обращение.
+  - Конфликтует с принципом 13 (нет): альфы по-прежнему через `sdlc-alpha-tracker`.
+- related_commits: [PR #32]
+
 ## Правила ведения
 
 - Запись создаётся **до** или **вместе** с изменением `CLAUDE.md`.
