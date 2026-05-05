@@ -5,19 +5,70 @@
 
 ## [Unreleased]
 
-### Added (Wave 5 — preparation for v0.4.0)
-- `scripts/migrate-essence-to-state-rag.sh` — разовая утилита миграции dogfooding-target с режимами `--dry-run`, `--verify`, `--exec`.
-- `tests/unit/migrate-essence-to-state-rag.bats` — 7 кейсов: exists, missing source, dry-run, exec+backup, idempotency, verify, help.
-- `.gitignore` запись `.sdlc-db/` для pglite/sdlc-state-rag локальной БД (ADR-011).
+## [0.4.0] — 2026-05-05
 
-### Pending (will land in v0.4.0)
-- Merge цепочки PR-A..G Wave 4/5 (PR #29..#35 → main).
-- Публикация `@ypolosov/sdlc-state-rag` v0.1.0 на npm.
-- Dogfooding-миграция плагина на новый backend.
+Multi-agent extension (Wave 4) + sdlc-state-rag (Wave 5).
 
-### BREAKING (v0.4.0)
-- `essence-alpha-mcp` удаляется из `.mcp.json`; `sdlc-alpha-tracker` дёргает только `sdlc-state-rag`.
-- ENV var `ESSENCE_ALPHA_VALIDATE_CMD` переименован в `SDLC_STATE_RAG_VALIDATE_CMD` (старая переменная даёт deprecation warning одну версию).
+### ⚠️ BREAKING CHANGES
+
+- `@ypolosov/essence-alpha-mcp` удалён из `.mcp.json`; `sdlc-alpha-tracker` дёргает только `mcp__sdlc_state_rag__state_*`.
+- ENV var `ESSENCE_ALPHA_VALIDATE_CMD` переименован в `SDLC_STATE_RAG_VALIDATE_CMD` (deprecation-warning одну версию).
+- ADR-009 переведён в `Deprecated` (superseded by ADR-011).
+
+### Added (Wave 4)
+
+- `catalogs/tool-categories.md` — 7 агностических категорий инструментов SDLC.
+- `catalogs/roles.md`: новая абстрактная роль `security-engineer` + поля `tool_categories`/`agent_kind`.
+- `meta-templates/target-roles.meta.md` — `<target>/.claude/sdlc/role-extensions.md`.
+- `meta-templates/tool-binding.meta.md` — `<target>/.claude/sdlc/tool-bindings.md`.
+- `agents/sdlc-tool-router.md` — обязательный AskUserQuestion ДО write-операций (ADR-016).
+- `agents/sdlc-context-aggregator.md` — фасад консолидации с провенансом каждого фрагмента (ADR-010).
+- `commands/sdlc-tools.md` — list/bind/test/unbind для биндингов категорий.
+- `skills/sdlc-integrations/SKILL.md` — фаза подключения инструментов SDLC целевого.
+- `scripts/check-tool-binding.sh`, `scripts/detect-credentials.sh`.
+- `tests/integration/context-aggregator-mid.bats` — 20 кейсов, фикстура `tests/fixture/mid-target/`.
+- ADR-010 (multi-agent topology), ADR-013 (категории как агностический интерфейс), ADR-015 (security-engineer), ADR-016 (tool-router).
+- Принципы 18 (категории+роли agnostic), 19 (контекст как услуга), 19a (опрос MCP всегда до RAG).
+
+### Added (Wave 5)
+
+- `meta-templates/sdlc-state-rag-contract.meta.md` — контракт MCP-сервера `@ypolosov/sdlc-state-rag` (5 доменов: alpha state machine + RAG + decisions + audit + sync).
+- `meta-templates/rag-config.meta.md` — RAG-конфиг по уровню SME (pet/mid/enterprise).
+- `meta-templates/webhooks.meta.md` — реестр webhook-эндпоинтов для enterprise.
+- `commands/sdlc-rag.md` — reindex/query/stats/purge.
+- `scripts/check-rag-config.sh` — валидация по уровню SME (8 bats-кейсов).
+- `scripts/migrate-essence-to-state-rag.sh` — разовая утилита миграции (--dry-run/--verify/--exec).
+- `tests/unit/migrate-essence-to-state-rag.bats` — 7 кейсов.
+- `tests/integration/sdlc-state-rag-contract.bats` — 20 кейсов.
+- `examples/wave-5-enterprise/` — демо enterprise target с PgVector + cron + webhooks.
+- TypeScript whitelist в `enforce-no-comments.sh` (`@ts-`, `eslint-`, `biome-ignore`).
+- ADR-011 (sdlc-state-rag unified backend), ADR-012 (worker pattern по SME), ADR-014 (enterprise dogfooding).
+- Принципы 20 (worker по SME, единый RDB), 21 (per-target БД, concurrent-safe).
+- `.gitignore`: запись `.sdlc-db/`.
+
+### Closed epics
+
+- **#3** — runtime vs dev-time MCP разграничены (`tool-bindings.md` ↔ `.mcp.json`).
+- **#6** — role-extensions фиксируют активную роль на фазе.
+- **#7** — multi-agent coexistence через aggregator + RDB-backend.
+- **#13** — `/sdlc-tools test` верифицирует стек на onboarding.
+- **#20** — enterprise webhook + Mastra-runtime.
+- **#21** — `agent_kind: ai` для delivery-lead.
+
+### Changed
+
+- `.mcp.json`: убран `essence-alpha`, добавлен `sdlc-state-rag` (npx).
+- `agents/sdlc-alpha-tracker.md`: переключён на `mcp__sdlc_state_rag__state_*` tools + композитные `state_advance_with_decision`, `state_regress_with_audit`.
+- `scripts/check-alpha-consistency.sh`: ENV var rename с deprecation warning.
+- `meta-templates/plugin-config.meta.md`: добавлены секции `tool_bindings`, `rag_ref`, `workers`.
+- `CLAUDE.md` принцип 13: ссылка на ADR-011 и backend `@ypolosov/sdlc-state-rag`.
+- README: Skills 12→13, Commands 8→10, Agents 5→7, Catalogs 4→5, Meta-templates 11→16, Scripts 13→17, ADRs 9→14.
+- Tests: unit 6→11 файлов / 31→80 кейсов; integration 0→2 файла / 0→40 кейсов.
+
+### Внешние артефакты
+
+- `@ypolosov/sdlc-state-rag@0.1.0` опубликован на npm (`npx -y @ypolosov/sdlc-state-rag`).
+- Репо: https://github.com/ypolosov/sdlc-state-rag.
 
 ## [0.3.1] — 2026-05-04
 
@@ -110,7 +161,8 @@
 - Принципы Волны 1 (1-13 + 4a).
 - Демо-сценарий на todo-list.
 
-[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.2.0...v0.2.1
