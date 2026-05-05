@@ -5,6 +5,20 @@
 
 ## [Unreleased]
 
+### Added (Wave 5 — preparation for v0.4.0)
+- `scripts/migrate-essence-to-state-rag.sh` — разовая утилита миграции dogfooding-target с режимами `--dry-run`, `--verify`, `--exec`.
+- `tests/unit/migrate-essence-to-state-rag.bats` — 7 кейсов: exists, missing source, dry-run, exec+backup, idempotency, verify, help.
+- `.gitignore` запись `.sdlc-db/` для pglite/sdlc-state-rag локальной БД (ADR-011).
+
+### Pending (will land in v0.4.0)
+- Merge цепочки PR-A..G Wave 4/5 (PR #29..#35 → main).
+- Публикация `@ypolosov/sdlc-state-rag` v0.1.0 на npm.
+- Dogfooding-миграция плагина на новый backend.
+
+### BREAKING (v0.4.0)
+- `essence-alpha-mcp` удаляется из `.mcp.json`; `sdlc-alpha-tracker` дёргает только `sdlc-state-rag`.
+- ENV var `ESSENCE_ALPHA_VALIDATE_CMD` переименован в `SDLC_STATE_RAG_VALIDATE_CMD` (старая переменная даёт deprecation warning одну версию).
+
 ## [0.3.1] — 2026-05-04
 
 ### Fixed
