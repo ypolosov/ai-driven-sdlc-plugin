@@ -81,9 +81,14 @@ setup() {
   [ "$status" -eq 0 ]
 }
 
-@test ".mcp.json uses launcher script for sdlc-state-rag (v0.5.2 fix)" {
+@test ".mcp.json uses bash wrapper for launcher (v0.5.3 fix)" {
   command_value=$(python3 -c 'import json; d=json.load(open("'"$MCP_JSON"'")); print(d["mcpServers"]["sdlc-state-rag"]["command"])')
-  [[ "$command_value" == *"launch-sdlc-state-rag.sh" ]]
+  [ "$command_value" = "bash" ]
+}
+
+@test ".mcp.json bash args reference launch-sdlc-state-rag.sh" {
+  args_str=$(python3 -c 'import json; d=json.load(open("'"$MCP_JSON"'")); print(" ".join(d["mcpServers"]["sdlc-state-rag"]["args"]))')
+  [[ "$args_str" == *"launch-sdlc-state-rag.sh"* ]]
 }
 
 @test "launch-sdlc-state-rag.sh exists and is executable" {

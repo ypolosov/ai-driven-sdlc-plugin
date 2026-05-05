@@ -5,6 +5,12 @@
 
 ## [Unreleased]
 
+## [0.5.3] — 2026-05-05
+
+### Fixed
+
+- `.mcp.json` для `sdlc-state-rag`: v0.5.2 использовал `${CLAUDE_PLUGIN_ROOT}` который НЕ подставляется в project-level `.mcp.json` (только в plugin-level). Это ломало dogfooding — при работе над плагином как над проектом запись отображалась как `Failed to connect`. Заменено на `bash -c 'exec "${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR:-$PWD}}/scripts/launch-sdlc-state-rag.sh"'` — bash-параметр-expansion работает в обоих контекстах.
+
 ## [0.5.2] — 2026-05-05
 
 ### Fixed
@@ -242,7 +248,8 @@ Multi-agent extension (Wave 4) + sdlc-state-rag (Wave 5).
 - Принципы Волны 1 (1-13 + 4a).
 - Демо-сценарий на todo-list.
 
-[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.2...HEAD
+[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.3...HEAD
+[0.5.3]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.4.0...v0.5.0
