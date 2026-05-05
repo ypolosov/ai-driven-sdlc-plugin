@@ -138,6 +138,22 @@ source_of_truth_for_principles: CLAUDE.md
   - Bats-фикстуры используют `SDLC_STATE_RAG_VALIDATE_CMD` (rename из `ESSENCE_ALPHA_VALIDATE_CMD`).
 - related_commits: [PR #33]
 
+## 2026-05-05 — Wave 5 cleanup: essence-alpha-mcp полностью удалён
+- principle: 13
+- action: cleanup
+- context: после релиза v0.4.0 и dogfooding-миграции на pglite (Шаг D плана) пакет, репо и legacy-файлы essence-alpha-mcp удалены.
+- removed:
+  - npm `@ypolosov/essence-alpha-mcp` (unpublish all versions)
+  - GitHub repo `ypolosov/essence-alpha-mcp` (deleted)
+  - `scripts/seed-essence-alpha.sh` + `tests/unit/seed-essence-alpha.bats`
+  - `.claude/sdlc/external-systems/essence-alpha-mcp.md`
+  - `.gitignore` записи `essence-alpha.db*`
+  - `ESSENCE_ALPHA_VALIDATE_CMD` deprecation alias из `check-alpha-consistency.sh`
+- preserved:
+  - ADR-009 как Deprecated stub (исторический record, superseded_by ADR-011)
+  - Backup `.claude/sdlc/alphas.md.backup-2026-05-05` как evidence миграции
+- related_commits: [cleanup PR в этом коммите]
+
 ## 2026-05-05 — Принцип 13: backend переключён на sdlc-state-rag
 - principle: 13
 - action: modify

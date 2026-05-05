@@ -2,8 +2,8 @@
 name: system-context
 type: attention-context
 project: ai-driven-sdlc-plugin
-current_focus: essence-alpha-mcp
-updated: 2026-05-01
+current_focus: ai-driven-sdlc-plugin
+updated: 2026-05-05
 ---
 
 # Реестр систем внимания
@@ -16,14 +16,12 @@ updated: 2026-05-01
 
 | slug | role_vs_target | kind | last_focused_at | focus_count |
 |---|---|---|---|---|
-| ai-driven-sdlc-plugin | target | materialized | 2026-04-19 | 2 |
+| ai-driven-sdlc-plugin | target | materialized | 2026-05-05 | 3 |
 | hooks | subsystem | logical | 2026-04-19 | 1 |
-| essence-alpha-mcp | in_environment | logical | 2026-04-30 | 1 |
 
 ## Пояснения
 
-`current_focus=essence-alpha-mcp` — внимание на внешней зависимости (in_environment).
-Целевая система остаётся `ai-driven-sdlc-plugin` (dogfooding, принцип 12).
+`current_focus=ai-driven-sdlc-plugin` — целевая система (dogfooding, принцип 12).
 `role_vs_target` указывается относительно корня плагина для каждой записи.
 Надсистему, подсистемы и окружение фиксируйте через `/sdlc-focus` по мере необходимости.
 
@@ -49,16 +47,9 @@ updated: 2026-05-01
 - Описание системы: `README.sdlc.md` в корне проекта.
 - Мотив: подготовка к `/sdlc-phase development` для всего плагина.
 
-### 2026-04-30 — фокус на essence-alpha-mcp (in_environment)
+### 2026-05-05 — возврат на ai-driven-sdlc-plugin после Wave 5
 
-- focus: `essence-alpha-mcp` (kind=logical).
-- Граница: npm-пакет `@ypolosov/essence-alpha-mcp`.
-- Описание системы: `.claude/sdlc/external-systems/essence-alpha-mcp.md`.
-- Мотив: bootstrap БД, эксплуатация, релиз v0.3.0 (см. ADR-009).
-
-### 2026-05-01 — фоновый фокус на hooks (Стадия B)
-
-- focus остаётся `essence-alpha-mcp`; `hooks` затронут косвенно.
-- Расширение bench-hooks 5→8 потребовало доступа к подсистеме `hooks`.
-- Описание `external-systems/hooks.md` уже существует с Волны 2.
-- focus_count для hooks без инкремента (Стадия B без отдельного `/sdlc-focus`).
+- focus: `ai-driven-sdlc-plugin` (kind=materialized).
+- Граница: корень репозитория.
+- Мотив: релиз v0.4.0 + удаление `essence-alpha-mcp` (ADR-011 supersedes ADR-009).
+- `essence-alpha-mcp` больше не in_environment (npm-пакет и репо удалены).

@@ -35,25 +35,13 @@ payload() {
 
 @test "alphas.md with mock validate ok=true passes" {
   echo "snapshot" > "$TMP_DIR/.claude/sdlc/alphas.md"
-  run bash -c "ESSENCE_ALPHA_VALIDATE_CMD='true' printf '%s' '$(payload Write "$TMP_DIR/.claude/sdlc/alphas.md" "$TMP_DIR")' | ESSENCE_ALPHA_VALIDATE_CMD='true' '$SCRIPT'"
+  run bash -c "SDLC_STATE_RAG_VALIDATE_CMD='true' printf '%s' '$(payload Write "$TMP_DIR/.claude/sdlc/alphas.md" "$TMP_DIR")' | SDLC_STATE_RAG_VALIDATE_CMD='true' '$SCRIPT'"
   [ "$status" -eq 0 ]
 }
 
 @test "alphas.md with mock validate ok=false fails with exit 2" {
   echo "snapshot" > "$TMP_DIR/.claude/sdlc/alphas.md"
-  run bash -c "printf '%s' '$(payload Write "$TMP_DIR/.claude/sdlc/alphas.md" "$TMP_DIR")' | ESSENCE_ALPHA_VALIDATE_CMD='false' '$SCRIPT'"
+  run bash -c "printf '%s' '$(payload Write "$TMP_DIR/.claude/sdlc/alphas.md" "$TMP_DIR")' | SDLC_STATE_RAG_VALIDATE_CMD='false' '$SCRIPT'"
   [ "$status" -eq 2 ]
 }
 
-@test "SDLC_STATE_RAG_VALIDATE_CMD ok=true passes (Wave 5)" {
-  echo "snapshot" > "$TMP_DIR/.claude/sdlc/alphas.md"
-  run bash -c "printf '%s' '$(payload Write "$TMP_DIR/.claude/sdlc/alphas.md" "$TMP_DIR")' | SDLC_STATE_RAG_VALIDATE_CMD='true' '$SCRIPT'"
-  [ "$status" -eq 0 ]
-}
-
-@test "ESSENCE_ALPHA_VALIDATE_CMD emits deprecation warning (Wave 5)" {
-  echo "snapshot" > "$TMP_DIR/.claude/sdlc/alphas.md"
-  run bash -c "printf '%s' '$(payload Write "$TMP_DIR/.claude/sdlc/alphas.md" "$TMP_DIR")' | ESSENCE_ALPHA_VALIDATE_CMD='true' '$SCRIPT' 2>&1"
-  [ "$status" -eq 0 ]
-  echo "$output" | grep -qiE 'deprecated'
-}

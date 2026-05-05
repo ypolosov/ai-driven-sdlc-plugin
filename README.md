@@ -41,9 +41,7 @@
 Плагин ship'ит минимальный `github` MCP в `.mcp.json` как fallback.
 Плагин ship'ит запись `sdlc-state-rag` в `.mcp.json`; backend per-target через `${SDLC_STATE_RAG_DSN}` из `<target>/.env`.
 
-`@ypolosov/essence-alpha-mcp` (ADR-009) **deprecated** в Волне 5; superseded by ADR-011.
 Логика OMG Essence 1.2 state machine реализована **внутри** `sdlc-state-rag` (TypeScript).
-`essence-alpha-mcp` удалён из `.mcp.json` плагина и не рекомендуется новым targets.
 
 ## Быстрый старт
 
@@ -91,7 +89,7 @@
 - `sdlc-tool-router` — маршрутизация запросов по категориям к MCP-серверам (Волна 4).
 - `sdlc-context-aggregator` — фасад консолидации контекста с провенансом (Волна 4, ADR-010).
 
-### Scripts (17)
+### Scripts (16)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
 - `enforce-tdd.sh` — мягкая блокировка записи кода без парного теста.
 - `enforce-format-lint.sh` — диспетчер форматера и линтера из `plugin-config.md`.
@@ -101,7 +99,6 @@
 - `check-system-readmes.sh` — инвентарь описаний систем внимания в целевом (Волна 2).
 - `check-memom-consistency.sh` — блокирует изменение принципов без записи в memom (Волна 2).
 - `check-alpha-consistency.sh` — валидирует БД sdlc-state-rag при записи snapshot (Волна 5).
-- `seed-essence-alpha.sh` — bootstrap БД essence-alpha-mcp (legacy, deprecated).
 - `bootstrap-target.sh` — инициализация целевого, режимы `--fail-if-exists` / `--merge` / `--force`.
 - `bench-hooks.sh` — бенчмарк 8 детерминированных hooks (NFR hooks-performance).
 - `bootstrap-dev-env.sh` — детектит pkg-manager и выводит команду установки bats/shellcheck/shfmt.
@@ -156,20 +153,20 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (10 файлов, 73 кейса):
+- Unit (bats-core) — `tests/unit/` (10 файлов, 74 кейса):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 9 кейсов (включая TypeScript whitelist Wave 5).
   - `bootstrap-dev-env.bats` — 3 кейса на детектор пакетного менеджера.
-  - `check-alpha-consistency.bats` — 7 кейсов на валидатор БД (Wave 5: +SDLC_STATE_RAG_VALIDATE_CMD и deprecation).
-  - `seed-essence-alpha.bats` — 4 кейса на bootstrap БД через цепочки.
+  - `check-alpha-consistency.bats` — 5 кейсов на валидатор БД через `SDLC_STATE_RAG_VALIDATE_CMD`.
   - `check-tool-binding.bats` — 9 кейсов на проверку категорий tool-bindings (Волна 4).
   - `target-roles-schema.bats` — 14 кейсов на схему ролей и target-roles (Волна 4).
   - `detect-credentials.bats` — 6 кейсов на проверку `.env` и обязательных ключей (Волна 4).
   - `check-rag-config.bats` — 8 кейсов на схему rag-config и worker.kind ↔ SME (Волна 5).
+  - `migrate-essence-to-state-rag.bats` — 7 кейсов на разовую утилиту миграции (PR-H, Волна 5).
 - Integration (bats-core) — `tests/integration/` (2 файла, 40 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
-  - `sdlc-state-rag-contract.bats` — 20 кейсов на контракт sdlc-state-rag, deprecation ADR-009, переключение трекера (Волна 5, ADR-011).
+  - `sdlc-state-rag-contract.bats` — 20 кейсов на контракт sdlc-state-rag и переключение трекера (Волна 5, ADR-011).
 - Фикстуры — `tests/fixture/minimal-target/`, `tests/fixture/mid-target/` (валидные каркасы).
 - Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.
 - CI — `.github/workflows/ci.yml` запускает всё на push/PR.
