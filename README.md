@@ -169,7 +169,7 @@
   - `enforce-sdlc-phase.bats` — 10 кейсов на PreToolUse hook принципа 22 (Волна 5, v0.5.0).
 - Integration (bats-core) — `tests/integration/` (3 файла, 47 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
-  - `sdlc-state-rag-contract.bats` — 23 кейса на контракт sdlc-state-rag, переключение трекера, launcher-скрипт (Волна 5, ADR-011, v0.5.2).
+  - `sdlc-state-rag-contract.bats` — 23 кейса на контракт sdlc-state-rag, переключение трекера, bash-wrapper для launcher (Волна 5, ADR-011, v0.5.3).
   - `enforce-sdlc-phase-integration.bats` — 4 кейса на e2e блокировку write-команд при отсутствии `active_phase` (Волна 5, принцип 22).
 - Фикстуры — `tests/fixture/minimal-target/`, `tests/fixture/mid-target/` (валидные каркасы).
 - Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.
