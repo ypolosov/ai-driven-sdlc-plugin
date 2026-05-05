@@ -78,10 +78,10 @@ fi
 
 case "$mode" in
   dry-run)
-    npx -y "@ypolosov/sdlc-state-rag-migrate-essence" --source "$source_path" --dry-run
+    npx -y --package="@ypolosov/sdlc-state-rag" sdlc-state-rag-migrate-essence --source "$source_path" --dry-run
     ;;
   verify)
-    npx -y "@ypolosov/sdlc-state-rag-migrate-essence" --source "$source_path" --verify
+    npx -y --package="@ypolosov/sdlc-state-rag" sdlc-state-rag-migrate-essence --source "$source_path" --verify
     ;;
   exec)
     if [ ! -f "$backup_path" ]; then
@@ -90,6 +90,6 @@ case "$mode" in
     else
       echo "migrate-essence: backup already exists at $backup_path (idempotent)" >&2
     fi
-    npx -y "@ypolosov/sdlc-state-rag-migrate-essence" --source "$source_path" --backup "$backup_path"
+    npx -y --package="@ypolosov/sdlc-state-rag" sdlc-state-rag-migrate-essence --source "$source_path" --backup "$backup_path"
     ;;
 esac
