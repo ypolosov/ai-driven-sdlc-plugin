@@ -132,6 +132,31 @@ rag_ref:
 При `enabled: true` aggregator делает RAG-запросы перед опросом MCP.
 Дефолт — `enabled: false` (применимо к большинству mid и всем pet).
 
+### phase_enforcement (Волна 5, принцип 22)
+
+Конфигурация принуждения активной фазы перед write-операциями.
+
+```yaml
+phase_enforcement:
+  enabled: true
+  ttl_hours: 24
+  whitelist_paths:
+    - .claude/sdlc/
+    - .claude/CLAUDE.md
+    - .gitignore
+    - .env.example
+    - README.sdlc.md
+  bash_blacklist:
+    git: [commit, push, tag, rebase, reset, checkout, rm, merge, cherry-pick, revert, clean, stash]
+    gh:  [pr.create, pr.merge, pr.edit, pr.close, pr.reopen, release, repo.delete, repo.create]
+    npm: [publish, unpublish, deprecate]
+```
+
+`ttl_hours` — насколько долго `active_phase_set_at` действителен. По умолчанию 24 ч.
+`SDLC_PHASE_TTL_HOURS` env var переопределяет TTL для одной сессии.
+`SDLC_PHASE_ENFORCE=skip` — escape hatch для CI.
+Эфемерный override — через `/sdlc-autonomy --task hootl --duration <N>m` пишет `.claude/sdlc/autonomy.session.md`.
+
 ### workers (Волна 5, опционально)
 
 Конфигурация worker'ов синхронизации.

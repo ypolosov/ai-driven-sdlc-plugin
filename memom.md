@@ -138,6 +138,20 @@ source_of_truth_for_principles: CLAUDE.md
   - Bats-фикстуры используют `SDLC_STATE_RAG_VALIDATE_CMD` (rename из `ESSENCE_ALPHA_VALIDATE_CMD`).
 - related_commits: [PR #33]
 
+## 2026-05-05 — Принцип 22: обязательное использование плагина (enforce-sdlc-phase)
+- principle: 22
+- action: add
+- formulation: «Любая write-операция в целевом проекте требует активной фазы SDLC. PreToolUse hook `enforce-sdlc-phase.sh` блокирует Bash (blacklist: git commit/push/tag, gh pr/release, npm publish/unpublish) и Edit/Write вне whitelist (`.claude/sdlc/`, `.claude/CLAUDE.md`, `.gitignore`, `.env.example`, `README.sdlc.md`) при отсутствии `active_phase` в profile.md. TTL 24 ч на `active_phase_set_at`. Override через `/sdlc-autonomy --task hootl` или env var `SDLC_PHASE_ENFORCE=skip`.»
+- motive: после релиза v0.4.0 агент сделал 9+ PR подряд напрямую через git/gh/npm, ни разу не вызвав skills плагина. Принципы 1, 6, 12 нарушены без enforcement. Hook делает правило физически принудительным.
+- consequences:
+  - Новый skill behavior: `/sdlc-phase <name>` записывает `active_phase` и `active_phase_set_at` в profile.md frontmatter.
+  - Расширение `meta-templates/profile.meta.md` (+поля) и `plugin-config.meta.md` (+секция `phase_enforcement`).
+  - PreToolUse hook через `Bash|Write|Edit` matcher.
+  - Bench-hooks расширен с 8 до 9 hooks.
+  - README inventory: Scripts 16→17, принципы 22→23, unit bats 74→84, integration 40→44.
+  - .gitignore: добавлен `.claude/sdlc/autonomy.session.md` (ephemeral).
+- related_commits: [v0.5.0 release]
+
 ## 2026-05-05 — Wave 5 cleanup: essence-alpha-mcp полностью удалён
 - principle: 13
 - action: cleanup

@@ -9,3 +9,6 @@ release-notes-v*.md
 
 # ai-driven-sdlc: pglite/sdlc-state-rag локальная БД (Wave 5, ADR-011)
 .sdlc-db/
+
+# ai-driven-sdlc: ephemeral autonomy session (Wave 5, принцип 22)
+.claude/sdlc/autonomy.session.md

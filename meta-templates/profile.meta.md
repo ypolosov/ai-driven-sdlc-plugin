@@ -19,8 +19,14 @@ type: sdlc-profile
 project: <slug целевого проекта>
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>
+active_phase: <vision|requirements|architecture|development|testing|deployment|operations|null>
+active_phase_set_at: <YYYY-MM-DDTHH:MM:SSZ>
 ---
 ```
+
+`active_phase` устанавливается skill `/sdlc-phase <name>` при входе в фазу (Wave 5, ADR — TBD).
+`active_phase_set_at` — UTC timestamp ISO-8601 момента установки.
+PreToolUse hook `enforce-sdlc-phase.sh` блокирует write-операции, если `active_phase` пуст или `active_phase_set_at` устарел (TTL 24 ч по умолчанию).
 
 ## Обязательная таблица SME
 

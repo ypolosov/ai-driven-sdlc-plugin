@@ -233,6 +233,17 @@ Mutating операции — через PostgreSQL транзакции.
 Композитные tools обеспечивают атомарность (`state_advance_with_decision`).
 `sdlc-alpha-tracker` дёргает только `sdlc-state-rag` (single source альф; принцип 13).
 
+### 22. Обязательное использование плагина для write-операций
+
+Любая write-операция в целевом проекте требует активной фазы SDLC.
+Под write-операциями понимаются:
+- `Edit` / `Write` на путях вне whitelist (`.claude/sdlc/**`, `.claude/CLAUDE.md`, `.gitignore`, `.env.example`, `README.sdlc.md`).
+- `Bash` с blacklist-командами (`git commit|push|tag|rebase|reset|checkout|rm|merge|cherry-pick|revert|clean|stash`, `gh pr (create|merge|edit|close|reopen)|release|repo (delete|create)`, `npm publish|unpublish|deprecate`).
+PreToolUse hook `enforce-sdlc-phase.sh` проверяет `<target>/.claude/sdlc/profile.md` поле `active_phase` и `active_phase_set_at` (TTL 24 ч по умолчанию).
+Эфемерный override — `/sdlc-autonomy --task hootl --duration <N>m` пишет `.claude/sdlc/autonomy.session.md`.
+Escape hatch для CI — `SDLC_PHASE_ENFORCE=skip` env var.
+Принцип реализуется через `scripts/enforce-sdlc-phase.sh` (Wave 5, ADR — TBD).
+
 ## Привязка принципов к источникам
 
 | Принцип | Источник |
@@ -250,6 +261,7 @@ Mutating операции — через PostgreSQL транзакции.
 | 19a | принципы 13, 19; ADR-010 |
 | 20 | принципы 6, 13; ADR-011, ADR-012 |
 | 21 | принципы 9, 13; ADR-011 |
+| 22 | принципы 1, 6, 12; enforce-sdlc-phase hook |
 
 ## Правила работы с артефактами
 
