@@ -89,7 +89,7 @@
 - `sdlc-tool-router` — маршрутизация запросов по категориям к MCP-серверам (Волна 4).
 - `sdlc-context-aggregator` — фасад консолидации контекста с провенансом (Волна 4, ADR-010).
 
-### Scripts (17)
+### Scripts (18)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
 - `enforce-tdd.sh` — мягкая блокировка записи кода без парного теста.
 - `enforce-format-lint.sh` — диспетчер форматера и линтера из `plugin-config.md`.
@@ -107,6 +107,7 @@
 - `check-rag-config.sh` — валидирует `rag-config.md` целевого и worker.kind ↔ SME (Волна 5, ADR-012).
 - `migrate-essence-to-state-rag.sh` — разовая миграция dogfooding с `--dry-run` / `--verify` / `--exec` (Волна 5, PR-H).
 - `enforce-sdlc-phase.sh` — PreToolUse hook принципа 22; блокирует git/gh/npm write-команды и Edit/Write без `active_phase` (Волна 5, v0.5.0).
+- `launch-sdlc-state-rag.sh` — launcher MCP-сервера sdlc-state-rag с fallback PATH→nvm→standard locations→npx (v0.5.2).
 
 ### Meta-templates (16)
 - `work-product.meta.md` — базовая схема рабочего продукта.
@@ -166,9 +167,9 @@
   - `check-rag-config.bats` — 8 кейсов на схему rag-config и worker.kind ↔ SME (Волна 5).
   - `migrate-essence-to-state-rag.bats` — 7 кейсов на разовую утилиту миграции (PR-H, Волна 5).
   - `enforce-sdlc-phase.bats` — 10 кейсов на PreToolUse hook принципа 22 (Волна 5, v0.5.0).
-- Integration (bats-core) — `tests/integration/` (3 файла, 45 кейсов):
+- Integration (bats-core) — `tests/integration/` (3 файла, 47 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
-  - `sdlc-state-rag-contract.bats` — 21 кейс на контракт sdlc-state-rag, переключение трекера и direct-binary registration (Волна 5, ADR-011, v0.5.1).
+  - `sdlc-state-rag-contract.bats` — 23 кейса на контракт sdlc-state-rag, переключение трекера, launcher-скрипт (Волна 5, ADR-011, v0.5.2).
   - `enforce-sdlc-phase-integration.bats` — 4 кейса на e2e блокировку write-команд при отсутствии `active_phase` (Волна 5, принцип 22).
 - Фикстуры — `tests/fixture/minimal-target/`, `tests/fixture/mid-target/` (валидные каркасы).
 - Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.

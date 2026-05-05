@@ -11,7 +11,7 @@
     },
     "sdlc-state-rag": {
       "type": "stdio",
-      "command": "sdlc-state-rag",
+      "command": "${CLAUDE_PLUGIN_ROOT}/scripts/launch-sdlc-state-rag.sh",
       "args": [],
       "env": {
         "SDLC_STATE_RAG_DSN": "${SDLC_STATE_RAG_DSN}"
