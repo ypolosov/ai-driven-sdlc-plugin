@@ -5,6 +5,24 @@
 
 ## [Unreleased]
 
+### Removed (post-v0.4.0 cleanup)
+
+- npm-пакет `@ypolosov/essence-alpha-mcp` unpublished.
+- GitHub-репо `ypolosov/essence-alpha-mcp` удалён.
+- `scripts/seed-essence-alpha.sh` + `tests/unit/seed-essence-alpha.bats` (legacy bootstrap).
+- `.claude/sdlc/external-systems/essence-alpha-mcp.md` (sidecar logical-системы).
+- Deprecation-alias `ESSENCE_ALPHA_VALIDATE_CMD` в `check-alpha-consistency.sh`.
+- `.gitignore` записи `essence-alpha.db*`.
+
+### Changed (cleanup)
+
+- README/agents/meta-templates: убраны упоминания `essence-alpha-mcp` как живой зависимости.
+- Scripts inventory: 17 → 16. Tests inventory: unit 80 → 74 кейса.
+
+### Preserved
+
+- ADR-009 как Deprecated исторический record (`superseded_by: ADR-011`).
+
 ## [0.4.0] — 2026-05-05
 
 Multi-agent extension (Wave 4) + sdlc-state-rag (Wave 5).

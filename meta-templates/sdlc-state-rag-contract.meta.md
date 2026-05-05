@@ -9,7 +9,7 @@ source: ADR-011; OMG Essence 1.2; принципы 13, 20, 21
 # Контракт `sdlc-state-rag` MCP-сервера
 
 `sdlc-state-rag` — единый MCP-сервер per-target, объединяющий пять доменов в одной БД PostgreSQL+pgvector.
-Полностью замещает `essence-alpha-mcp` (см. ADR-009 → Deprecated; ADR-011).
+Авторитативный backend трекера альф (ADR-011).
 
 ## Backend
 
@@ -90,7 +90,6 @@ DSN передаётся через переменную окружения `SDL
 
 `sdlc-alpha-tracker` дёргает **только** `sdlc-state-rag` через `state_*` tools.
 Никаких прямых обращений к `alphas.md` (принцип 13).
-Никаких обращений к `essence-alpha` MCP (после Wave 5 он удалён из `.mcp.json`).
 
 ## Реализация
 
@@ -104,6 +103,6 @@ PR-E2d — pglite + dogfooding миграция.
 ## Связь
 
 - Принципы 13 (single source альф), 20 (worker по SME), 21 (per-target БД).
-- ADR-011 (sdlc-state-rag) supersedes ADR-009 (essence-alpha-mcp).
+- ADR-011 (sdlc-state-rag) — авторитативное архитектурное решение для backend альф.
 - Конфигурация — `plugin-config.meta.md` секция `rag_ref`.
 - Воркер — `meta-templates/rag-config.meta.md` (PR-F).

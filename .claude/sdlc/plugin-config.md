@@ -45,12 +45,10 @@ tdd_pairs:
     test: 'tests/unit/bootstrap-dev-env.bats'
   - source: '^scripts/check-alpha-consistency\.sh$'
     test: 'tests/unit/check-alpha-consistency.bats'
-  - source: '^scripts/seed-essence-alpha\.sh$'
-    test: 'tests/unit/seed-essence-alpha.bats'
 ```
 
-Активные пары — 6 скриптов: validate-artifact, check-cross-refs, enforce-no-comments, bootstrap-dev-env, check-alpha-consistency, seed-essence-alpha.
-Остальные 5 скриптов — out of scope до написания их тестов.
+Активные пары — 5 скриптов: validate-artifact, check-cross-refs, enforce-no-comments, bootstrap-dev-env, check-alpha-consistency.
+Остальные скрипты — out of scope до написания их тестов.
 
 ### Планируемые пары (не активны, документация)
 

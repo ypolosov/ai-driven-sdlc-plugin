@@ -97,7 +97,6 @@ MCP-side использует kebab-case: `opportunity`, `software-system`.
 - Язык сообщений — русский, ≤15 слов.
 - При недоступности MCP-сервера — отказать в advance/regress.
 - Fallback на чисто markdown-валидацию запрещён.
-- Запрет вызова `essence-alpha` MCP — он удалён из `.mcp.json` (Wave 5).
 
 ## Выход
 

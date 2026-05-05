@@ -2,17 +2,17 @@
 name: alphas
 type: alpha-snapshot
 project: ai-driven-sdlc-plugin
-updated: 2026-05-02
-source_of_truth: mcp://essence-alpha
+updated: 2026-05-05
+source_of_truth: mcp://sdlc-state-rag
 snapshot_role: pr-visible-mirror
 generated_after: mcp-write
 ---
 
 # Snapshot состояний альф
 
-Авторитативный backend — MCP-сервер `essence-alpha` (см. ADR-009).
+Авторитативный backend — MCP-сервер `sdlc-state-rag` (см. ADR-011).
 Этот файл — PR-видимый snapshot текущих состояний альф.
-Журнал переходов живёт в БД через `essence_list_transitions`.
+Журнал переходов живёт в БД через `state_list_transitions`.
 Прямое чтение этого файла другими агентами запрещено (принцип 13).
 
 ## Текущее состояние альф
@@ -31,15 +31,14 @@ generated_after: mcp-write
 
 ## Журнал переходов
 
-Журнал делегирован MCP-серверу `essence-alpha`.
-Получение через `mcp__essence_alpha__essence_list_transitions(alpha=<kebab-id>)`.
-Исторический журнал до 2026-04-30 — out of scope MVP интеграции.
+Журнал делегирован MCP-серверу `sdlc-state-rag` (ADR-011).
+Получение через `mcp__sdlc_state_rag__state_list_transitions(alpha_id=<kebab-id>)`.
+Исторический журнал — `.claude/sdlc/alphas.md.backup-2026-05-05` (snapshot до миграции Wave 5).
 
-## Bootstrap БД
+## Bootstrap БД (Wave 5)
 
-БД заселена 2026-04-30 через `scripts/seed-essence-alpha.sh`.
-Записан 21 переход; `essence_validate_consistency` возвращает ok.
-Snapshot и БД синхронизированы по итогам Стадии A.
+БД (pglite в `.sdlc-db/`) заселена 2026-05-05 через `scripts/migrate-essence-to-state-rag.sh`.
+7 альф мигрированы из snapshot; OMG Essence 1.2 conformance — внутри `@ypolosov/sdlc-state-rag@0.1.1`.
 
 ## Журнал MCP-продвижений
 
