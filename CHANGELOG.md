@@ -5,6 +5,18 @@
 
 ## [Unreleased]
 
+## [0.5.2] — 2026-05-05
+
+### Fixed
+
+- `.mcp.json` для `sdlc-state-rag`: прямой `command: "sdlc-state-rag"` (v0.5.1) не работает в Claude Code MCP launcher из-за ограниченного PATH (не находит `node` через nvm). Заменено на launcher-скрипт `${CLAUDE_PLUGIN_ROOT}/scripts/launch-sdlc-state-rag.sh`, который пытается резолвить бинарь через PATH → nvm.sh → стандартные локации (`/usr/local/bin`, `/opt/homebrew/bin`, `~/.local/bin`) → fallback на `npx -y`.
+- `scripts/enforce-no-comments.sh`: добавлен whitelist для `# shellcheck` директив (как `# pylint:`, `// eslint-`).
+- `tests/integration/sdlc-state-rag-contract.bats`: 2 новых кейса на launcher-скрипт (21→23 кейса).
+
+### Added
+
+- `scripts/launch-sdlc-state-rag.sh` — launcher с fallback-цепочкой для разных Node-окружений.
+
 ## [0.5.1] — 2026-05-05
 
 ### Fixed
@@ -230,7 +242,8 @@ Multi-agent extension (Wave 4) + sdlc-state-rag (Wave 5).
 - Принципы Волны 1 (1-13 + 4a).
 - Демо-сценарий на todo-list.
 
-[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.1...HEAD
+[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.2...HEAD
+[0.5.2]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.3.1...v0.4.0

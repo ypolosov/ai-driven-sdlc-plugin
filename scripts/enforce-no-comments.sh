@@ -35,6 +35,7 @@ whitelist+=('^\s*// @ts-')
 whitelist+=('^\s*// eslint-')
 whitelist+=('^\s*/\* eslint-')
 whitelist+=('^\s*// biome-ignore')
+whitelist+=('^\s*# shellcheck')
 
 if [ -f "$config" ]; then
   while IFS= read -r pat; do
