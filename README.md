@@ -91,7 +91,7 @@
 - `sdlc-tool-router` — маршрутизация запросов по категориям к MCP-серверам (Волна 4).
 - `sdlc-context-aggregator` — фасад консолидации контекста с провенансом (Волна 4, ADR-010).
 
-### Scripts (16)
+### Scripts (17)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
 - `enforce-tdd.sh` — мягкая блокировка записи кода без парного теста.
 - `enforce-format-lint.sh` — диспетчер форматера и линтера из `plugin-config.md`.
@@ -108,6 +108,7 @@
 - `check-tool-binding.sh` — валидирует категории `tool-bindings.md` целевого (Волна 4).
 - `detect-credentials.sh` — проверяет `.env` и обязательные ключи привязок (Волна 4).
 - `check-rag-config.sh` — валидирует `rag-config.md` целевого и worker.kind ↔ SME (Волна 5, ADR-012).
+- `migrate-essence-to-state-rag.sh` — разовая миграция dogfooding с `--dry-run` / `--verify` / `--exec` (Волна 5, PR-H).
 
 ### Meta-templates (16)
 - `work-product.meta.md` — базовая схема рабочего продукта.
