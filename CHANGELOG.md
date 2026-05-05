@@ -5,6 +5,14 @@
 
 ## [Unreleased]
 
+## [0.5.4] — 2026-05-05
+
+### Fixed
+
+- Корневая причина серии Failed-to-connect (v0.5.0–v0.5.3): Claude Code НЕ подставляет переменные `${VAR}` в env-секции `.mcp.json` (только в command/args). Поэтому server получал `process.env.SDLC_STATE_RAG_DSN = "${SDLC_STATE_RAG_DSN}"` (литерал) и пытался использовать как actual DSN — падал.
+- `scripts/launch-sdlc-state-rag.sh`: добавлен sanitize в начале — если `SDLC_STATE_RAG_DSN` начинается с `${`, переменная unset (server falls back на pglite).
+- Переписаны `# shellcheck` директивы как переменная `_nvm_path` для совместимости с installed plugin v0.5.1 hook (без shellcheck whitelist).
+
 ## [0.5.3] — 2026-05-05
 
 ### Fixed
@@ -248,7 +256,8 @@ Multi-agent extension (Wave 4) + sdlc-state-rag (Wave 5).
 - Принципы Волны 1 (1-13 + 4a).
 - Демо-сценарий на todo-list.
 
-[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.3...HEAD
+[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.4...HEAD
+[0.5.4]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.3...v0.5.4
 [0.5.3]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.0...v0.5.1
