@@ -11,11 +11,8 @@
     },
     "sdlc-state-rag": {
       "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@ypolosov/sdlc-state-rag"
-      ],
+      "command": "sdlc-state-rag",
+      "args": [],
       "env": {
         "SDLC_STATE_RAG_DSN": "${SDLC_STATE_RAG_DSN}"
       }

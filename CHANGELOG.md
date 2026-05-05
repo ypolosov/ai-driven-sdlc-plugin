@@ -5,6 +5,14 @@
 
 ## [Unreleased]
 
+## [0.5.1] — 2026-05-05
+
+### Fixed
+
+- `.mcp.json` для `sdlc-state-rag`: `npx -y @ypolosov/sdlc-state-rag` заменён на прямой `sdlc-state-rag` без аргументов. NPX cold-fetch (108 deps включая pglite/pg/pgvector) превышает таймаут health-check Claude Code, плагиновая запись отображается как `Failed to connect`. Та же проблема была у `essence-alpha-mcp` в v0.3.1.
+- README §MCP: требование `npm install -g @ypolosov/sdlc-state-rag` (минимум v0.1.1) перед использованием плагина.
+- `tests/integration/sdlc-state-rag-contract.bats`: новый кейс «.mcp.json uses direct binary not npx» (21-й кейс).
+
 ## [0.5.0] — 2026-05-05
 
 Принцип 22 «Обязательное использование плагина для write-операций» + `enforce-sdlc-phase` PreToolUse hook.
@@ -222,7 +230,8 @@ Multi-agent extension (Wave 4) + sdlc-state-rag (Wave 5).
 - Принципы Волны 1 (1-13 + 4a).
 - Демо-сценарий на todo-list.
 
-[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.1...HEAD
+[0.5.1]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.3.0...v0.3.1
