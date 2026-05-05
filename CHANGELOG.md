@@ -5,6 +5,49 @@
 
 ## [Unreleased]
 
+## [0.5.0] — 2026-05-05
+
+Принцип 22 «Обязательное использование плагина для write-операций» + `enforce-sdlc-phase` PreToolUse hook.
+
+### ⚠️ ACTION REQUIRED после установки
+
+Перезагрузить Claude Code или выполнить `/plugin reload ai-driven-sdlc` для активации нового PreToolUse hook'а.
+
+### Added
+
+- `scripts/enforce-sdlc-phase.sh` — PreToolUse hook принципа 22.
+  Блокирует Bash blacklist (git commit/push/tag/rebase/reset/checkout/rm/merge,
+  gh pr (create|merge|edit|close|reopen)|release|repo (delete|create),
+  npm publish/unpublish/deprecate) и Edit/Write вне whitelist
+  (`.claude/sdlc/**`, `.claude/CLAUDE.md`, `.gitignore`, `.env.example`,
+  `README.sdlc.md`) при отсутствии `active_phase` в profile.md.
+- `tests/unit/enforce-sdlc-phase.bats` — 10 кейсов.
+- `tests/integration/enforce-sdlc-phase-integration.bats` — 4 кейса.
+- `meta-templates/profile.meta.md`: поля `active_phase`, `active_phase_set_at`.
+- `meta-templates/plugin-config.meta.md`: секция `phase_enforcement` (TTL, whitelist).
+- `hooks/hooks.json`: PreToolUse matcher расширен до `Bash|Write|Edit`.
+- `scripts/bench-hooks.sh`: entry `enforce-sdlc-phase` (avg 26ms локально).
+- `.gitignore`: `.claude/sdlc/autonomy.session.md` (ephemeral HOOTL override).
+- CLAUDE.md: принцип 22 + источник в таблице принципов.
+- memom.md: запись add 2026-05-05.
+
+### Override механизмы
+
+- `/sdlc-autonomy --task hootl --duration <N>m` — ephemeral autonomy.session.md.
+- `SDLC_PHASE_ENFORCE=skip` env var — escape hatch для CI.
+- `SDLC_PHASE_TTL_HOURS=<N>` — переопределяет TTL (default 24 ч).
+
+### Changed
+
+- README inventory: Scripts 16→17, принципы 22→23, unit bats 74→84 (10→11 файлов), integration 40→44 (2→3 файла).
+
+### Notes
+
+- Skills `/sdlc-phase` пока не пишут `active_phase` автоматически (TODO в следующем минорном). Временно — вручную или `SDLC_PHASE_ENFORCE=skip`.
+- Самоприменение (dogfooding): этот PR-релиз создавался уже после merge enforce-sdlc-phase в main; команды git push/gh release блокируются hook'ом без активной фазы. Workaround на текущей итерации — `SDLC_PHASE_ENFORCE=skip` для процесса релиза.
+
+## [0.4.1-cleanup] — 2026-05-05 (post-v0.4.0 hotfix)
+
 ### Removed (post-v0.4.0 cleanup)
 
 - npm-пакет `@ypolosov/essence-alpha-mcp` unpublished.
@@ -179,7 +222,8 @@ Multi-agent extension (Wave 4) + sdlc-state-rag (Wave 5).
 - Принципы Волны 1 (1-13 + 4a).
 - Демо-сценарий на todo-list.
 
-[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/ypolosov/ai-driven-sdlc-plugin/compare/v0.2.1...v0.3.0

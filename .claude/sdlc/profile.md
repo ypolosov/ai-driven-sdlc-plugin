@@ -3,7 +3,9 @@ name: profile
 type: sdlc-profile
 project: ai-driven-sdlc-plugin
 created: 2026-04-19
-updated: 2026-04-19
+updated: 2026-05-05
+active_phase: deployment
+active_phase_set_at: 2026-05-05T19:50:00Z
 ---
 
 # SME-профиль проекта
