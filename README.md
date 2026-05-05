@@ -35,7 +35,7 @@
 
 - `context7@claude-plugins-official` — референсная документация инструментов (обязательно для SME-опроса).
 - `github@claude-plugins-official` — GitHub Issues как state_artifact для альфы Work (опционально, mid+).
-- `@ypolosov/sdlc-state-rag` — единый backend альф + RAG + decisions + audit + sync (см. ADR-011, Волна 5).
+- `@ypolosov/sdlc-state-rag` — единый backend альф + RAG + decisions + audit + sync (см. ADR-011, Волна 5). **Установка обязательна:** `npm install -g @ypolosov/sdlc-state-rag` (минимум v0.1.1; npx-cold-fetch медленнее MCP health-check таймаута).
 
 Плагин не ship'ит собственный `context7` — используйте dedicated плагин.
 Плагин ship'ит минимальный `github` MCP в `.mcp.json` как fallback.
@@ -166,9 +166,9 @@
   - `check-rag-config.bats` — 8 кейсов на схему rag-config и worker.kind ↔ SME (Волна 5).
   - `migrate-essence-to-state-rag.bats` — 7 кейсов на разовую утилиту миграции (PR-H, Волна 5).
   - `enforce-sdlc-phase.bats` — 10 кейсов на PreToolUse hook принципа 22 (Волна 5, v0.5.0).
-- Integration (bats-core) — `tests/integration/` (3 файла, 44 кейса):
+- Integration (bats-core) — `tests/integration/` (3 файла, 45 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
-  - `sdlc-state-rag-contract.bats` — 20 кейсов на контракт sdlc-state-rag и переключение трекера (Волна 5, ADR-011).
+  - `sdlc-state-rag-contract.bats` — 21 кейс на контракт sdlc-state-rag, переключение трекера и direct-binary registration (Волна 5, ADR-011, v0.5.1).
   - `enforce-sdlc-phase-integration.bats` — 4 кейса на e2e блокировку write-команд при отсутствии `active_phase` (Волна 5, принцип 22).
 - Фикстуры — `tests/fixture/minimal-target/`, `tests/fixture/mid-target/` (валидные каркасы).
 - Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.

@@ -81,6 +81,11 @@ setup() {
   [ "$status" -eq 0 ]
 }
 
+@test ".mcp.json uses direct binary not npx for sdlc-state-rag (v0.5.1 fix)" {
+  command_value=$(python3 -c 'import json; d=json.load(open("'"$MCP_JSON"'")); print(d["mcpServers"]["sdlc-state-rag"]["command"])')
+  [ "$command_value" = "sdlc-state-rag" ]
+}
+
 @test "alpha-tracker uses state_* MCP tools" {
   run grep -E 'mcp__sdlc_state_rag__state_' "$TRACKER"
   [ "$status" -eq 0 ]
