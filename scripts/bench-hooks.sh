@@ -14,6 +14,7 @@ scripts["check-readme-inventory"]="$root/scripts/check-readme-inventory.sh"
 scripts["check-alpha-consistency"]="$root/scripts/check-alpha-consistency.sh"
 scripts["enforce-no-comments"]="$root/scripts/enforce-no-comments.sh"
 scripts["enforce-format-lint"]="$root/scripts/enforce-format-lint.sh"
+scripts["enforce-sdlc-phase"]="$root/scripts/enforce-sdlc-phase.sh"
 
 sample_artifact="$root/.claude/sdlc/phases/testing/testing.md"
 sample_alphas="$root/.claude/sdlc/alphas.md"
@@ -56,7 +57,7 @@ for name in "${!scripts[@]}"; do
       ;;
     check-alpha-consistency)
       payload=$(printf '{"tool_name":"Edit","tool_input":{"file_path":"%s"},"cwd":"%s"}' "$sample_alphas" "$root")
-      cmd="printf '%s' '$payload' | ESSENCE_ALPHA_VALIDATE_CMD='true' bash '$path'"
+      cmd="printf '%s' '$payload' | SDLC_STATE_RAG_VALIDATE_CMD='true' bash '$path'"
       ;;
     enforce-no-comments)
       payload=$(printf '{"tool_name":"Edit","tool_input":{"file_path":"%s","content":"#!/usr/bin/env bash\necho ok"}}' "$sample_script")
@@ -64,6 +65,10 @@ for name in "${!scripts[@]}"; do
       ;;
     enforce-format-lint)
       payload=$(printf '{"tool_name":"Edit","tool_input":{"file_path":"%s"},"cwd":"%s"}' "$sample_script" "$root")
+      cmd="printf '%s' '$payload' | bash '$path'"
+      ;;
+    enforce-sdlc-phase)
+      payload=$(printf '{"tool_name":"Bash","tool_input":{"command":"git status"},"cwd":"%s"}' "$root")
       cmd="printf '%s' '$payload' | bash '$path'"
       ;;
     *)

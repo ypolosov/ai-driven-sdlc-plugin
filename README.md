@@ -10,7 +10,7 @@
 Волны 1–2 закрыты; Волна 3 идёт; Волна 4 (multi-agent extension) развёртывается через PR-цепочку A→G.
 Альфа Software System: **Usable** — плагин устанавливается через marketplace.
 Альфа Way of Working: **Working Well** — fitness 8 hooks <200ms; самоприменение SDLC.
-Конституция плагина: 22 принципа (1–17 + 4a + 18/19/19a Волны 4 + 20/21 Волны 5), см. [CLAUDE.md](CLAUDE.md).
+Конституция плагина: 23 принципа (1–17 + 4a + 18/19/19a Волны 4 + 20/21/22 Волны 5), см. [CLAUDE.md](CLAUDE.md).
 
 ## Опорные источники
 
@@ -89,7 +89,7 @@
 - `sdlc-tool-router` — маршрутизация запросов по категориям к MCP-серверам (Волна 4).
 - `sdlc-context-aggregator` — фасад консолидации контекста с провенансом (Волна 4, ADR-010).
 
-### Scripts (16)
+### Scripts (17)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
 - `enforce-tdd.sh` — мягкая блокировка записи кода без парного теста.
 - `enforce-format-lint.sh` — диспетчер форматера и линтера из `plugin-config.md`.
@@ -106,6 +106,7 @@
 - `detect-credentials.sh` — проверяет `.env` и обязательные ключи привязок (Волна 4).
 - `check-rag-config.sh` — валидирует `rag-config.md` целевого и worker.kind ↔ SME (Волна 5, ADR-012).
 - `migrate-essence-to-state-rag.sh` — разовая миграция dogfooding с `--dry-run` / `--verify` / `--exec` (Волна 5, PR-H).
+- `enforce-sdlc-phase.sh` — PreToolUse hook принципа 22; блокирует git/gh/npm write-команды и Edit/Write без `active_phase` (Волна 5, v0.5.0).
 
 ### Meta-templates (16)
 - `work-product.meta.md` — базовая схема рабочего продукта.
@@ -153,7 +154,7 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (10 файлов, 74 кейса):
+- Unit (bats-core) — `tests/unit/` (11 файлов, 84 кейса):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 9 кейсов (включая TypeScript whitelist Wave 5).
@@ -164,9 +165,11 @@
   - `detect-credentials.bats` — 6 кейсов на проверку `.env` и обязательных ключей (Волна 4).
   - `check-rag-config.bats` — 8 кейсов на схему rag-config и worker.kind ↔ SME (Волна 5).
   - `migrate-essence-to-state-rag.bats` — 7 кейсов на разовую утилиту миграции (PR-H, Волна 5).
-- Integration (bats-core) — `tests/integration/` (2 файла, 40 кейсов):
+  - `enforce-sdlc-phase.bats` — 10 кейсов на PreToolUse hook принципа 22 (Волна 5, v0.5.0).
+- Integration (bats-core) — `tests/integration/` (3 файла, 44 кейса):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
   - `sdlc-state-rag-contract.bats` — 20 кейсов на контракт sdlc-state-rag и переключение трекера (Волна 5, ADR-011).
+  - `enforce-sdlc-phase-integration.bats` — 4 кейса на e2e блокировку write-команд при отсутствии `active_phase` (Волна 5, принцип 22).
 - Фикстуры — `tests/fixture/minimal-target/`, `tests/fixture/mid-target/` (валидные каркасы).
 - Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.
 - CI — `.github/workflows/ci.yml` запускает всё на push/PR.
