@@ -31,6 +31,8 @@ jobs:
         run: shfmt -d -i 2 -ci scripts/validate-artifact.sh scripts/bootstrap-dev-env.sh
 
       - name: Run deterministic checks
+        env:
+          BENCH_THRESHOLD_MS: '2000'
         run: |
           ./scripts/check-readme-inventory.sh
           ./scripts/bench-hooks.sh
