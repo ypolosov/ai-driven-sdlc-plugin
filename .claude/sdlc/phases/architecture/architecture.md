@@ -47,7 +47,7 @@ updated: 2026-04-30
 |---|---|---|
 | Интерактивный опрос пользователя | skills фаз | Way of Working |
 | Выбор метода и инструмента (SME) | sdlc-method-engineer | Way of Working |
-| Хранение состояния альф | sdlc-alpha-tracker + essence-alpha-mcp | все альфы |
+| Хранение состояния альф | sdlc-alpha-tracker + sdlc-state-rag (ADR-011) | все альфы |
 | Перенос фокуса внимания | sdlc-focus | Software System |
 | Аудит консистентности | sdlc-consistency-auditor | Way of Working |
 | Валидация артефактов | scripts hooks | Way of Working |
@@ -112,7 +112,19 @@ updated: 2026-04-30
 | [ADR-006](adr/ADR-006-deterministic-over-llm.md) | Детерминированное приоритетнее LLM | Accepted |
 | [ADR-007](adr/ADR-007-artifact-path-convention.md) | Артефакты в `.claude/sdlc/` | Accepted |
 | [ADR-008](adr/ADR-008-secrets-outside-git.md) | Секреты целевого проекта вне git | Accepted |
-| [ADR-009](adr/ADR-009-essence-alpha-mcp-integration.md) | Авторитативный backend альф через essence-alpha-mcp | Accepted |
+| [ADR-009](adr/ADR-009-essence-alpha-mcp-integration.md) | Авторитативный backend альф через essence-alpha-mcp | Deprecated (см. ADR-011) |
+
+## 5а. Wave 4-5 ADR (multi-agent + sdlc-state-rag + enforce-sdlc-phase)
+
+| ADR | Заголовок | Статус | Волна |
+|---|---|---|---|
+| [ADR-010](adr/ADR-010-multi-agent-topology-aggregator-router.md) | Multi-agent topology: aggregator-фасад + tool-router | Accepted | Wave 4 |
+| [ADR-011](adr/ADR-011-sdlc-state-rag-unified-backend.md) | Единый sdlc-state-rag PostgreSQL+pgvector per-target | Accepted | Wave 5 |
+| [ADR-012](adr/ADR-012-worker-pattern-by-sme-level.md) | Worker pattern по уровню SME | Accepted | Wave 5 |
+| [ADR-013](adr/ADR-013-tool-categories-as-agnostic-interface.md) | Категории инструментов как агностический интерфейс | Accepted | Wave 4 |
+| [ADR-014](adr/ADR-014-enterprise-dogfooding-and-worker-runtime.md) | Enterprise dogfooding + worker runtime | Accepted | Wave 4 |
+| [ADR-015](adr/ADR-015-security-engineer-as-abstract-role.md) | Security-engineer как абстрактная роль | Accepted | Wave 4 |
+| [ADR-016](adr/ADR-016-tool-router-and-bindings-registry.md) | Tool-router и bindings registry | Accepted | Wave 4 |
 
 ## 6. Трассируемость
 
