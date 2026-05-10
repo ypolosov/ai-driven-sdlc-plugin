@@ -66,3 +66,54 @@ payload() {
   run bash -c "printf '%s' '$(payload Write "$TMP_DIR/file.ts" "$TMP_DIR")' | '$SCRIPT'"
   [ "$status" -ne 0 ]
 }
+
+@test "heredoc with markdown headers does not trigger (Gap-2 fix)" {
+  cat >"$TMP_DIR/with-heredoc.sh" <<'OUTER'
+#!/usr/bin/env bash
+cat >"$1" <<'EOF'
+# Markdown Header
+## Section
+EOF
+OUTER
+  run bash -c "printf '%s' '$(payload Write "$TMP_DIR/with-heredoc.sh" "$TMP_DIR")' | '$SCRIPT'"
+  [ "$status" -eq 0 ]
+}
+
+@test "heredoc with bash-style hash comments inside is not flagged (Gap-2 fix)" {
+  cat >"$TMP_DIR/heredoc-hash.sh" <<'OUTER'
+#!/usr/bin/env bash
+cat >"$1" <<EOF
+# This is content of generated file
+.env
+.env.local
+EOF
+OUTER
+  run bash -c "printf '%s' '$(payload Write "$TMP_DIR/heredoc-hash.sh" "$TMP_DIR")' | '$SCRIPT'"
+  [ "$status" -eq 0 ]
+}
+
+@test "comment OUTSIDE heredoc is still flagged (Gap-2 fix)" {
+  cat >"$TMP_DIR/mixed.sh" <<'OUTER'
+#!/usr/bin/env bash
+# this is a real bash comment
+cat >"$1" <<'EOF'
+# This is heredoc content
+EOF
+OUTER
+  run bash -c "printf '%s' '$(payload Write "$TMP_DIR/mixed.sh" "$TMP_DIR")' | '$SCRIPT'"
+  [ "$status" -ne 0 ]
+}
+
+@test "multiple heredocs all ignored (Gap-2 fix)" {
+  cat >"$TMP_DIR/multi.sh" <<'OUTER'
+#!/usr/bin/env bash
+cat >"$1" <<EOF
+# First heredoc content
+EOF
+cat >"$2" <<EOF
+# Second heredoc content
+EOF
+OUTER
+  run bash -c "printf '%s' '$(payload Write "$TMP_DIR/multi.sh" "$TMP_DIR")' | '$SCRIPT'"
+  [ "$status" -eq 0 ]
+}

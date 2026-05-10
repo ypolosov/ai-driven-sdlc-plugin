@@ -64,7 +64,15 @@ if tool_name in ("Write", "Edit"):
   if not file_path:
     print("OK")
     sys.exit(0)
-  rel = os.path.relpath(file_path, cwd) if file_path.startswith(cwd) else file_path
+  abs_file = os.path.abspath(file_path)
+  abs_cwd = os.path.abspath(cwd)
+  try:
+    rel = os.path.relpath(abs_file, abs_cwd)
+  except ValueError:
+    rel = abs_file
+  if rel.startswith(".."):
+    print("OK")
+    sys.exit(0)
   if in_whitelist_path(rel):
     print("OK")
     sys.exit(0)

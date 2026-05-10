@@ -5,6 +5,27 @@
 
 ## [Unreleased]
 
+## [0.7.0] — 2026-05-10
+
+### Fixed
+
+- **Gap-0 (#55, P1)**: hook `enforce-sdlc-phase.sh` теперь проверяет realpath(file_path) относительно cwd. Файлы вне CWD-tree (например `~/.claude/plans/foo.md`) не блокируются hook'ом. Снимает workaround через HOOTL-override для plan-files и других external paths.
+- **Gap-2 (#56, P1)**: hook `enforce-no-comments.sh` распознаёт heredoc-блоки (`<<EOF`, `<<-EOF`, `<<'EOF'`, `<<"EOF"`) и пропускает их при поиске комментариев. Markdown-заголовки и hash-content в heredocs больше не дают false-positive.
+
+### Added
+
+- `tests/unit/enforce-sdlc-phase.bats` — 2 новых кейса (file outside CWD / file inside CWD).
+- `tests/unit/enforce-no-comments.bats` — 4 новых кейса (heredoc with markdown / heredoc with hash / comment outside heredoc / multiple heredocs).
+
+### Changed
+
+- `scripts/enforce-no-comments.sh` — внутренняя реализация переписана на Python heredoc для парсинга bash-heredoc-блоков.
+- README inventory: Unit tests 94→100 кейсов; `enforce-no-comments.bats` 9→13; `enforce-sdlc-phase.bats` 10→12.
+
+### Why
+
+Wave 6 gt-validation выявила 2 P1 hook-issues. Gap-0 блокировал работу с plan-файлами в `~/.claude/plans/` без override. Gap-2 давал false-positive при редактировании bash-скриптов с heredocs (CLAUDE.md / .gitignore template content). Оба фикса разблокируют dogfooding-разработку плагина.
+
 ## [0.6.0] — 2026-05-10
 
 ### Added

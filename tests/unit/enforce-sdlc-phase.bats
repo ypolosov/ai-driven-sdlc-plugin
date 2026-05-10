@@ -109,3 +109,17 @@ EOF
   [ "$status" -eq 2 ]
   [[ "$output" == *"sdlc"* ]]
 }
+
+@test "Edit on file outside CWD-tree passes (Gap-0 fix)" {
+  outside_dir="$(mktemp -d)"
+  outside_file="$outside_dir/external.md"
+  printf 'content\n' >"$outside_file"
+  run bash -c "printf '%s' '$(payload Edit '{"file_path":"'"$outside_file"'"}')' | '$SCRIPT'"
+  rm -rf "$outside_dir"
+  [ "$status" -eq 0 ]
+}
+
+@test "Edit on absolute path inside CWD still requires active_phase" {
+  run bash -c "printf '%s' '$(payload Edit '{"file_path":"'"$TARGET_DIR"'/src/foo.ts"}')' | '$SCRIPT'"
+  [ "$status" -eq 2 ]
+}
