@@ -5,6 +5,8 @@
 
 ## [Unreleased]
 
+## [0.11.0] — 2026-05-11
+
 ### Added
 
 - **#61 (Wave 8 P2 Gap-8)**: `meta-templates/iteration.meta.md` — kanban-style meta-template для группировки work-units в итерации (sprint или milestone). Поля frontmatter:
@@ -47,6 +49,14 @@
 ### Why
 
 Wave 8 P2 issues из gt-validation backlog (#61 Gap-8 + #60 Gap-7 + #69 hook bug + #59 Gap-5). #61: плагин не имел meta-template для kanban-style итерационных декомпозиций. #60: плагин не предлагал meta-template для C4-диаграмм. #69: Edit `.claude/sdlc/alphas.md` триггерил `ECONNREFUSED 5432` на pet-target с embedded pglite. #59: bootstrap создавал placeholder frontmatter, который validate-artifact.sh отклонял как невалидный.
+
+### Plugin tools used (принцип 12 dogfooding)
+
+- skill `/sdlc-phase development` ×4 + `/sdlc-phase deployment` активированы методологически для каждого PR.
+- `mcp__sdlc-state-rag__decisions_record` ×5 (id 34-38: 4 PR planning + deployment scope).
+- TDD-first (принцип 5): red → fix → green для каждого PR. Тесты 121 → **154** (+33 кейса).
+- shellcheck + shfmt clean на всех изменённых scripts.
+- Принципы: 1, 4a, 5, 12, 20, 21, 22.
 
 ## [0.10.1] — 2026-05-10
 

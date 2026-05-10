@@ -6,8 +6,8 @@
 
 ## Статус
 
-Текущая версия: **v0.10.1** (май 2026).
-Волны 1–7 закрыты; Wave 4 multi-agent extension и Wave 5 sdlc-state-rag merged; Wave 6 pre-validation fixes (A1+A2) + Wave 7 closed 5 issues (#54-#58); v0.10.1 docs drift cleanup.
+Текущая версия: **v0.11.0** (май 2026).
+Волны 1–8 закрыты; Wave 4 multi-agent extension; Wave 5 sdlc-state-rag; Wave 6 pre-validation fixes; Wave 7 closed 5 issues (#54-#58); Wave 8 closed 4 P2 issues (#59, #60, #61, #69).
 Альфа Software System: **Usable** — плагин устанавливается через marketplace.
 Альфа Way of Working: **Working Well** — fitness 9 hooks <200ms; самоприменение SDLC.
 Конституция плагина: 22 принципа + 4a + 19a (24 секции в [CLAUDE.md](CLAUDE.md): 1–22 пронумерованы, 4a и 19a как sub-clauses).
@@ -168,7 +168,7 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (16 файлов, 121 кейс):
+- Unit (bats-core) — `tests/unit/` (19 файлов, 154 кейса):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 13 кейсов (TypeScript whitelist Wave 5 + heredoc detection Wave 7).
