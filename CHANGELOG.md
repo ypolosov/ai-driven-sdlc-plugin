@@ -30,10 +30,23 @@
   - Если ни DSN, ни pglite directory → exit 2 с helpful error (нет backend).
   - Если DSN установлен → validate как раньше через `SDLC_STATE_RAG_VALIDATE_CMD`.
 - `tests/unit/check-alpha-consistency.bats` расширен: 5 → **8 кейсов** (+pet pglite skip; +no-DSN-no-pglite error; +DSN override pglite).
+- **#59 (Wave 8 P2 Gap-5)**: `scripts/bootstrap-target.sh` теперь создаёт 6 артефактов целевого с **валидными `type:` полями** (не `type: placeholder`). После `/sdlc-init` файлы проходят `validate-artifact.sh`:
+  - `profile.md` → `type: sdlc-profile`
+  - `plugin-config.md` → `type: hooks-config`
+  - `alphas.md` → `type: alpha-snapshot`
+  - `system-context.md` → `type: attention-context`
+  - `roles.md` → `type: role-journal`
+  - `decisions.md` → `type: decision-journal`
+- Добавлены минимальные обязательные поля в каждый frontmatter (`project`, `created`, `updated`; `version` для plugin-config; `source_of_truth`/`snapshot_role` для alphas; `current_focus` для system-context; `active_roles: []` для roles).
+
+### Changed
+
+- `scripts/bootstrap-target.sh`: удалён мёртвый код (unused `write_if_absent` function, unused `templates_root` variable). shellcheck + shfmt clean.
+- `tests/unit/bootstrap-valid-frontmatter.bats` — 8 новых кейсов (existence × 6 + no-placeholder + project field).
 
 ### Why
 
-Wave 8 P2 issues из gt-validation backlog (#61 Gap-8 + #60 Gap-7 + #69 hook bug). #61: плагин не имел meta-template для kanban-style итерационных декомпозиций. #60: плагин не предлагал meta-template для C4-диаграмм (gt использует C4 в `docs/architecture/c4/`). #69: Edit `.claude/sdlc/alphas.md` триггерил `ECONNREFUSED 5432` на pet-target с embedded pglite — принципы 20/21 нарушены.
+Wave 8 P2 issues из gt-validation backlog (#61 Gap-8 + #60 Gap-7 + #69 hook bug + #59 Gap-5). #61: плагин не имел meta-template для kanban-style итерационных декомпозиций. #60: плагин не предлагал meta-template для C4-диаграмм. #69: Edit `.claude/sdlc/alphas.md` триггерил `ECONNREFUSED 5432` на pet-target с embedded pglite. #59: bootstrap создавал placeholder frontmatter, который validate-artifact.sh отклонял как невалидный.
 
 ## [0.10.1] — 2026-05-10
 

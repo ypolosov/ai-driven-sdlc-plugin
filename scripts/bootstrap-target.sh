@@ -4,12 +4,10 @@ set -euo pipefail
 target="${1:-$PWD}"
 mode="${2:-fail-if-exists}"
 
-plugin_root="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
-templates_root="${plugin_root}/meta-templates"
 sdlc_dir="${target}/.claude/sdlc"
 
 case "$mode" in
-  fail-if-exists|merge|force) ;;
+  fail-if-exists | merge | force) ;;
   *)
     printf 'bootstrap-target: неизвестный режим %s\n' "$mode" >&2
     exit 2
@@ -33,22 +31,10 @@ fi
 
 mkdir -p "$sdlc_dir"
 
-write_if_absent() {
-  local dest="$1"
-  local source="$2"
-  if [ -e "$dest" ] && [ "$mode" = "merge" ]; then
-    return 0
-  fi
-  if [ -e "$dest" ] && [ "$mode" = "fail-if-exists" ]; then
-    return 0
-  fi
-  cp "$source" "$dest"
-}
-
 target_claude_md="${target}/.claude/CLAUDE.md"
 mkdir -p "${target}/.claude"
 if [ ! -f "$target_claude_md" ]; then
-  cat > "$target_claude_md" <<'EOF'
+  cat >"$target_claude_md" <<'EOF'
 ---
 name: target-project-constitution
 type: project-constitution
@@ -73,27 +59,113 @@ language: ru
 EOF
 fi
 
-for f in profile plugin-config alphas system-context roles decisions; do
-  dest="${sdlc_dir}/${f}.md"
-  if [ -f "$dest" ]; then continue; fi
-  cat > "$dest" <<EOF
+project_name="$(basename "$target")"
+today="$(date +%Y-%m-%d)"
+
+if [ ! -f "${sdlc_dir}/profile.md" ]; then
+  cat >"${sdlc_dir}/profile.md" <<EOF
 ---
-name: ${f}
-type: placeholder
-project: $(basename "$target")
-created: $(date +%Y-%m-%d)
-updated: $(date +%Y-%m-%d)
+name: profile
+type: sdlc-profile
+project: ${project_name}
+created: ${today}
+updated: ${today}
 ---
 
-# ${f}
+# SME-профиль проекта
 
-Placeholder. Заполняется skill \`sdlc-bootstrap\` через /sdlc-init.
+Заполняется skill \`sdlc-bootstrap\` через /sdlc-init.
 EOF
-done
+fi
+
+if [ ! -f "${sdlc_dir}/plugin-config.md" ]; then
+  cat >"${sdlc_dir}/plugin-config.md" <<EOF
+---
+name: plugin-config
+type: hooks-config
+project: ${project_name}
+version: 1
+created: ${today}
+updated: ${today}
+---
+
+# Технический конфиг hooks
+
+Заполняется skill \`sdlc-bootstrap\` через /sdlc-init.
+EOF
+fi
+
+if [ ! -f "${sdlc_dir}/alphas.md" ]; then
+  cat >"${sdlc_dir}/alphas.md" <<EOF
+---
+name: alphas
+type: alpha-snapshot
+project: ${project_name}
+source_of_truth: mcp://sdlc-state-rag
+snapshot_role: pr-visible-mirror
+created: ${today}
+updated: ${today}
+---
+
+# Snapshot состояний альф
+
+Заполняется skill \`sdlc-bootstrap\` через /sdlc-init.
+EOF
+fi
+
+if [ ! -f "${sdlc_dir}/system-context.md" ]; then
+  cat >"${sdlc_dir}/system-context.md" <<EOF
+---
+name: system-context
+type: attention-context
+project: ${project_name}
+current_focus: ${project_name}
+created: ${today}
+updated: ${today}
+---
+
+# Реестр систем внимания
+
+Заполняется skill \`sdlc-focus\` через /sdlc-focus.
+EOF
+fi
+
+if [ ! -f "${sdlc_dir}/roles.md" ]; then
+  cat >"${sdlc_dir}/roles.md" <<EOF
+---
+name: roles
+type: role-journal
+project: ${project_name}
+active_roles: []
+created: ${today}
+updated: ${today}
+---
+
+# Журнал играемых ролей
+
+Заполняется skill \`sdlc-bootstrap\` через /sdlc-init.
+EOF
+fi
+
+if [ ! -f "${sdlc_dir}/decisions.md" ]; then
+  cat >"${sdlc_dir}/decisions.md" <<EOF
+---
+name: decisions
+type: decision-journal
+project: ${project_name}
+created: ${today}
+updated: ${today}
+---
+
+# Журнал альтернатив и решений
+
+Заполняется skills фаз через AskUserQuestion и MCP \`decisions_record\`.
+EOF
+fi
 
 role_ext_dest="${sdlc_dir}/role-extensions.md"
 if [ ! -f "$role_ext_dest" ]; then
-  cat > "$role_ext_dest" <<EOF
+  cat >"$role_ext_dest" <<EOF
 ---
 name: role-extensions
 type: target-role-mapping
@@ -134,7 +206,7 @@ fi
 
 env_example="${target}/.env.example"
 if [ ! -f "$env_example" ]; then
-  cat > "$env_example" <<'EOF'
+  cat >"$env_example" <<'EOF'
 # Пример .env.example — значения не коммитить в git.
 # Скопируйте в .env и заполните по ходу фаз.
 EOF
@@ -143,7 +215,7 @@ fi
 gitignore="${target}/.gitignore"
 touch "$gitignore"
 if ! grep -qE '^\.env$' "$gitignore"; then
-  cat >> "$gitignore" <<'EOF'
+  cat >>"$gitignore" <<'EOF'
 
 # ai-driven-sdlc: credentials (принцип 10)
 .env
