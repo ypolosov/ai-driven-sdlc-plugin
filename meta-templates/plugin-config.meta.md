@@ -157,6 +157,29 @@ phase_enforcement:
 `SDLC_PHASE_ENFORCE=skip` — escape hatch для CI.
 Эфемерный override — через `/sdlc-autonomy --task hootl --duration <N>m` пишет `.claude/sdlc/autonomy.session.md`.
 
+### adr_paths (Волна 6, опционально)
+
+Пути к каталогам ADR в целевом проекте.
+Поддерживает greenfield-таргеты и existing-таргеты с собственной структурой docs/.
+
+```yaml
+adr_paths:
+  - phases/architecture/adr/
+```
+
+Default при отсутствии поля: `[phases/architecture/adr/]`.
+Для existing-проектов с собственной структурой:
+
+```yaml
+adr_paths:
+  - docs/adrs/
+  - devops/configuration/decisions/
+```
+
+Поля массив строк; пути относительные к корню целевого.
+`scripts/check-adr-paths.sh` валидирует существование путей; exit 2 при несуществующем.
+`agents/sdlc-context-aggregator.md` сканирует все пути при чтении ADR.
+
 ### workers (Волна 5, опционально)
 
 Конфигурация worker'ов синхронизации.

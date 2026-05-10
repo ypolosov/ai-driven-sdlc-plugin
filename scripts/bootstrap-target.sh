@@ -111,5 +111,53 @@ if ! grep -qE '^\.env$' "$gitignore"; then
 EOF
 fi
 
+mcp_json="${target}/.mcp.json"
+overwrite_mode="${MCP_OVERWRITE_SDLC_RAG:-no}"
+TARGET_MCP_JSON="$mcp_json" OVERWRITE_MODE="$overwrite_mode" python3 - <<'PY'
+import json
+import os
+import sys
+
+target_path = os.environ['TARGET_MCP_JSON']
+overwrite = os.environ.get('OVERWRITE_MODE', 'no')
+
+new_entry = {
+    "type": "stdio",
+    "command": "bash",
+    "args": [
+        "-c",
+        'exec "${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR:-$PWD}}/scripts/launch-sdlc-state-rag.sh"',
+    ],
+    "env": {"SDLC_STATE_RAG_DSN": "${SDLC_STATE_RAG_DSN}"},
+}
+
+if os.path.exists(target_path):
+    try:
+        with open(target_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except json.JSONDecodeError as exc:
+        sys.stderr.write(f'bootstrap-target: некорректный JSON в {target_path}: {exc}\n')
+        sys.exit(2)
+    if not isinstance(data, dict):
+        sys.stderr.write(f'bootstrap-target: {target_path} не объект JSON\n')
+        sys.exit(2)
+    servers = data.setdefault('mcpServers', {})
+    if not isinstance(servers, dict):
+        sys.stderr.write(f'bootstrap-target: mcpServers не объект в {target_path}\n')
+        sys.exit(2)
+    if 'sdlc-state-rag' in servers and overwrite != 'yes':
+        pass
+    else:
+        servers['sdlc-state-rag'] = new_entry
+    with open(target_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+        f.write('\n')
+else:
+    data = {'mcpServers': {'sdlc-state-rag': new_entry}}
+    with open(target_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+        f.write('\n')
+PY
+
 printf 'bootstrap-target: %s инициализирован в режиме %s.\n' "$sdlc_dir" "$mode"
 exit 0

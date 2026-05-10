@@ -5,6 +5,26 @@
 
 ## [Unreleased]
 
+## [0.6.0] — 2026-05-10
+
+### Added
+
+- **Fix A2 (P0)**: `scripts/bootstrap-target.sh` авто-создаёт `<target>/.mcp.json` с записью `sdlc-state-rag` в режиме strict-merge. Если файл существует — добавляет entry; если есть `sdlc-state-rag` — keep по умолчанию, overwrite через `MCP_OVERWRITE_SDLC_RAG=yes`. Соблюдает принцип 21 (per-target instance MCP).
+- **Fix A1 (P0)**: поле `adr_paths` в `meta-templates/plugin-config.meta.md` — массив путей к каталогам ADR. Default `[phases/architecture/adr/]` (greenfield). Поддерживает existing-проекты с собственной структурой (например `[docs/adrs/]` для gt-style monorepo).
+- `scripts/check-adr-paths.sh` — валидация поля; exit 2 при несуществующих путях. Default-mode совместимость.
+- `tests/unit/init-mcp-json.bats` — 5 кейсов: greenfield / existing-without-sdlc / existing-with-sdlc-overwrite / existing-with-sdlc-keep / invalid-JSON.
+- `tests/unit/plugin-config-adr-paths.bats` — 5 кейсов: missing-field / block-style / flow-style / non-existent-path / executable.
+- `agents/sdlc-context-aggregator.md` — раздел «Подготовка» извлекает `adr_paths` из plugin-config.
+
+### Changed
+
+- README inventory: Scripts 18→19 (+`check-adr-paths.sh`); Unit tests 11→13 файлов, 84→94 кейса.
+- `meta-templates/plugin-config.meta.md` — добавлен раздел `adr_paths` (Волна 6).
+
+### Why
+
+Pre-validation для Wave 6 gt-experiment: enterprise-проекты часто имеют собственную структуру ADR (`docs/adrs/`, `architecture/decisions/`), плагин её не учитывал. И `.mcp.json` не создавался в target → MCP-сервер `sdlc-state-rag` запускался не per-target. Оба issue блокировали enterprise-применение плагина без ручных обходов.
+
 ## [0.5.4] — 2026-05-05
 
 ### Fixed

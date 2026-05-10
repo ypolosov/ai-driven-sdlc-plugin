@@ -89,7 +89,7 @@
 - `sdlc-tool-router` — маршрутизация запросов по категориям к MCP-серверам (Волна 4).
 - `sdlc-context-aggregator` — фасад консолидации контекста с провенансом (Волна 4, ADR-010).
 
-### Scripts (18)
+### Scripts (19)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
 - `enforce-tdd.sh` — мягкая блокировка записи кода без парного теста.
 - `enforce-format-lint.sh` — диспетчер форматера и линтера из `plugin-config.md`.
@@ -108,6 +108,7 @@
 - `migrate-essence-to-state-rag.sh` — разовая миграция dogfooding с `--dry-run` / `--verify` / `--exec` (Волна 5, PR-H).
 - `enforce-sdlc-phase.sh` — PreToolUse hook принципа 22; блокирует git/gh/npm write-команды и Edit/Write без `active_phase` (Волна 5, v0.5.0).
 - `launch-sdlc-state-rag.sh` — launcher MCP-сервера sdlc-state-rag с fallback PATH→nvm→standard locations→npx (v0.5.2).
+- `check-adr-paths.sh` — валидирует `adr_paths` в `plugin-config.md` целевого (Волна 6, v0.6.0).
 
 ### Meta-templates (16)
 - `work-product.meta.md` — базовая схема рабочего продукта.
@@ -155,7 +156,7 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (11 файлов, 84 кейса):
+- Unit (bats-core) — `tests/unit/` (13 файлов, 94 кейса):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 9 кейсов (включая TypeScript whitelist Wave 5).
@@ -167,6 +168,8 @@
   - `check-rag-config.bats` — 8 кейсов на схему rag-config и worker.kind ↔ SME (Волна 5).
   - `migrate-essence-to-state-rag.bats` — 7 кейсов на разовую утилиту миграции (PR-H, Волна 5).
   - `enforce-sdlc-phase.bats` — 10 кейсов на PreToolUse hook принципа 22 (Волна 5, v0.5.0).
+  - `init-mcp-json.bats` — 5 кейсов на авто-создание/мердж `.mcp.json` в target (Волна 6, v0.6.0).
+  - `plugin-config-adr-paths.bats` — 5 кейсов на валидацию `adr_paths` в plugin-config (Волна 6, v0.6.0).
 - Integration (bats-core) — `tests/integration/` (3 файла, 47 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
   - `sdlc-state-rag-contract.bats` — 23 кейса на контракт sdlc-state-rag, переключение трекера, bash-wrapper для launcher (Волна 5, ADR-011, v0.5.3).
