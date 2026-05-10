@@ -7,7 +7,7 @@ file_path="$(printf '%s' "$payload" | python3 -c 'import sys,json;d=json.load(sy
 cwd="$(printf '%s' "$payload" | python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get("cwd",""))')"
 
 case "$tool_name" in
-  Write|Edit) ;;
+  Write | Edit) ;;
   *) exit 0 ;;
 esac
 
@@ -17,7 +17,7 @@ case "$file_path" in
 esac
 
 case "$file_path" in
-  *.md|*.yml|*.yaml|*.json|*/.gitignore|*/.env.example|*/.env) exit 0 ;;
+  *.md | *.yml | *.yaml | *.json | */.gitignore | */.env.example | */.env) exit 0 ;;
 esac
 
 [ -f "$file_path" ] || exit 0
@@ -45,31 +45,59 @@ if [ -f "$config" ]; then
   done < <(awk '/^no_comments_whitelist:/{flag=1;next} flag&&/^[^[:space:]-]/{flag=0} flag' "$config" | grep -E "^\s*-")
 fi
 
-violations=0
-while IFS= read -r line_raw; do
-  ln=${line_raw%%:*}
-  rest=${line_raw#*:}
+whitelist_joined="$(printf '%s\n' "${whitelist[@]}")"
+SCAN_FILE="$file_path" SCAN_WHITELIST="$whitelist_joined" python3 - <<'PY'
+import os
+import re
+import sys
 
-  if [[ "$rest" =~ ^[[:space:]]*$ ]]; then continue; fi
+file_path = os.environ['SCAN_FILE']
+whitelist_raw = os.environ.get('SCAN_WHITELIST', '')
+whitelist = [re.compile(p) for p in whitelist_raw.splitlines() if p.strip()]
 
-  allowed=0
-  for pat in "${whitelist[@]}"; do
-    if [[ "$rest" =~ $pat ]]; then
-      allowed=1
-      break
-    fi
-  done
-  [ "$allowed" = "1" ] && continue
+with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
+    lines = f.readlines()
 
-  if [[ "$rest" =~ ^[[:space:]]*// ]] || [[ "$rest" =~ ^[[:space:]]*# ]] || [[ "$rest" =~ ^[[:space:]]*/\* ]] || [[ "$rest" =~ ^[[:space:]]*\*/[[:space:]]*$ ]]; then
-    printf 'no-comments: %s:%s содержит комментарий.\n' "$file_path" "$ln" >&2
-    violations=$((violations+1))
-  fi
-done < <(grep -nE '^\s*(//|#|/\*|\*/)' "$file_path" || true)
+heredoc_re = re.compile(r"<<-?\s*['\"]?([A-Za-z_][A-Za-z0-9_]*)['\"]?")
+in_heredoc = False
+delimiter = None
+allow_indent = False
 
-if [ "$violations" -gt 0 ]; then
-  printf 'Принцип 4a: код без комментариев. Уберите %s комментариев.\n' "$violations" >&2
-  exit 2
-fi
+violations = []
+for idx, line in enumerate(lines, start=1):
+    if in_heredoc:
+        stripped = line.rstrip('\n')
+        check = stripped.lstrip() if allow_indent else stripped
+        if check == delimiter:
+            in_heredoc = False
+            delimiter = None
+            allow_indent = False
+        continue
+    m = heredoc_re.search(line)
+    if m:
+        delimiter = m.group(1)
+        allow_indent = '<<-' in line[: m.start() + 3]
+        in_heredoc = True
+        continue
+    if not re.match(r'^\s*(//|#|/\*|\*/)', line):
+        continue
+    if line.strip() == '':
+        continue
+    matched_white = False
+    for pat in whitelist:
+        if pat.search(line):
+            matched_white = True
+            break
+    if matched_white:
+        continue
+    if re.match(r'^\s*//', line) or re.match(r'^\s*#', line) or re.match(r'^\s*/\*', line) or re.match(r'^\s*\*/\s*$', line):
+        violations.append(idx)
 
-exit 0
+for ln in violations:
+    sys.stderr.write(f'no-comments: {file_path}:{ln} содержит комментарий.\n')
+
+if violations:
+    sys.stderr.write(f'Принцип 4a: код без комментариев. Уберите {len(violations)} комментариев.\n')
+    sys.exit(2)
+sys.exit(0)
+PY

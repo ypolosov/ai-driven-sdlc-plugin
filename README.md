@@ -156,10 +156,10 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (13 файлов, 94 кейса):
+- Unit (bats-core) — `tests/unit/` (13 файлов, 100 кейсов):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
-  - `enforce-no-comments.bats` — 9 кейсов (включая TypeScript whitelist Wave 5).
+  - `enforce-no-comments.bats` — 13 кейсов (TypeScript whitelist Wave 5 + heredoc detection Wave 7).
   - `bootstrap-dev-env.bats` — 3 кейса на детектор пакетного менеджера.
   - `check-alpha-consistency.bats` — 5 кейсов на валидатор БД через `SDLC_STATE_RAG_VALIDATE_CMD`.
   - `check-tool-binding.bats` — 9 кейсов на проверку категорий tool-bindings (Волна 4).
@@ -167,7 +167,7 @@
   - `detect-credentials.bats` — 6 кейсов на проверку `.env` и обязательных ключей (Волна 4).
   - `check-rag-config.bats` — 8 кейсов на схему rag-config и worker.kind ↔ SME (Волна 5).
   - `migrate-essence-to-state-rag.bats` — 7 кейсов на разовую утилиту миграции (PR-H, Волна 5).
-  - `enforce-sdlc-phase.bats` — 10 кейсов на PreToolUse hook принципа 22 (Волна 5, v0.5.0).
+  - `enforce-sdlc-phase.bats` — 12 кейсов на PreToolUse hook принципа 22 (Волна 5 v0.5.0 + realpath fix Wave 7).
   - `init-mcp-json.bats` — 5 кейсов на авто-создание/мердж `.mcp.json` в target (Волна 6, v0.6.0).
   - `plugin-config-adr-paths.bats` — 5 кейсов на валидацию `adr_paths` в plugin-config (Волна 6, v0.6.0).
 - Integration (bats-core) — `tests/integration/` (3 файла, 47 кейсов):
