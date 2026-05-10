@@ -85,8 +85,8 @@ updated: 2026-04-30
 | determinism | Проверяемые задачи выполняют скрипты, не LLM | принцип 6 |
 | hooks-performance | Hooks не замедляют пользователя ощутимо | exit <200ms на средний артефакт |
 | security | Секреты целевого проекта не утекают в git | `.env` в `.gitignore`, нет токенов в артефактах |
-| reliability | Переходы альф валидируются формальной state machine | `essence_validate_consistency` зелёный |
-| maintainability | Каталог альф вынесен в reusable npm-пакет | `@ypolosov/essence-alpha-mcp` обновляется независимо |
+| reliability | Переходы альф валидируются формальной state machine | `state_validate_consistency` зелёный |
+| maintainability | State+RAG backend вынесен в reusable npm-пакет | `@ypolosov/sdlc-state-rag` обновляется независимо |
 
 Покрытие NFR по ADR (поле `frontmatter.nfr`):
 

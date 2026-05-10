@@ -4,8 +4,8 @@ type: sdlc-profile
 project: ai-driven-sdlc-plugin
 created: 2026-04-19
 updated: 2026-05-05
-active_phase: deployment
-active_phase_set_at: 2026-05-05T19:50:00Z
+active_phase: development
+active_phase_set_at: 2026-05-10T19:49:21Z
 ---
 
 # SME-профиль проекта
@@ -45,3 +45,10 @@ active_phase_set_at: 2026-05-05T19:50:00Z
 - 2026-04-19 — development выбран: mid, bats-core + shellcheck + shfmt + GitHub Actions, autonomy hitl.
 - 2026-04-19 — deployment выбран: mid, semver + CHANGELOG + GitHub Releases + marketplace, autonomy hitl.
 - 2026-04-19 — operations выбран: pet, GitHub Issues + templates + SUPPORT.md, autonomy hitl.
+- 2026-05-04 — Wave 4 merged (PR-A..G): tool-categories, abstract roles, tool-router, aggregator, sdlc-state-rag contract, rag-config, webhooks (ADR-010..016).
+- 2026-05-05 — Wave 5 v0.5.0 ввёл принцип 22 + PreToolUse hook `enforce-sdlc-phase.sh`.
+- 2026-05-06 — Wave 5 v0.5.1..v0.5.4: серия фиксов MCP Failed-to-connect (launch-sdlc-state-rag.sh).
+- 2026-05-09 — Wave 6 v0.6.0: Fix A1 (`adr_paths` массив) + Fix A2 (`<target>/.mcp.json` auto-merge).
+- 2026-05-10 — Wave 7 v0.7.0..v0.10.0: closed issues #54-#58 (1 P0 + 4 P1); 4 PR merged (#62-#65).
+- 2026-05-10 — фаза development re-активирована для docs-PR drift cleanup (Wave 7 closure).
+- 2026-05-10 — `sdlc-integrations` skill (Wave 4) фиксируется как **out-of-band** cross-cutting; не отдельная фаза в SME-таблице.

@@ -6,11 +6,11 @@
 
 ## Статус
 
-Текущая версия: **v0.3.1** (май 2026).
-Волны 1–2 закрыты; Волна 3 идёт; Волна 4 (multi-agent extension) развёртывается через PR-цепочку A→G.
+Текущая версия: **v0.10.0** (май 2026).
+Волны 1–7 закрыты; Wave 4 multi-agent extension и Wave 5 sdlc-state-rag merged; Wave 6 pre-validation fixes (A1+A2) + Wave 7 closed 5 issues (#54-#58).
 Альфа Software System: **Usable** — плагин устанавливается через marketplace.
-Альфа Way of Working: **Working Well** — fitness 8 hooks <200ms; самоприменение SDLC.
-Конституция плагина: 23 принципа (1–17 + 4a + 18/19/19a Волны 4 + 20/21/22 Волны 5), см. [CLAUDE.md](CLAUDE.md).
+Альфа Way of Working: **Working Well** — fitness 9 hooks <200ms; самоприменение SDLC.
+Конституция плагина: 22 принципа + 4a + 19a (24 секции в [CLAUDE.md](CLAUDE.md): 1–22 пронумерованы, 4a и 19a как sub-clauses).
 
 ## Опорные источники
 
@@ -100,7 +100,7 @@
 - `check-memom-consistency.sh` — блокирует изменение принципов без записи в memom (Волна 2).
 - `check-alpha-consistency.sh` — валидирует БД sdlc-state-rag при записи snapshot (Волна 5).
 - `bootstrap-target.sh` — инициализация целевого, режимы `--fail-if-exists` / `--merge` / `--force`.
-- `bench-hooks.sh` — бенчмарк 8 детерминированных hooks (NFR hooks-performance).
+- `bench-hooks.sh` — бенчмарк 9 детерминированных hooks (NFR hooks-performance).
 - `bootstrap-dev-env.sh` — детектит pkg-manager и выводит команду установки bats/shellcheck/shfmt.
 - `check-tool-binding.sh` — валидирует категории `tool-bindings.md` целевого (Волна 4).
 - `detect-credentials.sh` — проверяет `.env` и обязательные ключи привязок (Волна 4).
@@ -110,7 +110,7 @@
 - `launch-sdlc-state-rag.sh` — launcher MCP-сервера sdlc-state-rag с fallback PATH→nvm→standard locations→npx (v0.5.2).
 - `check-adr-paths.sh` — валидирует `adr_paths` в `plugin-config.md` целевого (Волна 6, v0.6.0).
 
-### Meta-templates (19)
+### Meta-templates (24: 19 top + 5 external-systems)
 - `work-product.meta.md` — базовая схема рабочего продукта.
 - `phase-artifact.meta.md` — схема любого артефакта фазы.
 - `profile.meta.md` — схема SME-выбора целевого.
@@ -224,7 +224,7 @@ State-артефакт Work — **GitHub Issues** (решение принцип
 
 ## Как читать плагин
 
-- `CLAUDE.md` — конституция плагина (17 принципов + 4a).
+- `CLAUDE.md` — конституция плагина (22 принципа + 4a + 19a, 24 секции).
 - `catalogs/**` — терминологический каркас.
 - `meta-templates/**` — схемы рабочих продуктов.
 - `skills/**/SKILL.md` — методические инструкции фаз и сквозных дисциплин.

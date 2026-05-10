@@ -4,8 +4,8 @@
 .env.local
 .env.*.local
 
-# ai-driven-sdlc: временные release notes для gh release create --notes-file
-release-notes-v*.md
+# ai-driven-sdlc: временные release notes для gh release create --notes-file (root only — committed копии живут в docs/release-notes/)
+/release-notes-v*.md
 
 # ai-driven-sdlc: pglite/sdlc-state-rag локальная БД (Wave 5, ADR-011)
 .sdlc-db/
