@@ -5,6 +5,21 @@
 
 ## [Unreleased]
 
+## [0.8.0] — 2026-05-10
+
+### Added
+
+- **Gap-4 (#57, P1)**: `scripts/bootstrap-target.sh` создаёт `<target>/.claude/sdlc/role-extensions.md` placeholder в момент инициализации. Содержит схему `target-role-mapping` (frontmatter type), human-readable инструкцию и пример pet-role `solo-developer extends [product-owner, architect, developer, tester, devops]`. Позволяет greenfield-таргетам сразу видеть формат role-расширений без чтения catalogs/.
+- `tests/unit/bootstrap-role-extensions.bats` — 4 кейса (file exists / type frontmatter / name+project / merge-mode preserves existing).
+
+### Changed
+
+- README inventory: Unit tests 100→104 кейсов; +`bootstrap-role-extensions.bats` (4 кейса).
+
+### Why
+
+Wave 6 gt-validation выявила что bootstrap не создавал `role-extensions.md`, хотя ADR-015 определяет его как обязательный артефакт `.claude/sdlc/`. Для enterprise-проектов user должен был писать его вручную после `/sdlc-init`. Теперь bootstrap создаёт минимально-валидный placeholder.
+
 ## [0.7.0] — 2026-05-10
 
 ### Fixed

@@ -91,6 +91,47 @@ Placeholder. Заполняется skill \`sdlc-bootstrap\` через /sdlc-in
 EOF
 done
 
+role_ext_dest="${sdlc_dir}/role-extensions.md"
+if [ ! -f "$role_ext_dest" ]; then
+  cat > "$role_ext_dest" <<EOF
+---
+name: role-extensions
+type: target-role-mapping
+project: $(basename "$target")
+created: $(date +%Y-%m-%d)
+updated: $(date +%Y-%m-%d)
+---
+
+# Role extensions целевого проекта
+
+Маппинг конкретных ролей команды на 9 абстрактных ролей плагина (см. \`catalogs/roles.md\`).
+
+Для greenfield-проектов начните с одной записи; расширяйте по мере роста команды.
+
+## Запись роли
+
+\`\`\`yaml
+- id: <slug>
+  title: <human-readable>
+  extends: [<abstract-role>, ...]
+  agent_kind: human | ai | both
+  tool_categories: [<id>, ...]
+  phases: [<phase>, ...]
+  alphas: [<alpha>, ...]
+\`\`\`
+
+## Пример (pet, solo developer)
+
+- id: solo-developer
+  title: Solo Developer
+  extends: [product-owner, architect, developer, tester, devops]
+  agent_kind: human
+  tool_categories: [vcs]
+  phases: [vision, requirements, architecture, development, testing, deployment, operations]
+  alphas: [Opportunity, Requirements, Software System, Work, Stakeholders, Way of Working, Team]
+EOF
+fi
+
 env_example="${target}/.env.example"
 if [ ! -f "$env_example" ]; then
   cat > "$env_example" <<'EOF'

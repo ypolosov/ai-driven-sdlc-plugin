@@ -156,7 +156,7 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (13 файлов, 100 кейсов):
+- Unit (bats-core) — `tests/unit/` (14 файлов, 104 кейсa):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 13 кейсов (TypeScript whitelist Wave 5 + heredoc detection Wave 7).
@@ -170,6 +170,7 @@
   - `enforce-sdlc-phase.bats` — 12 кейсов на PreToolUse hook принципа 22 (Волна 5 v0.5.0 + realpath fix Wave 7).
   - `init-mcp-json.bats` — 5 кейсов на авто-создание/мердж `.mcp.json` в target (Волна 6, v0.6.0).
   - `plugin-config-adr-paths.bats` — 5 кейсов на валидацию `adr_paths` в plugin-config (Волна 6, v0.6.0).
+  - `bootstrap-role-extensions.bats` — 4 кейса на создание `role-extensions.md` placeholder при /sdlc-init (Волна 7, v0.8.0).
 - Integration (bats-core) — `tests/integration/` (3 файла, 47 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
   - `sdlc-state-rag-contract.bats` — 23 кейса на контракт sdlc-state-rag, переключение трекера, bash-wrapper для launcher (Волна 5, ADR-011, v0.5.3).
