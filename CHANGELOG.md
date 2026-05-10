@@ -5,6 +5,15 @@
 
 ## [Unreleased]
 
+### Added
+
+- **#61 (Wave 8 P2 Gap-8)**: `meta-templates/iteration.meta.md` — kanban-style meta-template для группировки work-units в итерации (sprint или milestone). Поля frontmatter:
+  - `iteration_id`, `sprint_or_milestone`, `status` (planned/in-progress/completed)
+  - `work_units` — массив ссылок на work-unit-артефакты
+  - `start_date`, `end_date`
+  - Опциональные kanban-метрики: `wip_limit`, `cycle_time_avg`, `velocity`
+- `tests/unit/iteration-template.bats` — 10 кейсов (existence, frontmatter, kanban states, alphas).
+
 ### Fixed
 
 - **#69 (Wave 8 P2 bug)**: `scripts/check-alpha-consistency.sh` использовал TCP `postgresql://localhost:5432/<projectname>` fallback по умолчанию, что вызывало `ECONNREFUSED 5432` на pet-target с embedded pglite (`<target>/.sdlc-db/`). Теперь script:
@@ -15,7 +24,7 @@
 
 ### Why
 
-В Wave 7 closure session (2026-05-10) каждый Edit `.claude/sdlc/alphas.md` или `decisions.md` триггерил PostToolUse hook с `ECONNREFUSED 127.0.0.1:5432` в stdout. Edit применялся (postoolUse не откатывает), но логи засорены. Принципы 20/21 говорят «pet → pglite»; script default нарушал их.
+Wave 8 P2 issues из gt-validation backlog (#61 Gap-8 + #69 hook bug). #61: плагин не имел meta-template для kanban-style итерационных декомпозиций (`docs/architecture/iterations/` в gt). #69: Edit `.claude/sdlc/alphas.md` триггерил `ECONNREFUSED 5432` на pet-target с embedded pglite — принципы 20/21 нарушены.
 
 ## [0.10.1] — 2026-05-10
 
