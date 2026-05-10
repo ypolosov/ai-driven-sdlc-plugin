@@ -113,6 +113,20 @@ Skill `sdlc-method-engineering` объединяет матрицу плагин
 | mid | Автоматизированный конвейер с несколькими средами и blue-green | GitHub Actions deploy job • Octopus Deploy • Spinnaker |
 | enterprise | Декларативная доставка с прогрессивным выкатом и feature-флагами | ArgoCD • Flux • Harness Progressive Delivery |
 
+## 11a. External-system references (Wave 7, v0.10.0)
+
+Готовые reference-документы по подключению MCP-серверов для популярных enterprise-инструментов. Каждый файл содержит install-команды, env-vars, capability mapping и привязку к категории из `tool-categories.md`.
+
+| Категория | Reference |
+|---|---|
+| issue-tracker | [external-systems/issue-tracker.jira.md](../meta-templates/external-systems/issue-tracker.jira.md) — Atlassian Rovo / sooperset/mcp-atlassian |
+| knowledge-base | [external-systems/knowledge-base.confluence.md](../meta-templates/external-systems/knowledge-base.confluence.md) — Atlassian Rovo / sooperset |
+| vcs | [external-systems/vcs.bitbucket.md](../meta-templates/external-systems/vcs.bitbucket.md) — Atlassian Rovo / community Bitbucket MCP |
+| observability | [external-systems/observability.grafana.md](../meta-templates/external-systems/observability.grafana.md) — official mcp-grafana |
+| cd-platform | [external-systems/cd-platform.argocd.md](../meta-templates/external-systems/cd-platform.argocd.md) — community argocd-mcp |
+
+Skill `sdlc-integrations` ссылается на эти файлы при опросе пользователя. `sdlc-tool-router` использует capability mappings для маршрутизации.
+
 ## 12. Embedders для RAG (Wave 5)
 
 | Уровень | Метод (абстрактно) | Примеры инструментов |
