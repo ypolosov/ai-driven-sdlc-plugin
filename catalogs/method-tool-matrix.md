@@ -38,8 +38,8 @@ Skill `sdlc-method-engineering` объединяет матрицу плагин
 | Уровень | Метод (абстрактно) | Примеры инструментов |
 |---|---|---|
 | pet | Одностраничное описание структуры системы с одной диаграммой | ASCII box-and-arrow • Mermaid-диаграмма • draw.io sketch |
-| mid | Фиксация значимых архитектурных решений и многоуровневое визуальное моделирование | ADR (Nygard) • C4 Level 1-2 • arc42 |
-| enterprise | Формальная оценка качественных атрибутов и моделирование системной архитектуры | ATAM/QAW • ArchiMate/TOGAF • SEI Views-and-Beyond |
+| mid | Фиксация значимых архитектурных решений и многоуровневое визуальное моделирование | ADR (Nygard) • C4 Level 1-2 (PlantUML / Structurizr / Mermaid) • arc42 |
+| enterprise | Формальная оценка качественных атрибутов и моделирование системной архитектуры | ATAM/QAW • C4 Level 1-3 + Structurizr workspace • ArchiMate/TOGAF • SEI Views-and-Beyond |
 
 ## 4. Development
 
