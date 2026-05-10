@@ -6,8 +6,8 @@
 
 ## Статус
 
-Текущая версия: **v0.10.0** (май 2026).
-Волны 1–7 закрыты; Wave 4 multi-agent extension и Wave 5 sdlc-state-rag merged; Wave 6 pre-validation fixes (A1+A2) + Wave 7 closed 5 issues (#54-#58).
+Текущая версия: **v0.10.1** (май 2026).
+Волны 1–7 закрыты; Wave 4 multi-agent extension и Wave 5 sdlc-state-rag merged; Wave 6 pre-validation fixes (A1+A2) + Wave 7 closed 5 issues (#54-#58); v0.10.1 docs drift cleanup.
 Альфа Software System: **Usable** — плагин устанавливается через marketplace.
 Альфа Way of Working: **Working Well** — fitness 9 hooks <200ms; самоприменение SDLC.
 Конституция плагина: 22 принципа + 4a + 19a (24 секции в [CLAUDE.md](CLAUDE.md): 1–22 пронумерованы, 4a и 19a как sub-clauses).
@@ -190,7 +190,7 @@
 - Фикстуры — `tests/fixture/minimal-target/`, `tests/fixture/mid-target/` (валидные каркасы).
 - Статика — `shellcheck` на все скрипты; `shfmt -i 2 -ci` как форматёр.
 - CI — `.github/workflows/ci.yml` запускает всё на push/PR.
-- Покрыто тестами 6 из 13 скриптов; расширение — backlog Волны 3.
+- Покрыто тестами 11 из 19 скриптов; расширение — backlog Wave 8.
 
 Подготовка dev-окружения — `bash scripts/bootstrap-dev-env.sh`.
 
