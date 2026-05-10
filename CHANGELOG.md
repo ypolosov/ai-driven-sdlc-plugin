@@ -13,6 +13,15 @@
   - `start_date`, `end_date`
   - Опциональные kanban-метрики: `wip_limit`, `cycle_time_avg`, `velocity`
 - `tests/unit/iteration-template.bats` — 10 кейсов (existence, frontmatter, kanban states, alphas).
+- **#60 (Wave 8 P2 Gap-7)**: `meta-templates/c4-diagram.meta.md` — meta-template для C4-диаграмм (Simon Brown). Поля frontmatter:
+  - `level` enum: Context / Container / Component / Code
+  - `format` enum: plantuml / structurizr / mermaid
+  - `file_path` — относительный путь к рендерному файлу или null если inline
+  - `alphas: [Software System]`
+- `tests/unit/c4-diagram-template.bats` — 12 кейсов (existence, frontmatter, levels, formats, matrix references).
+- `catalogs/method-tool-matrix.md` Architecture секция расширена:
+  - mid: `C4 Level 1-2 (PlantUML / Structurizr / Mermaid)`
+  - enterprise: `C4 Level 1-3 + Structurizr workspace`
 
 ### Fixed
 
@@ -24,7 +33,7 @@
 
 ### Why
 
-Wave 8 P2 issues из gt-validation backlog (#61 Gap-8 + #69 hook bug). #61: плагин не имел meta-template для kanban-style итерационных декомпозиций (`docs/architecture/iterations/` в gt). #69: Edit `.claude/sdlc/alphas.md` триггерил `ECONNREFUSED 5432` на pet-target с embedded pglite — принципы 20/21 нарушены.
+Wave 8 P2 issues из gt-validation backlog (#61 Gap-8 + #60 Gap-7 + #69 hook bug). #61: плагин не имел meta-template для kanban-style итерационных декомпозиций. #60: плагин не предлагал meta-template для C4-диаграмм (gt использует C4 в `docs/architecture/c4/`). #69: Edit `.claude/sdlc/alphas.md` триггерил `ECONNREFUSED 5432` на pet-target с embedded pglite — принципы 20/21 нарушены.
 
 ## [0.10.1] — 2026-05-10
 
