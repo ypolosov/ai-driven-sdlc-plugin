@@ -181,6 +181,43 @@ source_of_truth_for_principles: CLAUDE.md
   - ADR-009 → Deprecated (`superseded_by: ADR-011`).
 - related_commits: [PR #33]
 
+## 2026-05-10 — Wave 6-7 cleanup: enterprise-валидация и закрытие 5 issues
+- principle: 14, 18, 22, 4a
+- action: clarify
+- before:
+  - 14: `adr_paths` неявно ожидался как `phases/architecture/adr/` (greenfield-only).
+  - 18: `external-systems/<category>/` без конкретных reference-примеров на инструменты.
+  - 22: `enforce-sdlc-phase.sh` блокировал write-операции на файлы вне CWD-tree (включая `~/.claude/plans/`).
+  - 4a: `enforce-no-comments.sh` помечал markdown-заголовки внутри bash heredoc как комментарии.
+- after:
+  - 14: `adr_paths` — массив строк в `plugin-config.md` (default `[phases/architecture/adr/]`, customizable `[docs/adrs/]`); `bootstrap-target.sh` создаёт `<target>/.mcp.json` с merge-логикой.
+  - 18: 5 reference-инстансов в `meta-templates/external-systems/` (jira, confluence, bitbucket, grafana, argocd) + 3 work-unit meta-templates (jira/linear/github); `role-extensions.md` placeholder создаётся bootstrap'ом.
+  - 22: hook проверяет realpath(file_path) и пропускает paths вне target.
+  - 4a: hook отслеживает heredoc-блоки (`<<EOF` / `<<-'TAG'`) и не флагует комментарии внутри них.
+- motive: gt-validation в worktree (Wave 6 Phase 2) вскрыл 8 реальных gaps вместо угаданных. 1 P0 (Gap-3 reference-примеры на enterprise-стек) + 4 P1 (Gap-0/2/4/6) закрыты в Wave 7. План Wave 6 одобрен после критического аудита, исключив RAG/Onyx/Atlassian-Rovo как преждевременную автоматизацию.
+- consequences:
+  - **v0.6.0 (Wave 6)**: Fix A1 (`adr_paths`) + Fix A2 (`.mcp.json` auto-merge); 9 новых bats-кейсов; новый `scripts/check-adr-paths.sh`.
+  - **v0.7.0 (Wave 7 PR-1, #62)**: Gap-0 realpath + Gap-2 heredoc; принципы 22, 4a уточнены без формальных правок CLAUDE.md.
+  - **v0.8.0 (Wave 7 PR-2, #63)**: Gap-4 placeholder `role-extensions.md` создаётся `bootstrap-target.sh`.
+  - **v0.9.0 (Wave 7 PR-3, #64)**: Gap-6 3 work-unit meta-templates `work-unit.<tracker>.meta.md`; `check-readme-inventory.sh` regex расширен до `[a-z][a-z0-9.\-]*`.
+  - **v0.10.0 (Wave 7 PR-4, #65)**: Gap-3 5 external-systems references; `catalogs/method-tool-matrix.md` §11a таблица.
+  - 8 GitHub issues открыты (#54-#61); 5 closed (1 P0 + 4 P1); 3 P2 (#59-#61) отложены на Wave 8.
+  - Meta-templates total: 19 → 24 (3 work-unit + 5 external-systems в subdir + 1 расширение plugin-config).
+  - Tests total: 16 → 17 unit-bats файлов.
+  - Bench-hooks: 8 → 9 (после Wave 5 enforce-sdlc-phase).
+- related_commits: [PR #62 v0.7.0, PR #63 v0.8.0, PR #64 v0.9.0, PR #65 v0.10.0, releases v0.6.0..v0.10.0]
+
+## 2026-05-10 — Принцип 13: единственный backend sdlc-state-rag (Wave 5 ratify в Wave 7 audit)
+- principle: 13
+- action: modify
+- before: «Авторитативный backend трекера — `@ypolosov/sdlc-state-rag` (см. ADR-011). Markdown `alphas.md` — PR-видимый snapshot».
+- after: формулировка не меняется; **аудит Wave 7 подтвердил**: `essence-alpha-mcp` полностью удалён, ADR-009 Deprecated, `.claude/sdlc/external-systems/essence-alpha-mcp.md` удалён. Все ссылки на `essence_validate_consistency` в фазных артефактах должны быть заменены на `state_validate_consistency`.
+- motive: audit `/sdlc-audit` 2026-05-10 обнаружил W-4 — `architecture.md` строки 50, 88 ссылаются на deprecated `essence-alpha-mcp` и `essence_validate_consistency`.
+- consequences:
+  - `architecture.md` строки 50, 88-89 переписаны.
+  - `audit.md` снова валиден после re-run.
+- related_commits: [docs/wave-7-closure-drift]
+
 ## Правила ведения
 
 - Запись создаётся **до** или **вместе** с изменением `CLAUDE.md`.
