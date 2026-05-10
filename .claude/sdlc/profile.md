@@ -5,7 +5,7 @@ project: ai-driven-sdlc-plugin
 created: 2026-04-19
 updated: 2026-05-05
 active_phase: development
-active_phase_set_at: 2026-05-10T20:46:00Z
+active_phase_set_at: 2026-05-10T20:50:00Z
 ---
 
 # SME-профиль проекта
@@ -56,3 +56,4 @@ active_phase_set_at: 2026-05-10T20:46:00Z
 - 2026-05-10 — фаза development активирована для Wave 8 PR-1 (#69 check-alpha-consistency hook pglite fix).
 - 2026-05-10 — фаза development активирована для Wave 8 PR-2 (#61 iteration.meta.md).
 - 2026-05-10 — фаза development активирована для Wave 8 PR-3 (#60 c4-diagram.meta.md).
+- 2026-05-10 — фаза development активирована для Wave 8 PR-4 (#59 bootstrap valid frontmatter).

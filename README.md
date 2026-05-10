@@ -187,6 +187,7 @@
   - `external-systems-references.bats` — 10 кейсов на 5 reference MCP-серверов (Волна 7, v0.10.0).
   - `iteration-template.bats` — 10 кейсов на iteration meta-template (Wave 8, #61, Gap-8).
   - `c4-diagram-template.bats` — 12 кейсов на c4-diagram meta-template + matrix references (Wave 8, #60, Gap-7).
+  - `bootstrap-valid-frontmatter.bats` — 8 кейсов на валидные frontmatter из bootstrap (Wave 8, #59, Gap-5).
 - Integration (bats-core) — `tests/integration/` (3 файла, 47 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
   - `sdlc-state-rag-contract.bats` — 23 кейса на контракт sdlc-state-rag, переключение трекера, bash-wrapper для launcher (Волна 5, ADR-011, v0.5.3).
