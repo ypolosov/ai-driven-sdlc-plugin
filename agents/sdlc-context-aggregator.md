@@ -27,6 +27,7 @@ Skills не вызывают MCP напрямую; запрашивают кон
 - Прочитать `<target_dir>/.claude/sdlc/plugin-config.md`.
 - Если файл отсутствует — отказать.
 - Извлечь `rag_ref.enabled` (Волна 5) и `tool_bindings`.
+- Извлечь `adr_paths` (Волна 6); default `[phases/architecture/adr/]`.
 - Определить `rag_enabled` (default: false).
 
 ### 2. Запрос RAG (если включён)
@@ -106,7 +107,7 @@ Skills не вызывают MCP напрямую; запрашивают кон
 ## Связь
 
 - Источники — `sdlc-tool-router`, `sdlc-state-reader`, `sdlc-alpha-tracker`, RAG MCP.
-- Конфиг — `meta-templates/plugin-config.meta.md` (секции `tool_bindings`, `rag_ref`).
+- Конфиг — `meta-templates/plugin-config.meta.md` (секции `tool_bindings`, `rag_ref`, `adr_paths`).
 - Принципы — 1 (AskUserQuestion), 13 (нет обхода трекера), 18 (категории), 19 (провенанс), 19a (MCP до RAG).
 - ADR — ADR-010 (multi-agent topology).
 - Закрывает epic #7 (параллельная работа), готовит epic #10 (evolution-фаза).
