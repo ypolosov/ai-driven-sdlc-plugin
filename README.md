@@ -131,6 +131,13 @@
 - `work-unit.linear.meta.md` — схема work-unit для Linear-managed целевых (Волна 7, v0.9.0, Gap-6).
 - `work-unit.github.meta.md` — схема work-unit для GitHub Issues-managed целевых (Волна 7, v0.9.0, Gap-6).
 
+#### External-system references (`meta-templates/external-systems/`, Волна 7 v0.10.0)
+- `issue-tracker.jira.md` — Atlassian Rovo / sooperset/mcp-atlassian.
+- `knowledge-base.confluence.md` — единый Atlassian-сервер для Confluence.
+- `vcs.bitbucket.md` — Atlassian Rovo / community Bitbucket MCP.
+- `observability.grafana.md` — official mcp-grafana (Loki/Prometheus/Tempo).
+- `cd-platform.argocd.md` — community argocd-mcp.
+
 ### Catalogs (5)
 - `catalogs/alphas.md` — определения альф SDLC.
 - `catalogs/disciplines.md` — дисциплины, закреплённые за фазами.
@@ -159,7 +166,7 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (15 файлов, 111 кейсов):
+- Unit (bats-core) — `tests/unit/` (16 файлов, 121 кейс):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 13 кейсов (TypeScript whitelist Wave 5 + heredoc detection Wave 7).
@@ -175,6 +182,7 @@
   - `plugin-config-adr-paths.bats` — 5 кейсов на валидацию `adr_paths` в plugin-config (Волна 6, v0.6.0).
   - `bootstrap-role-extensions.bats` — 4 кейса на создание `role-extensions.md` placeholder при /sdlc-init (Волна 7, v0.8.0).
   - `work-unit-templates.bats` — 7 кейсов на 3 work-unit meta-templates (Jira/Linear/GitHub) (Волна 7, v0.9.0).
+  - `external-systems-references.bats` — 10 кейсов на 5 reference MCP-серверов (Волна 7, v0.10.0).
 - Integration (bats-core) — `tests/integration/` (3 файла, 47 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
   - `sdlc-state-rag-contract.bats` — 23 кейса на контракт sdlc-state-rag, переключение трекера, bash-wrapper для launcher (Волна 5, ADR-011, v0.5.3).

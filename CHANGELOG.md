@@ -5,6 +5,28 @@
 
 ## [Unreleased]
 
+## [0.10.0] — 2026-05-10
+
+### Added
+
+- **Gap-3 (#54, P0)**: 5 reference-документов в `meta-templates/external-systems/` для популярных enterprise-MCP-серверов:
+  - `issue-tracker.jira.md` — Atlassian Rovo + sooperset/mcp-atlassian.
+  - `knowledge-base.confluence.md` — единый Atlassian-сервер.
+  - `vcs.bitbucket.md` — Atlassian Rovo + community Bitbucket MCP.
+  - `observability.grafana.md` — official mcp-grafana (Loki/Prometheus/Tempo).
+  - `cd-platform.argocd.md` — community argocd-mcp.
+- Каждый файл: install-команды, env-vars, capability mapping, `tool-bindings.md` пример.
+- `catalogs/method-tool-matrix.md` — раздел 11a со ссылками на references.
+- `tests/unit/external-systems-references.bats` — 10 кейсов (existence × 5, frontmatter, sections, matrix-references).
+
+### Changed
+
+- README inventory: Unit tests 111→121 кейсов; новый подраздел `External-system references` в Meta-templates.
+
+### Why
+
+Wave 6 gt-validation выявила что enterprise-targets не имеют готовых рекомендаций для подключения MCP-серверов к стеку (Jira/Confluence/Bitbucket/Grafana/ArgoCD). Без references пользователь должен изобретать конфигурацию с нуля. Этот release завершает Wave 7 (Gap-0/2/3/4/6 закрыты).
+
 ## [0.9.0] — 2026-05-10
 
 ### Added
