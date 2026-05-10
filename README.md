@@ -171,7 +171,7 @@
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 13 кейсов (TypeScript whitelist Wave 5 + heredoc detection Wave 7).
   - `bootstrap-dev-env.bats` — 3 кейса на детектор пакетного менеджера.
-  - `check-alpha-consistency.bats` — 5 кейсов на валидатор БД через `SDLC_STATE_RAG_VALIDATE_CMD`.
+  - `check-alpha-consistency.bats` — 8 кейсов на валидатор БД (DSN/pglite mode discrimination, Wave 8 #69).
   - `check-tool-binding.bats` — 9 кейсов на проверку категорий tool-bindings (Волна 4).
   - `target-roles-schema.bats` — 14 кейсов на схему ролей и target-roles (Волна 4).
   - `detect-credentials.bats` — 6 кейсов на проверку `.env` и обязательных ключей (Волна 4).

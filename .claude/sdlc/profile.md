@@ -4,8 +4,8 @@ type: sdlc-profile
 project: ai-driven-sdlc-plugin
 created: 2026-04-19
 updated: 2026-05-05
-active_phase: deployment
-active_phase_set_at: 2026-05-10T20:06:57Z
+active_phase: development
+active_phase_set_at: 2026-05-10T20:38:03Z
 ---
 
 # SME-профиль проекта
@@ -53,3 +53,4 @@ active_phase_set_at: 2026-05-10T20:06:57Z
 - 2026-05-10 — фаза development re-активирована для docs-PR drift cleanup (Wave 7 closure).
 - 2026-05-10 — `sdlc-integrations` skill (Wave 4) фиксируется как **out-of-band** cross-cutting; не отдельная фаза в SME-таблице.
 - 2026-05-10 — фаза deployment активирована для release v0.10.1 patch (PR #66 merged).
+- 2026-05-10 — фаза development активирована для Wave 8 PR-1 (#69 check-alpha-consistency hook pglite fix).

@@ -5,6 +5,18 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- **#69 (Wave 8 P2 bug)**: `scripts/check-alpha-consistency.sh` использовал TCP `postgresql://localhost:5432/<projectname>` fallback по умолчанию, что вызывало `ECONNREFUSED 5432` на pet-target с embedded pglite (`<target>/.sdlc-db/`). Теперь script:
+  - Если `SDLC_STATE_RAG_DSN` не установлен И `<target>/.sdlc-db/` существует → exit 0 (pet/pglite mode; trust MCP server).
+  - Если ни DSN, ни pglite directory → exit 2 с helpful error (нет backend).
+  - Если DSN установлен → validate как раньше через `SDLC_STATE_RAG_VALIDATE_CMD`.
+- `tests/unit/check-alpha-consistency.bats` расширен: 5 → **8 кейсов** (+pet pglite skip; +no-DSN-no-pglite error; +DSN override pglite).
+
+### Why
+
+В Wave 7 closure session (2026-05-10) каждый Edit `.claude/sdlc/alphas.md` или `decisions.md` триггерил PostToolUse hook с `ECONNREFUSED 127.0.0.1:5432` в stdout. Edit применялся (postoolUse не откатывает), но логи засорены. Принципы 20/21 говорят «pet → pglite»; script default нарушал их.
+
 ## [0.10.1] — 2026-05-10
 
 ### Changed
