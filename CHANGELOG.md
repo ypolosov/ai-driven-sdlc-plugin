@@ -5,6 +5,35 @@
 
 ## [Unreleased]
 
+## [0.10.1] — 2026-05-10
+
+### Changed
+
+- **Wave 7 closure docs drift cleanup** (audit `/sdlc-audit` warn 0/6/3 → fixes):
+  - `README.md` counters: версия v0.3.1 → **v0.10.0** (uplifted после Wave 6-7); «23 принципа» → **«22+4a+19a, 24 секции»**; bench-hooks **8 → 9**; Meta-templates **19 → 24** (19 top + 5 external-systems).
+  - `memom.md` +2 записи: **2026-05-10 Wave 6-7 cleanup** (агрегированная) + **принцип 13 ratify в Wave 7 audit** (essence-alpha-mcp полностью удалён).
+  - `.claude/sdlc/phases/architecture/architecture.md`: §5а с таблицей ADR-010..016 (Wave 4-5 snapshot); `essence_validate_consistency` → `state_validate_consistency`; npm pkg name `@ypolosov/sdlc-state-rag`.
+  - `.claude/sdlc/profile.md`: +6 history-записей Wave 4-7; `sdlc-integrations` skill помечен как out-of-band cross-cutting (не SDLC-фаза).
+  - `.claude/sdlc/alphas.md`: Software System evidence обновлён на `CHANGELOG.md#0.10.0`; +3 строки журнала (decisions через MCP).
+  - `.claude/sdlc/audit.md`: Wave 7 audit результаты (warn 0/6/3) зафиксированы.
+
+### Reorganized
+
+- `release-notes-v*.md` (12 файлов v0.3.0..v0.10.0) перенесены из root в `docs/release-notes/`.
+- `.gitignore`: паттерн `release-notes-v*.md` → `/release-notes-v*.md` (root only); committed-копии в `docs/release-notes/` теперь tracked.
+
+### Why
+
+После быстрой череды релизов v0.6.0..v0.10.0 (Wave 6-7) накопился drift документации: счётчики README устарели, memom не отражал Wave 6-7, architecture.md ссылался на deprecated `essence-alpha-mcp`. Patch-релиз без поведенческих изменений; только docs sync. PR #66 merged 2026-05-10 после `/sdlc-audit` (commit 101012e в main).
+
+### Plugin tools used (принцип 12 dogfooding)
+
+- skill `/sdlc-phase development` + `/sdlc-phase deployment` активированы методологически.
+- `AskUserQuestion` ×2 (принцип 1) — scope-выбор ДО правок и ДО release.
+- `mcp__sdlc-state-rag__decisions_record` ×4 (id 1-4: phase activation, software-system evidence, way-of-working evidence, deployment scope).
+- `scripts/check-readme-inventory.sh` + `check-memom-consistency.sh` — green pre-merge.
+- Принципы: 1, 13, 15, 16, 22.
+
 ## [0.10.0] — 2026-05-10
 
 ### Added
