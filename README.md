@@ -110,7 +110,7 @@
 - `launch-sdlc-state-rag.sh` — launcher MCP-сервера sdlc-state-rag с fallback PATH→nvm→standard locations→npx (v0.5.2).
 - `check-adr-paths.sh` — валидирует `adr_paths` в `plugin-config.md` целевого (Волна 6, v0.6.0).
 
-### Meta-templates (16)
+### Meta-templates (19)
 - `work-product.meta.md` — базовая схема рабочего продукта.
 - `phase-artifact.meta.md` — схема любого артефакта фазы.
 - `profile.meta.md` — схема SME-выбора целевого.
@@ -127,6 +127,9 @@
 - `sdlc-state-rag-contract.meta.md` — контракт MCP-сервера sdlc-state-rag (Волна 5, ADR-011).
 - `rag-config.meta.md` — схема `rag-config.md` целевого и worker'ов (Волна 5, ADR-012).
 - `webhooks.meta.md` — схема `webhooks.md` целевого для enterprise (Волна 5, ADR-014).
+- `work-unit.jira.meta.md` — схема work-unit для Jira-managed целевых (Волна 7, v0.9.0, Gap-6).
+- `work-unit.linear.meta.md` — схема work-unit для Linear-managed целевых (Волна 7, v0.9.0, Gap-6).
+- `work-unit.github.meta.md` — схема work-unit для GitHub Issues-managed целевых (Волна 7, v0.9.0, Gap-6).
 
 ### Catalogs (5)
 - `catalogs/alphas.md` — определения альф SDLC.
@@ -156,7 +159,7 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (14 файлов, 104 кейсa):
+- Unit (bats-core) — `tests/unit/` (15 файлов, 111 кейсов):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 13 кейсов (TypeScript whitelist Wave 5 + heredoc detection Wave 7).
@@ -171,6 +174,7 @@
   - `init-mcp-json.bats` — 5 кейсов на авто-создание/мердж `.mcp.json` в target (Волна 6, v0.6.0).
   - `plugin-config-adr-paths.bats` — 5 кейсов на валидацию `adr_paths` в plugin-config (Волна 6, v0.6.0).
   - `bootstrap-role-extensions.bats` — 4 кейса на создание `role-extensions.md` placeholder при /sdlc-init (Волна 7, v0.8.0).
+  - `work-unit-templates.bats` — 7 кейсов на 3 work-unit meta-templates (Jira/Linear/GitHub) (Волна 7, v0.9.0).
 - Integration (bats-core) — `tests/integration/` (3 файла, 47 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
   - `sdlc-state-rag-contract.bats` — 23 кейса на контракт sdlc-state-rag, переключение трекера, bash-wrapper для launcher (Волна 5, ADR-011, v0.5.3).

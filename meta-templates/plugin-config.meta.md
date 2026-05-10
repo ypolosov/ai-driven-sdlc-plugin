@@ -157,6 +157,18 @@ phase_enforcement:
 `SDLC_PHASE_ENFORCE=skip` — escape hatch для CI.
 Эфемерный override — через `/sdlc-autonomy --task hootl --duration <N>m` пишет `.claude/sdlc/autonomy.session.md`.
 
+### work_unit_template (Волна 7, опционально)
+
+Имя tracker-flavored шаблона work-unit для фазы requirements.
+
+```yaml
+work_unit_template: jira | linear | github
+```
+
+При `jira` skill `sdlc-requirements` использует `meta-templates/work-unit.jira.meta.md`.
+Аналогично `linear`, `github`. Default — `github` (pet-friendly).
+Поле выбирается на основе `tool-bindings.md` категории `issue-tracker`.
+
 ### adr_paths (Волна 6, опционально)
 
 Пути к каталогам ADR в целевом проекте.

@@ -5,6 +5,25 @@
 
 ## [Unreleased]
 
+## [0.9.0] — 2026-05-10
+
+### Added
+
+- **Gap-6 (#58, P1)**: 3 tracker-flavored work-unit meta-templates (Jira, Linear, GitHub Issues). Каждый extends `work-product.meta.md`, содержит специфичные frontmatter-поля и секции для своего tracker'а.
+- `meta-templates/work-unit.jira.meta.md` — Epic/Story/Task/Sub-task, story_points, sprint, components/labels, epic-link, linked-issues.
+- `meta-templates/work-unit.linear.meta.md` — issue_id (ENG-123), project_id, cycle_id, priority (0-4), estimate (1/2/3/5/8), parent_issue, relations.
+- `meta-templates/work-unit.github.meta.md` — issue_number, milestone, labels, task-list AC, linked_pr, closes_issues. Pet-friendly default.
+- Поле `work_unit_template` в `meta-templates/plugin-config.meta.md` — выбор шаблона (`jira` / `linear` / `github`).
+- `tests/unit/work-unit-templates.bats` — 7 кейсов (existence / frontmatter / extends / config field / alphas).
+
+### Changed
+
+- README inventory: Meta-templates 16→19 (+3 work-unit-* templates); Unit tests 104→111 кейсов; +`work-unit-templates.bats` (7 кейсов).
+
+### Why
+
+Wave 6 gt-validation выявила что плагин не имеет templated work-unit format для разных issue-tracker категорий. Каждый tracker (Jira/Linear/GitHub) имеет специфичный набор полей и workflow. Без templates пользователь должен сам решать схему.
+
 ## [0.8.0] — 2026-05-10
 
 ### Added
