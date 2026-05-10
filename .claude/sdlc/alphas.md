@@ -22,7 +22,7 @@ generated_after: mcp-write
 | Opportunity | Value Established | `.claude/sdlc/phases/vision/vision.md` | 2026-04-19 |
 | Stakeholders | Involved | `.claude/sdlc/phases/requirements/requirements.md` | 2026-04-19 |
 | Requirements | Acceptable | `.claude/sdlc/phases/architecture/architecture.md` | 2026-04-19 |
-| Software System | Usable | `CHANGELOG.md#0.10.0` | 2026-05-10 |
+| Software System | Usable | `CHANGELOG.md#0.10.1` | 2026-05-10 |
 | Work | Under Control | `tests/unit/validate-artifact.bats` | 2026-04-19 |
 | Team | Seeded | `.claude/sdlc/roles.md` | 2026-04-19 |
 | Way of Working | Working Well | `.claude/sdlc/phases/testing/testing.md` §7a | 2026-05-01 |
@@ -51,3 +51,6 @@ generated_after: mcp-write
 - 2026-05-10: software-system evidence refresh на `CHANGELOG.md` секция [0.10.0] через `decisions_record` (без artificial state-cycle).
 - Rationale: v0.10.0 published, Wave 7 closed 5 issues, P2 issues #59-#61 ещё открыты — Ready criteria не достигнуты.
 - 2026-05-10: way-of-working evidence refresh с bench-hooks 9 hooks (Wave 5 enforce-sdlc-phase).
+- 2026-05-10T20:22Z: software-system Usable → Demonstrable → Usable через state_regress + state_advance.
+- Evidence обновлён на `file:///.../CHANGELOG.md#0.10.1`; БД sync с markdown snapshot.
+- Rationale: v0.10.1 published; bats 121/121 + integration 47 green; bench-hooks 9 hooks <200ms.
