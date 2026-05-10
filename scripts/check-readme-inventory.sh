@@ -46,7 +46,7 @@ skills_readme = set(re.findall(r"`(sdlc-[a-z-]+)`", find_section("Skills")))
 commands_readme = set(re.findall(r"/(sdlc-[a-z-]+)", find_section("Commands")))
 agents_readme = set(re.findall(r"`(sdlc-[a-z-]+)`", find_section("Agents")))
 scripts_readme = set(re.findall(r"`([a-z][a-z0-9-]*\.sh)`", find_section("Scripts")))
-meta_readme = set(re.findall(r"`([a-z][a-z0-9-]*\.meta\.md)`", find_section("Meta-templates")))
+meta_readme = set(re.findall(r"`([a-z][a-z0-9.\-]*\.meta\.md)`", find_section("Meta-templates")))
 
 errors = 0
 
