@@ -5,6 +5,24 @@
 
 ## [Unreleased]
 
+## [0.11.2] — 2026-05-11
+
+### Fixed
+
+- **MCP `sdlc-state-rag` ✗ Failed to connect (продолжение v0.11.1)**. v0.11.1 fix не сработал: Claude Code **не expand'ит `${CLAUDE_PLUGIN_ROOT}`** в поле `command` `.mcp.json` (variable передаётся literally в exec, который не делает shell expansion).
+  - Возвращена bash-обёртка (как в v0.5.x), но БЕЗ вложенного `:-` fallback (этот баг из v0.5.x→v0.11.0):
+    - **До (v0.11.1)**: `"command": "${CLAUDE_PLUGIN_ROOT}/scripts/launch-sdlc-state-rag.sh", "args": []`
+    - **После (v0.11.2)**: `"command": "bash", "args": ["-c", "exec \"$CLAUDE_PLUGIN_ROOT/scripts/launch-sdlc-state-rag.sh\""]`
+  - Bash делает variable expansion на `$CLAUDE_PLUGIN_ROOT` (env var, который Claude Code инжектит в MCP child process).
+- `scripts/bootstrap-target.sh`: same fix для генерируемого `<target>/.mcp.json`.
+- `tests/unit/mcp-json-no-nested-fallback.bats` обновлён под bash wrapper (4 кейса).
+- `tests/integration/sdlc-state-rag-contract.bats` обновлён под bash wrapper (2 кейса).
+- Smoke-test: `CLAUDE_PLUGIN_ROOT=<cache>/0.11.1 bash -c 'exec "$CLAUDE_PLUGIN_ROOT/scripts/launch-sdlc-state-rag.sh"'` запускает MCP server (exit 124 от timeout = server alive on stdin).
+
+### Why
+
+v0.11.1 был incomplete fix. `${CLAUDE_PLUGIN_ROOT}` в `command` field остался **unsubstituted** в runtime (`claude mcp list` показывал literally `${CLAUDE_PLUGIN_ROOT}/scripts/...`). Bash wrapper нужен для shell expansion env var. Avoiding `:-` fallback избегает оригинального v0.11.0 баг.
+
 ## [0.11.1] — 2026-05-11
 
 ### Fixed
