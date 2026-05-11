@@ -76,21 +76,19 @@ setup() {
   [ "$status" -ne 0 ]
 }
 
-@test ".mcp.json uses SDLC_STATE_RAG_DSN" {
-  run grep -E 'SDLC_STATE_RAG_DSN' "$MCP_JSON"
-  [ "$status" -eq 0 ]
-}
-
-@test ".mcp.json uses bash wrapper for sdlc-state-rag (v0.11.2 fix: Claude Code не expands в command field)" {
+@test ".mcp.json uses npx command for sdlc-state-rag (v0.11.3 real fix)" {
   command_value=$(python3 -c 'import json; d=json.load(open("'"$MCP_JSON"'")); print(d["mcpServers"]["sdlc-state-rag"]["command"])')
-  [ "$command_value" = "bash" ]
+  [ "$command_value" = "npx" ]
 }
 
-@test ".mcp.json bash args reference launch-sdlc-state-rag.sh без вложенного fallback (v0.11.2)" {
+@test ".mcp.json args reference @ypolosov/sdlc-state-rag package" {
   args_str=$(python3 -c 'import json; d=json.load(open("'"$MCP_JSON"'")); print(" ".join(d["mcpServers"]["sdlc-state-rag"]["args"]))')
-  [[ "$args_str" == *"launch-sdlc-state-rag.sh"* ]]
-  [[ "$args_str" == *"CLAUDE_PLUGIN_ROOT"* ]]
-  [[ "$args_str" != *":-"* ]]
+  [[ "$args_str" == *"@ypolosov/sdlc-state-rag"* ]]
+}
+
+@test ".mcp.json не использует CLAUDE_PLUGIN_ROOT (v0.11.3: Claude Code не expands в command/args)" {
+  run grep -F "CLAUDE_PLUGIN_ROOT" "$MCP_JSON"
+  [ "$status" -ne 0 ]
 }
 
 @test "launch-sdlc-state-rag.sh exists and is executable" {

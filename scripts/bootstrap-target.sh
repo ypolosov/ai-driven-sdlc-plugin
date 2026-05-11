@@ -236,12 +236,8 @@ overwrite = os.environ.get('OVERWRITE_MODE', 'no')
 
 new_entry = {
     "type": "stdio",
-    "command": "bash",
-    "args": [
-        "-c",
-        'exec "$CLAUDE_PLUGIN_ROOT/scripts/launch-sdlc-state-rag.sh"',
-    ],
-    "env": {"SDLC_STATE_RAG_DSN": "${SDLC_STATE_RAG_DSN}"},
+    "command": "npx",
+    "args": ["-y", "@ypolosov/sdlc-state-rag"],
 }
 
 if os.path.exists(target_path):
