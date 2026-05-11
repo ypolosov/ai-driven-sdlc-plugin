@@ -239,7 +239,7 @@ new_entry = {
     "command": "bash",
     "args": [
         "-c",
-        'exec "${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR:-$PWD}}/scripts/launch-sdlc-state-rag.sh"',
+        'exec "$CLAUDE_PLUGIN_ROOT/scripts/launch-sdlc-state-rag.sh"',
     ],
     "env": {"SDLC_STATE_RAG_DSN": "${SDLC_STATE_RAG_DSN}"},
 }
