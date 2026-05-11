@@ -15,6 +15,7 @@ scripts["check-alpha-consistency"]="$root/scripts/check-alpha-consistency.sh"
 scripts["enforce-no-comments"]="$root/scripts/enforce-no-comments.sh"
 scripts["enforce-format-lint"]="$root/scripts/enforce-format-lint.sh"
 scripts["enforce-sdlc-phase"]="$root/scripts/enforce-sdlc-phase.sh"
+scripts["inject-sdlc-context"]="$root/scripts/inject-sdlc-context.sh"
 
 sample_artifact="$root/.claude/sdlc/phases/testing/testing.md"
 sample_alphas="$root/.claude/sdlc/alphas.md"
@@ -69,6 +70,10 @@ for name in "${!scripts[@]}"; do
       ;;
     enforce-sdlc-phase)
       payload=$(printf '{"tool_name":"Bash","tool_input":{"command":"git status"},"cwd":"%s"}' "$root")
+      cmd="printf '%s' '$payload' | bash '$path'"
+      ;;
+    inject-sdlc-context)
+      payload=$(printf '{"hook_event_name":"SessionStart","cwd":"%s"}' "$root")
       cmd="printf '%s' '$payload' | bash '$path'"
       ;;
     *)
