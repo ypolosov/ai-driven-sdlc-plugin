@@ -22,8 +22,8 @@ d = json.load(open('$TARGET_DIR/.mcp.json'))
 assert 'mcpServers' in d, 'mcpServers missing'
 assert 'sdlc-state-rag' in d['mcpServers'], 'sdlc-state-rag missing'
 entry = d['mcpServers']['sdlc-state-rag']
-assert entry['command'] == 'bash', f'expected bash, got {entry[\"command\"]}'
-assert 'launch-sdlc-state-rag.sh' in ' '.join(entry['args']), 'launcher missing'
+assert entry['command'] == 'npx', f'expected npx, got {entry[\"command\"]}'
+assert '@ypolosov/sdlc-state-rag' in ' '.join(entry['args']), 'package missing'
 "
 }
 
@@ -52,7 +52,7 @@ EOF
 import json
 d = json.load(open('$TARGET_DIR/.mcp.json'))
 entry = d['mcpServers']['sdlc-state-rag']
-assert entry['command'] == 'bash', f'expected bash overwrite, got {entry[\"command\"]}'
+assert entry['command'] == 'npx', f'expected npx overwrite, got {entry[\"command\"]}'
 "
 }
 

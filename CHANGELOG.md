@@ -5,6 +5,40 @@
 
 ## [Unreleased]
 
+## [0.11.3] — 2026-05-11
+
+### Fixed
+
+- **MCP `sdlc-state-rag` connect — реальный fix.** v0.11.2 был incomplete: bash-wrapper с `$CLAUDE_PLUGIN_ROOT` не работает потому что Claude Code **не инжектит** `CLAUDE_PLUGIN_ROOT` env var в child MCP process когда `.mcp.json` загружается на project-level (project root `.mcp.json`, не plugin cache).
+  - **Diagnosis**: реальный root cause — мы использовали bash wrapper + `$CLAUDE_PLUGIN_ROOT` (env var из plugin context), но `.mcp.json` в plugin repo root загружается Claude Code как **project-level** MCP config. В project-level контексте `CLAUDE_PLUGIN_ROOT` не определена.
+  - **Real fix**: используем `npx` напрямую (как делают официальные Claude Code плагины — playwright, context7, github):
+    ```jsonc
+    "sdlc-state-rag": {
+      "command": "npx",
+      "args": ["-y", "@ypolosov/sdlc-state-rag"]
+    }
+    ```
+  - **Verification**: real MCP tool call `mcp__sdlc-state-rag__state_validate_consistency` → `{"ok":true,"issues":[]}` (full round-trip, не handshake).
+
+### Changed
+
+- `.mcp.json` (plugin repo root) — npx command, без bash wrapper, без `$CLAUDE_PLUGIN_ROOT`.
+- `scripts/bootstrap-target.sh` — генерация для `<target>/.mcp.json` теперь использует npx.
+- `tests/unit/init-mcp-json.bats` — обновлено под npx (3 кейса).
+- `tests/unit/mcp-json-no-nested-fallback.bats` — переименовано в смысле: regression v0.11.1 (`:-`) + v0.11.2 (`$CLAUDE_PLUGIN_ROOT`) + v0.11.3 (npx assertion).
+- `tests/integration/sdlc-state-rag-contract.bats` — обновлены 3 кейса под npx.
+
+### Why
+
+История v0.5.x → v0.11.3:
+- **v0.5.x**: bash wrapper `$CLAUDE_PLUGIN_ROOT` — работало в plugin cache контексте.
+- **v0.10.0**: вложенный `:-` fallback (`${CLAUDE_PLUGIN_ROOT:-${...}}`) — bug: `:-` сворачивается.
+- **v0.11.1**: bare `${CLAUDE_PLUGIN_ROOT}` в `command` — Claude Code не expand'ит variable в command field.
+- **v0.11.2**: возврат bash wrapper без `:-` — `CLAUDE_PLUGIN_ROOT` не определена на project-level.
+- **v0.11.3**: `npx` напрямую — как у официальных Claude Code плагинов.
+
+Lesson learned: посмотреть на working examples (claude-plugins-official: playwright/context7/github) ДО fix-attempts. Все 4 предыдущих попытки fix'ились на неправильном уровне абстракции.
+
 ## [0.11.2] — 2026-05-11
 
 ### Fixed
