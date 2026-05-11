@@ -45,6 +45,7 @@ meta_templates: [profile.meta.md, plugin-config.meta.md, alpha-state.meta.md, sy
 3. Какую роль вы играете сейчас? (выбор из `catalogs/roles.md`)
 4. Какую систему считаете целевой на старте? (обычно корневая система репозитория)
 5. Где хранить состояние работ? (state-артефакт: файл / каталог / GitHub Issues через MCP)
+6. Активировать output style `SDLC-first` как default outputStyle? (consensual, Принцип 1)
 
 Вопросы про конкретные инструменты не задаются здесь — только в skills фаз.
 
@@ -66,6 +67,8 @@ meta_templates: [profile.meta.md, plugin-config.meta.md, alpha-state.meta.md, sy
 8. Создать `decisions.md` по `decisions.meta.md` (пустой журнал).
 9. Создать `.env.example` и дополнить `.gitignore` строкой `.env` (по `credentials.meta.md`).
 10. Зафиксировать первый choice в `decisions.md`: выбранные уровень проекта и state-артефакт.
+11. Если пользователь выбрал активацию SDLC-first: записать `outputStyle: "SDLC-first"` в `<target>/.claude/settings.local.json` (merge с существующим).
+12. Зафиксировать выбор output style в `decisions.md` (вместе с альтернативой Default).
 
 Команда плагина: `/sdlc-init`. Реализация в `scripts/bootstrap-target.sh`.
 

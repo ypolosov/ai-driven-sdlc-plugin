@@ -34,6 +34,7 @@ commands = {f[:-3] for f in list_files("commands", ".md")}
 agents = {f[:-3] for f in list_files("agents", ".md")}
 scripts = list_files("scripts", ".sh")
 meta = list_files("meta-templates", ".md")
+output_styles = list_files("output-styles", ".md")
 
 with open(readme_path, encoding="utf-8") as f:
     text = f.read()
@@ -47,6 +48,7 @@ commands_readme = set(re.findall(r"/(sdlc-[a-z-]+)", find_section("Commands")))
 agents_readme = set(re.findall(r"`(sdlc-[a-z-]+)`", find_section("Agents")))
 scripts_readme = set(re.findall(r"`([a-z][a-z0-9-]*\.sh)`", find_section("Scripts")))
 meta_readme = set(re.findall(r"`([a-z][a-z0-9.\-]*\.meta\.md)`", find_section("Meta-templates")))
+output_styles_readme = set(re.findall(r"`output-styles/([a-z][a-z0-9-]*\.md)`", find_section("Output Styles")))
 
 errors = 0
 
@@ -66,6 +68,8 @@ check("commands", commands, commands_readme)
 check("agents", agents, agents_readme)
 check("scripts", scripts, scripts_readme)
 check("meta-templates", meta, meta_readme)
+if output_styles:
+    check("output-styles", output_styles, output_styles_readme)
 
 if errors:
     print(f"check-readme-inventory: {errors} расхождений. Обновите README.md.", file=sys.stderr)

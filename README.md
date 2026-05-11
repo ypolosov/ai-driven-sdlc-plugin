@@ -89,7 +89,7 @@
 - `sdlc-tool-router` — маршрутизация запросов по категориям к MCP-серверам (Волна 4).
 - `sdlc-context-aggregator` — фасад консолидации контекста с провенансом (Волна 4, ADR-010).
 
-### Scripts (19)
+### Scripts (20)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
 - `enforce-tdd.sh` — мягкая блокировка записи кода без парного теста.
 - `enforce-format-lint.sh` — диспетчер форматера и линтера из `plugin-config.md`.
@@ -109,6 +109,7 @@
 - `enforce-sdlc-phase.sh` — PreToolUse hook принципа 22; блокирует git/gh/npm write-команды и Edit/Write без `active_phase` (Волна 5, v0.5.0).
 - `launch-sdlc-state-rag.sh` — launcher MCP-сервера sdlc-state-rag с fallback PATH→nvm→standard locations→npx (v0.5.2).
 - `check-adr-paths.sh` — валидирует `adr_paths` в `plugin-config.md` целевого (Волна 6, v0.6.0).
+- `inject-sdlc-context.sh` — SessionStart + PostToolUse hook; инжектит actual state (`active_phase`, focus, autonomy override) (Волна 9, v0.12.0).
 
 ### Meta-templates (26: 21 top + 5 external-systems)
 - `work-product.meta.md` — базовая схема рабочего продукта.
@@ -148,7 +149,10 @@
 - `catalogs/tool-categories.md` — 7 агностических категорий инструментов SDLC (Волна 4, ADR-013).
 
 ### Hooks (1 файл)
-- `hooks/hooks.json` — PreToolUse TDD (soft); PostToolUse порядок: validator → check-cross-refs → format/lint → no-comments → check-system-readmes → check-alpha-consistency.
+- `hooks/hooks.json` — SessionStart (inject-sdlc-context); PreToolUse enforce-sdlc-phase (Принцип 22 hard block) + TDD (soft); PostToolUse порядок: validator → check-cross-refs → format/lint → no-comments → check-system-readmes → check-alpha-consistency → inject-sdlc-context (refresh).
+
+### Output Styles (1)
+- `output-styles/sdlc-first.md` — обязательный анализ через плагин перед любым ответом. **Strong nudge, не hard block.** Активируется consensually через `/sdlc-init` (запись в `<target>/.claude/settings.local.json`). Деактивация: `/config` → Output style → Default. Реальный enforcement write-операций — PreToolUse `enforce-sdlc-phase.sh` (Принцип 22). (Волна 9, v0.12.0)
 
 ### Memom (Волна 2)
 - `memom.md` — журнал эволюции принципов плагина (принцип 15).
