@@ -5,6 +5,39 @@
 
 ## [Unreleased]
 
+## [0.12.0] — 2026-05-11
+
+### Added
+
+- **Output Style `SDLC-first`** (`output-styles/sdlc-first.md`, Wave 9 PR-1) — модифицирует system prompt; обязательный анализ через плагин перед любым ответом. **Strong nudge, не hard block.**
+  - `force-for-plugin: false` — consensual активация через `/sdlc-init` (Принцип 1 — пользователь выбирает); деактивация через `/config` → Output style → Default.
+  - `keep-coding-instructions: true` — сохраняет дефолтные coding-инструкции Claude Code.
+  - Body: применимость к запросу, фаза SDLC, 10 команд + 13 skills + 7 agents + MCP + hooks + 22 принципа, обязательные правила ответа, anti-patterns.
+- **`SessionStart` hook event** в `hooks/hooks.json` — впервые в плагине; инжектит `[SDLC state]` в context в начале сессии и при `--resume`.
+- **`scripts/inject-sdlc-context.sh`** (20-й script плагина) — bash + python3 с skip-logic; читает `<target>/.claude/sdlc/profile.md` и `system-context.md`; выводит JSON `additionalContext` через hooks-протокол. Триггеры: `SessionStart` (всегда) + `PostToolUse` (только при изменении `profile.md` или `system-context.md`, иначе silent skip).
+- **Бенчмарк `inject-sdlc-context.sh`** в `bench-hooks.sh` — 40 ms < 200 ms threshold (Принцип 6 fitness).
+
+### Changed
+
+- `hooks/hooks.json` — теперь 3 events (`SessionStart`, `PreToolUse`, `PostToolUse`); `inject-sdlc-context.sh` зарегистрирован в SessionStart (1 hook) и PostToolUse (7-й hook для refresh при state-mutations внутри сессии).
+- `skills/sdlc-bootstrap/SKILL.md` — добавлен вопрос #6 про активацию SDLC-first (consensual, Принцип 1) и шаги 11–12 (запись `outputStyle: "SDLC-first"` в `<target>/.claude/settings.local.json` + фиксация в `decisions.md`).
+- `README.md` — новый раздел **Output Styles (1)** с disclaimer «strong nudge, не hard block; реальный enforcement — PreToolUse `enforce-sdlc-phase.sh` Принцип 22»; Scripts (20).
+- `scripts/check-readme-inventory.sh` — учитывает `output-styles/` директорию (новая категория артефактов плагина).
+
+### Rationale
+
+Решает проблему: Claude **игнорировал** memory `feedback_default_use_ai_driven_sdlc_plugin.md` и `feedback_show_plugin_tool_evidence.md` несмотря на Принципы 12/22. Memory — мягкий механизм, harness не enforce. **Нужен harness-enforced механизм** — Output Style модифицирует system prompt + SessionStart hook инжектит state в context.
+
+**4-уровневая защита** (план v3 после критического аудита):
+1. Output Style `sdlc-first` (главный, модифицирует system prompt) — strong nudge.
+2. SessionStart + PostToolUse refresh hooks (`inject-sdlc-context.sh`) — state injection.
+3. PreToolUse `enforce-sdlc-phase.sh` (Принцип 22, был с v0.5.0) — hard block write-операций.
+4. Memory — backup при отключённом плагине.
+
+Критическое решение после аудита: `force-for-plugin: false` (не `true`) — consensual активация, не подавляет outputStyle других пользователей плагина (Принцип 1).
+
+PR #81 merged.
+
 ## [0.11.3] — 2026-05-11
 
 ### Fixed
