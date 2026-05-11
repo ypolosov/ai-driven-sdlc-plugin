@@ -5,7 +5,7 @@ project: ai-driven-sdlc-plugin
 created: 2026-04-19
 updated: 2026-05-05
 active_phase: deployment
-active_phase_set_at: 2026-05-10T21:10:16Z
+active_phase_set_at: 2026-05-11T08:21:18Z
 ---
 
 # SME-профиль проекта

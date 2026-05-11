@@ -5,6 +5,19 @@
 
 ## [Unreleased]
 
+## [0.11.1] — 2026-05-11
+
+### Fixed
+
+- **MCP `sdlc-state-rag` Failed to connect** в Claude Code runtime. Корневая причина: вложенная форма `${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR:-$PWD}}` в `.mcp.json` не поддерживается Claude Code variable substitution — fallback `:-` сворачивал внешнюю переменную в пустую строку, и bash получал путь относительно `CLAUDE_PROJECT_DIR/$PWD` (root пользовательского проекта), где launcher-скрипта нет.
+  - `command`: bash-обёртка убрана; теперь `${CLAUDE_PLUGIN_ROOT}/scripts/launch-sdlc-state-rag.sh` напрямую (без `:-` fallback'ов).
+  - `args: []` (вместо bash heredoc).
+  - Verification: `claude mcp list | grep sdlc-state-rag` → ✓ Connected.
+
+### Why
+
+Discovered while preparing real-world enterprise gt project for plugin use. MCP unavailable блокирует `state_advance_alpha`, `decisions_record`, и весь principle 13 (БД как single source альф). Patch-релиз без поведенческих изменений API — только resolve-path fix в одном файле.
+
 ## [0.11.0] — 2026-05-11
 
 ### Added
