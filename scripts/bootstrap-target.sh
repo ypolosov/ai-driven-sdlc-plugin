@@ -218,11 +218,64 @@ updated: $(date +%Y-%m-%d)
 EOF
 fi
 
+tool_bindings_dest="${sdlc_dir}/tool-bindings.md"
+if [ ! -f "$tool_bindings_dest" ]; then
+  cat >"$tool_bindings_dest" <<EOF
+---
+name: tool-bindings
+type: tool-binding-registry
+project: ${project_name}
+version: 1
+created: ${today}
+updated: ${today}
+---
+
+# Реестр привязок категорий инструментов
+
+Skeleton: 7 категорий из \`catalogs/tool-categories.md\`, все \`verified: false\`.
+Заполняется через \`/sdlc-tools bind\` (один сервер на категорию).
+
+\`\`\`yaml
+bindings:
+  - category: issue-tracker
+    mcp_server: TODO
+    verified: false
+  - category: knowledge-base
+    mcp_server: TODO
+    verified: false
+  - category: vcs
+    mcp_server: TODO
+    verified: false
+  - category: chat
+    mcp_server: TODO
+    verified: false
+  - category: observability
+    mcp_server: TODO
+    verified: false
+  - category: cd-platform
+    mcp_server: TODO
+    verified: false
+  - category: test-management
+    mcp_server: TODO
+    verified: false
+\`\`\`
+EOF
+fi
+
 env_example="${target}/.env.example"
 if [ ! -f "$env_example" ]; then
   cat >"$env_example" <<'EOF'
 # Пример .env.example — значения не коммитить в git.
 # Скопируйте в .env и заполните по ходу фаз.
+
+# State-backend (sdlc-state-rag MCP). Пусто = embedded pglite (.sdlc-db/).
+SDLC_STATE_RAG_DSN=
+
+# Категории инструментов (заполняются по ходу /sdlc-tools bind).
+# Имена ключей здесь — placeholder; конкретные сервера задаёт tool-bindings.md.
+TOOL_ISSUE_TRACKER_TOKEN=
+TOOL_KNOWLEDGE_BASE_TOKEN=
+TOOL_VCS_TOKEN=
 EOF
 fi
 

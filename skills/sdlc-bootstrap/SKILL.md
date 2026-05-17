@@ -80,6 +80,13 @@ meta_templates: [profile.meta.md, plugin-config.meta.md, alpha-state.meta.md, sy
 8. Создать `decisions.md` по `decisions.meta.md` (пустой журнал).
 9. Создать `.env.example` и дополнить `.gitignore` строкой `.env` (по `credentials.meta.md`).
 10. Зафиксировать первый choice в `decisions.md`: выбранные уровень проекта и state-артефакт.
+   - **Provenance (принцип 19a):** каждое seed-значение помечается источником —
+     `catalog:<файл:строка>` / `user-decision` / `TODO-no-provenance`. При
+     недоступном MCP/RAG агрегатор не выдумывает значения; неопределённое →
+     `TODO-no-provenance`, не угадывать.
+   - **Team-agreement gate (B2.5, Essence Stakeholders):** для enterprise SME-выбор
+     фиксируется как `proposal` со статусом «требует подтверждения команды».
+     Stakeholders не достигает `In Agreement` без team-review; отметить в `decisions.md`.
 11. Если пользователь выбрал активацию SDLC-first: записать `outputStyle: "SDLC-first"` в `<target>/.claude/settings.local.json` (merge с существующим).
 12. Зафиксировать выбор output style в `decisions.md` (вместе с альтернативой Default).
 

@@ -5,6 +5,23 @@
 
 ## [Unreleased]
 
+## [0.15.0] — 2026-05-17
+
+### Added
+
+- **B1.2** (#82) — `bootstrap-target.sh` создаёт `tool-bindings.md` skeleton (7 категорий из `catalogs/tool-categories.md`, все `verified: false`, `mcp_server: TODO`). Устраняет orphan-ссылку `plugin-config.md → tool-bindings.md`; `sdlc-tool-router` больше не refuse сразу после bootstrap.
+- **B1.3** (#82) — `bootstrap-target.sh` `.env.example` содержит `SDLC_STATE_RAG_DSN` + category-level placeholder'ы (`TOOL_*_TOKEN`) вместо одного комментария.
+
+### Changed
+
+- **B6.1** (#82) — `system-context.meta.md` вводит ось `axis: functional | constructive` (Левенчук Том 2 гл.7); явное предупреждение «`backend`/`frontend`/`devops` — конструктивы, не функциональные подсистемы»; `subsystem` обязан объявить `axis`. Устраняет аудит-находку A1.
+- **B3.4** (#82) — `sdlc-bootstrap/SKILL.md` шаг 10: provenance-маркировка seed-значений (`catalog:<файл:строка>` / `user-decision` / `TODO-no-provenance`); запрет выдумывать значения при недоступном MCP/RAG (принцип 19a, A5).
+- **B2.5** (#82) — `sdlc-bootstrap/SKILL.md`: enterprise SME-выбор фиксируется как `proposal` со статусом «требует подтверждения команды»; Stakeholders не достигает `In Agreement` без team-review (Essence, A7).
+
+### Rationale
+
+Wave 12 закрывает оставшиеся 5 находок #82 (B1.2/B1.3/B6.1/B3.4/B2.5) — bootstrap-полнота + методологическая корректность. После Wave 10-12 закрыто 12 пунктов; bootstrap для GromTech enterprise полностью готов. TDD-first: 15 новых bats-кейсов (red→green), 0 регрессий из 258.
+
 ## [0.14.0] — 2026-05-17
 
 ### Added

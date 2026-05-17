@@ -25,9 +25,18 @@ updated: <YYYY-MM-DD>
 
 ## Обязательная таблица систем внимания
 
-| slug | role_vs_target | kind | last_focused_at | focus_count |
-|---|---|---|---|---|
-| <slug> | supersystem \| target \| subsystem \| in_environment \| creation_system | materialized \| logical | <YYYY-MM-DD> | <число> |
+| slug | role_vs_target | axis | kind | last_focused_at | focus_count |
+|---|---|---|---|---|---|
+| <slug> | supersystem \| target \| subsystem \| in_environment \| creation_system | functional \| constructive | materialized \| logical | <YYYY-MM-DD> | <число> |
+
+### Значения `axis` — функциональная vs конструктивная декомпозиция (Левенчук Том 2 гл. 7)
+
+- **functional** — что система *делает* (роль/поведение): wallet, RNG, KYC, bonus-engine.
+- **constructive** — из чего система *состоит* (модули кода/деплоя): backend, frontend, devops.
+
+**Не путать:** `backend`/`frontend`/`devops` — конструктивы (модули репозитория),
+НЕ функциональные подсистемы воплощённой системы. Подсистема `role_vs_target=subsystem`
+обязана объявить `axis`. Смешение осей — методологическая ошибка (аудит B6.1, A1).
 
 ### Значения `role_vs_target` (Левенчук Том 2 гл. 9)
 

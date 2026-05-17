@@ -5,7 +5,7 @@ project: ai-driven-sdlc-plugin
 created: 2026-04-19
 updated: 2026-05-17
 active_phase: development
-active_phase_set_at: 2026-05-17T17:12:55Z
+active_phase_set_at: 2026-05-17T17:22:17Z
 ---
 
 # SME-профиль проекта
@@ -63,3 +63,4 @@ active_phase_set_at: 2026-05-17T17:12:55Z
 - 2026-05-17 — фаза development активирована для Wave 10: GT enterprise bootstrap-блокеры (B0.1/B0.2/B0.3/B0.6/B4.4).
 - 2026-05-17 — фаза deployment активирована для release v0.13.0 minor (Wave 10 closure).
 - 2026-05-17 — фаза development активирована для Wave 11: B0.4 brownfield-seeding + B0.5 Этап-0 preconditions.
+- 2026-05-17 — фаза development активирована для Wave 12: B3.4/B6.1/B1.2/B1.3/B2.5 bootstrap-полнота.
