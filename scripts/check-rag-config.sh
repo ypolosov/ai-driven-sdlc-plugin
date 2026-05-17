@@ -27,6 +27,13 @@ if [ -z "$enabled_line" ]; then
 fi
 
 if echo "$enabled_line" | grep -qE 'enabled:[[:space:]]*true'; then
+  data_class="$(grep -E '^data_classification:[[:space:]]*' "$config_file" | head -1 | sed -E 's/.*data_classification:[[:space:]]*//; s/[[:space:]]*$//' || true)"
+  if [ "$data_class" = "regulated" ]; then
+    if ! grep -qE '^compliance_signoff:[[:space:]]*\S' "$config_file"; then
+      echo "check-rag-config: data_classification=regulated при enabled=true требует 'compliance_signoff' (compliance-gate)" >&2
+      errors=$((errors + 1))
+    fi
+  fi
   if ! grep -qE '^sources:' "$config_file"; then
     echo "check-rag-config: при enabled=true обязателен 'sources'" >&2
     errors=$((errors + 1))

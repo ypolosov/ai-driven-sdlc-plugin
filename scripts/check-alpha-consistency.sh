@@ -16,6 +16,10 @@ case "$file_path" in
   *) exit 0 ;;
 esac
 
+if [ -f "$file_path" ] && grep -qE '^type:[[:space:]]*alpha-journal[[:space:]]*$' "$file_path"; then
+  exit 0
+fi
+
 dsn="${SDLC_STATE_RAG_DSN:-}"
 pglite_dir="${cwd}/.sdlc-db"
 

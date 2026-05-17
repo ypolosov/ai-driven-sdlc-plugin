@@ -26,9 +26,9 @@ run_bootstrap() {
   [ "$status" -eq 0 ]
 }
 
-@test "bootstrap creates alphas.md with type alpha-snapshot" {
+@test "bootstrap creates alphas.md with type alpha-journal (B0.2: no-MCP default)" {
   run_bootstrap
-  run grep -E "^type: alpha-snapshot$" "$TMP_DIR/.claude/sdlc/alphas.md"
+  run grep -E "^type: alpha-journal$" "$TMP_DIR/.claude/sdlc/alphas.md"
   [ "$status" -eq 0 ]
 }
 
