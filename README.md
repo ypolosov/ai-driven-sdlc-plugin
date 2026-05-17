@@ -89,7 +89,7 @@
 - `sdlc-tool-router` — маршрутизация запросов по категориям к MCP-серверам (Волна 4).
 - `sdlc-context-aggregator` — фасад консолидации контекста с провенансом (Волна 4, ADR-010).
 
-### Scripts (20)
+### Scripts (21)
 - `validate-artifact.sh` — frontmatter, секции, ≤15 слов, русский.
 - `enforce-tdd.sh` — мягкая блокировка записи кода без парного теста.
 - `enforce-format-lint.sh` — диспетчер форматера и линтера из `plugin-config.md`.
@@ -110,6 +110,7 @@
 - `launch-sdlc-state-rag.sh` — launcher MCP-сервера sdlc-state-rag с fallback PATH→nvm→standard locations→npx (v0.5.2).
 - `check-adr-paths.sh` — валидирует `adr_paths` в `plugin-config.md` целевого (Волна 6, v0.6.0).
 - `inject-sdlc-context.sh` — SessionStart + PostToolUse hook; инжектит actual state (`active_phase`, focus, autonomy override) (Волна 9, v0.12.0).
+- `check-bootstrap-preconditions.sh` — Этап-0 read-only gate: `.env` не в git, существующий `.mcp.json`/`.claude/sdlc` (Wave 11, v0.14.0, B0.5).
 
 ### Meta-templates (26: 21 top + 5 external-systems)
 - `work-product.meta.md` — базовая схема рабочего продукта.
@@ -172,7 +173,7 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (23 файла, 184 кейса):
+- Unit (bats-core) — `tests/unit/` (25 файлов, 196 кейсов):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 13 кейсов (TypeScript whitelist Wave 5 + heredoc detection Wave 7).
@@ -196,6 +197,8 @@
   - `bootstrap-gt-blockers.bats` — 15 кейсов на GT enterprise-блокеры B0.1/B0.2/B0.3 (Wave 10, #82).
   - `mcp-json-backup.bats` — 5 кейсов на backup `.mcp.json` перед merge B0.6/C3 (Wave 10, #82).
   - `rag-config-compliance-gate.bats` — 7 кейсов на compliance-gate regulated-данных B4.4/C1 (Wave 10, #82).
+  - `check-bootstrap-preconditions.bats` — 7 кейсов на Этап-0 gate B0.5 (Wave 11, #82).
+  - `sdlc-bootstrap-brownfield.bats` — 5 кейсов на greenfield/brownfield дифференциацию SKILL B0.4 (Wave 11, #82).
 - Integration (bats-core) — `tests/integration/` (3 файла, 47 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
   - `sdlc-state-rag-contract.bats` — 23 кейса на контракт sdlc-state-rag, переключение трекера, bash-wrapper для launcher (Волна 5, ADR-011, v0.5.3).

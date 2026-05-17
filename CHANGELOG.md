@@ -5,6 +5,20 @@
 
 ## [Unreleased]
 
+## [0.14.0] — 2026-05-17
+
+### Added
+
+- **B0.5** (#82) — `scripts/check-bootstrap-preconditions.sh` (21-й script) — Этап-0 read-only gate: блокирует `.env` уже в git tracking (утечка credentials), info про существующий `.mcp.json` (backup B0.6) и `.claude/sdlc` (выбор режима), WARN если не git-репо. Ссылка из `sdlc-bootstrap/SKILL.md` как Шаг -1.
+
+### Changed
+
+- **B0.4** (#82) — `skills/sdlc-bootstrap/SKILL.md` дифференцирует greenfield/brownfield: добавлен вопрос #2 (зрелость), секция «Альфы которые продвигает» разделена (greenfield — начальные состояния; brownfield — фактические по опросу/RAG, запрет регресса ниже реальности — Essence), шаг 5 протокола больше не предписывает безусловно «все альфы в начальном состоянии». Устраняет методологический корень аудита A2/A3/A8 (live-продукт seed как стартап).
+
+### Rationale
+
+Wave 11 закрывает 2 находки 3-раундового аудита #82: B0.4 (методологический корень — bootstrap не различал greenfield/brownfield) + B0.5 (дешёвый Этап-0 guard перед созданием артефактов). Без B0.4 bootstrap GromTech (live gambling-платформа) зафиксировал бы ложную модель зрелого продукта как стартапа, наследуемую всеми фазами. TDD-first: 12 новых bats-кейсов (red→green), 0 регрессий из 243.
+
 ## [0.13.0] — 2026-05-17
 
 ### Fixed

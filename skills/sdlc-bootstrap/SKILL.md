@@ -18,9 +18,16 @@ meta_templates: [profile.meta.md, plugin-config.meta.md, alpha-state.meta.md, sy
 
 ## Альфы, которые продвигает
 
-- **Way of Working** — от Principles Established до Foundation Established.
-- **Team** — от Seeded до Formed (если роли определены).
-- **Stakeholders** — Recognized.
+Состояния зависят от зрелости целевой системы (greenfield vs brownfield).
+
+- **Greenfield** (новый проект): альфы стартуют в начальных состояниях.
+  - Way of Working — Principles Established → Foundation Established.
+  - Team — Seeded → Formed (если роли определены).
+  - Stakeholders — Recognized.
+- **Brownfield** (существующая/эксплуатируемая система): альфы отражают
+  реальность; запрещён регресс ниже фактического состояния (Essence).
+  - Состояния оцениваются по факту, не сбрасываются в начальные.
+  - Way of Working live-системы обычно уже In Use / In Place.
 
 ## Дисциплины
 
@@ -41,11 +48,14 @@ meta_templates: [profile.meta.md, plugin-config.meta.md, alpha-state.meta.md, sy
 ### Вопросы bootstrap
 
 1. Какой это проект: pet / mid / enterprise по масштабу команды и рисков?
-2. Есть ли уже существующий `.claude/sdlc/` — запустить в режиме `--fail-if-exists`, `--merge` или `--force`?
-3. Какую роль вы играете сейчас? (выбор из `catalogs/roles.md`)
-4. Какую систему считаете целевой на старте? (обычно корневая система репозитория)
-5. Где хранить состояние работ? (state-артефакт: файл / каталог / GitHub Issues через MCP)
-6. Активировать output style `SDLC-first` как default outputStyle? (consensual, Принцип 1)
+2. Зрелость: greenfield (новый) или brownfield (уже эксплуатируется в проде)?
+3. Есть ли уже существующий `.claude/sdlc/` — запустить в режиме `--fail-if-exists`, `--merge` или `--force`?
+4. Какую роль вы играете сейчас? (выбор из `catalogs/roles.md`)
+5. Какую систему считаете целевой на старте? (обычно корневая система репозитория)
+6. Где хранить состояние работ? (state-артефакт: файл / каталог / GitHub Issues через MCP)
+7. Активировать output style `SDLC-first` как default outputStyle? (consensual, Принцип 1)
+
+Для brownfield по каждой альфе уточнить фактическое состояние (опрос или RAG).
 
 Вопросы про конкретные инструменты не задаются здесь — только в skills фаз.
 
@@ -56,12 +66,15 @@ meta_templates: [profile.meta.md, plugin-config.meta.md, alpha-state.meta.md, sy
 
 ## Протокол инстанцирования
 
+-1. **Этап-0 (gate):** `scripts/check-bootstrap-preconditions.sh <target>` — read-only
+   проверка предпосылок (`.env` не в git, существующий `.mcp.json`/`.claude/sdlc`).
+   При exit 1 — устранить блокеры до продолжения.
 0. **Обязательно:** вызвать `AskUserQuestion` с блоком выше и дождаться ответов пользователя.
 1. Проверить наличие `<target>/.claude/sdlc/`; выбрать режим (принцип 14).
 2. Создать `CLAUDE.md` целевого проекта с основными правилами плагина.
 3. Создать `profile.md` по `profile.meta.md` с пустой таблицей фаз.
 4. Создать `plugin-config.md` по `plugin-config.meta.md`.
-5. Создать `alphas.md` по `alpha-state.meta.md` (все альфы в начальном состоянии).
+5. Создать `alphas.md` по `alpha-state.meta.md`: greenfield — начальные состояния; brownfield — фактические состояния по опросу/RAG (без регресса ниже реальности).
 6. Создать `system-context.md` по `system-context.meta.md` (текущая цель — корень).
 7. Создать `roles.md` по `roles-state.meta.md` с выбранной ролью.
 8. Создать `decisions.md` по `decisions.meta.md` (пустой журнал).

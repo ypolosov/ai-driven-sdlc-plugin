@@ -4,8 +4,8 @@ type: sdlc-profile
 project: ai-driven-sdlc-plugin
 created: 2026-04-19
 updated: 2026-05-17
-active_phase: deployment
-active_phase_set_at: 2026-05-17T16:52:24Z
+active_phase: development
+active_phase_set_at: 2026-05-17T17:12:55Z
 ---
 
 # SME-профиль проекта
@@ -62,3 +62,4 @@ active_phase_set_at: 2026-05-17T16:52:24Z
 - 2026-05-11 — фаза deployment активирована для release v0.12.0 minor (Wave 9 closure).
 - 2026-05-17 — фаза development активирована для Wave 10: GT enterprise bootstrap-блокеры (B0.1/B0.2/B0.3/B0.6/B4.4).
 - 2026-05-17 — фаза deployment активирована для release v0.13.0 minor (Wave 10 closure).
+- 2026-05-17 — фаза development активирована для Wave 11: B0.4 brownfield-seeding + B0.5 Этап-0 preconditions.
