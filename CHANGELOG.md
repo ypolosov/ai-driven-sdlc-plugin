@@ -5,6 +5,18 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- **B0.1** (#82) — `bootstrap-target.sh` пишет `active_phase: null` + `active_phase_set_at: null` явно в `profile.md`; success message инструктирует next-step (`/sdlc-phase`, `/sdlc-tools`) и предупреждает про `enforce-sdlc-phase` hook. Раньше отсутствие `active_phase` блокировало любой write после bootstrap.
+- **B0.2** (#82) — дефолт `alphas.md` теперь `type: alpha-journal` (markdown — source of truth), без `source_of_truth: mcp://`/`snapshot_role`; тело следует schema `alpha-state.meta.md` (Section 1 таблица альф + Section 2 журнал). `check-alpha-consistency.sh` early-exit для `alpha-journal` (не требует MCP backend). Раньше `alpha-snapshot` без рабочего MCP делал альфы стейтлесс.
+- **B0.3** (#82) — `bootstrap-target.sh` добавляет в `.gitignore`: `.sdlc-db/`, `.sdlc-worker/`, `.claude/sdlc/autonomy.session.md`, `.claude/sdlc/external-systems/*.local.md`. Раньше runtime-БД (embeddings/decisions/PII) утекала в git.
+- **B0.6/C3** (#82) — `bootstrap-target.sh` бэкапит существующий `.mcp.json` в `.mcp.json.bak` перед merge. Раньше командная MCP-конфигурация brownfield-репо могла быть перезаписана без backup.
+- **B4.4/C1** (#82) — `rag-config.meta.md` вводит поля `data_classification` (public/internal/regulated/unknown) и `compliance_signoff`; `check-rag-config.sh` блокирует `data_classification: regulated` + `enabled: true` без `compliance_signoff` (compliance-gate). Защищает regulated/gambling/GDPR-данные от индексации в неконтролируемый backend.
+
+### Rationale
+
+Первое реальное enterprise-применение плагина к GromTech (lic. gambling, brownfield, 25+ ADR) выявило 5 истинных bootstrap-блокеров из issue #82 (P0/P1). 3-раундовый критический аудит (self-review + Левенчук + Essence + жёсткий мета-аудит) подтвердил C1 как единственный необратимый блокер (регуляторная RAG-утечка). TDD-first: 27 новых bats-кейсов (red→green), 0 регрессий из 231.
+
 ## [0.12.0] — 2026-05-11
 
 ### Added

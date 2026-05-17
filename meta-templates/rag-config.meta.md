@@ -35,6 +35,25 @@ enabled: true | false
 При `enabled: false` `sdlc-context-aggregator` опрашивает MCP-серверы (принцип 19a).
 При `enabled: true` aggregator делает RAG-запросы перед опросом MCP.
 
+### data_classification
+
+```yaml
+data_classification: public | internal | regulated | unknown
+```
+
+Классификация индексируемых данных. Для `regulated` (PII, KYC/AML, платёжные,
+медицинские, gambling-license данные) RAG-индексация в неконтролируемый
+backend — регуляторный/GDPR риск.
+
+### compliance_signoff
+
+```yaml
+compliance_signoff: <DPA/ticket reference>
+```
+
+Обязателен при `data_classification: regulated` И `enabled: true`.
+Без него `check-rag-config.sh` блокирует конфигурацию (compliance-gate).
+
 ### sources
 
 Источники для индексации; категории берутся из `tool-categories.md`.
@@ -93,6 +112,8 @@ worker:
 ## Правила
 
 - При `enabled: true` обязательны `sources` и `embedder`.
+- При `data_classification: regulated` и `enabled: true` обязателен `compliance_signoff`.
+- Для regulated-целевых рекомендуется `enabled: false` по умолчанию до compliance-review.
 - При `enabled: false` остальные поля опциональны.
 - `worker.kind` должно соответствовать SME-уровню `profile.md` (валидируется).
 - DSN на `sdlc-state-rag` живёт в `<target>/.env` (`SDLC_STATE_RAG_DSN`).

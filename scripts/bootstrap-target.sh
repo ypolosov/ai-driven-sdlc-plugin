@@ -70,6 +70,8 @@ type: sdlc-profile
 project: ${project_name}
 created: ${today}
 updated: ${today}
+active_phase: null
+active_phase_set_at: null
 ---
 
 # SME-профиль проекта
@@ -99,17 +101,29 @@ if [ ! -f "${sdlc_dir}/alphas.md" ]; then
   cat >"${sdlc_dir}/alphas.md" <<EOF
 ---
 name: alphas
-type: alpha-snapshot
+type: alpha-journal
 project: ${project_name}
-source_of_truth: mcp://sdlc-state-rag
-snapshot_role: pr-visible-mirror
 created: ${today}
 updated: ${today}
 ---
 
-# Snapshot состояний альф
+# Состояние альф SDLC
 
-Заполняется skill \`sdlc-bootstrap\` через /sdlc-init.
+## 1. Текущее состояние альф
+
+| Альфа | Состояние | Артефакт-свидетельство | Дата |
+|---|---|---|---|
+| Opportunity | — | — | — |
+| Stakeholders | — | — | — |
+| Requirements | — | — | — |
+| Software System | — | — | — |
+| Work | — | — | — |
+| Team | — | — | — |
+| Way of Working | — | — | — |
+
+## 2. Журнал переходов
+
+Запись на каждое продвижение: дата, альфа, было/стало, артефакт.
 EOF
 fi
 
@@ -223,8 +237,22 @@ if ! grep -qE '^\.env$' "$gitignore"; then
 .env.*.local
 EOF
 fi
+if ! grep -qE '^\.sdlc-db/$' "$gitignore"; then
+  cat >>"$gitignore" <<'EOF'
+
+# ai-driven-sdlc: runtime state (не коммитить — embeddings, decisions, audit, PII)
+.sdlc-db/
+.sdlc-worker/
+.claude/sdlc/autonomy.session.md
+.claude/sdlc/external-systems/*.local.md
+EOF
+fi
 
 mcp_json="${target}/.mcp.json"
+if [ -f "$mcp_json" ]; then
+  cp "$mcp_json" "${mcp_json}.bak"
+  printf 'bootstrap-target: существующий .mcp.json сохранён в %s.bak\n' "$mcp_json" >&2
+fi
 overwrite_mode="${MCP_OVERWRITE_SDLC_RAG:-no}"
 TARGET_MCP_JSON="$mcp_json" OVERWRITE_MODE="$overwrite_mode" python3 - <<'PY'
 import json
@@ -269,4 +297,10 @@ else:
 PY
 
 printf 'bootstrap-target: %s инициализирован в режиме %s.\n' "$sdlc_dir" "$mode"
+printf '\n'
+printf 'Следующий шаг:\n'
+printf '  - выбрать активную фазу: /sdlc-phase <vision|requirements|architecture|development|testing|deployment|operations>\n'
+printf '  - или подключить инструменты: /sdlc-tools bind\n'
+printf '\n'
+printf 'Без активной фазы любая Write/Edit вне whitelist блокируется hook enforce-sdlc-phase.\n'
 exit 0
