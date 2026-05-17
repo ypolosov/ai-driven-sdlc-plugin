@@ -173,7 +173,7 @@
 
 Пирамида автотестов по фазе testing (уровень mid).
 
-- Unit (bats-core) — `tests/unit/` (25 файлов, 196 кейсов):
+- Unit (bats-core) — `tests/unit/` (28 файлов, 211 кейсов):
   - `validate-artifact.bats` — 7 кейсов на поведение валидатора.
   - `check-cross-refs.bats` — 6 кейсов на детектор осиротевших ссылок.
   - `enforce-no-comments.bats` — 13 кейсов (TypeScript whitelist Wave 5 + heredoc detection Wave 7).
@@ -199,6 +199,9 @@
   - `rag-config-compliance-gate.bats` — 7 кейсов на compliance-gate regulated-данных B4.4/C1 (Wave 10, #82).
   - `check-bootstrap-preconditions.bats` — 7 кейсов на Этап-0 gate B0.5 (Wave 11, #82).
   - `sdlc-bootstrap-brownfield.bats` — 5 кейсов на greenfield/brownfield дифференциацию SKILL B0.4 (Wave 11, #82).
+  - `bootstrap-completeness.bats` — 6 кейсов на tool-bindings skeleton B1.2 + .env.example B1.3 (Wave 12, #82).
+  - `system-context-decomposition.bats` — 4 кейса на функц/констр ось B6.1 (Wave 12, #82).
+  - `sdlc-bootstrap-provenance-team.bats` — 5 кейсов на provenance B3.4 + team-agreement B2.5 (Wave 12, #82).
 - Integration (bats-core) — `tests/integration/` (3 файла, 47 кейсов):
   - `context-aggregator-mid.bats` — 20 кейсов на топологию aggregator+router и фикстуру `mid-target/` (Волна 4, ADR-010).
   - `sdlc-state-rag-contract.bats` — 23 кейса на контракт sdlc-state-rag, переключение трекера, bash-wrapper для launcher (Волна 5, ADR-011, v0.5.3).
