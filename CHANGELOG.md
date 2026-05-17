@@ -5,6 +5,8 @@
 
 ## [Unreleased]
 
+## [0.13.0] — 2026-05-17
+
 ### Fixed
 
 - **B0.1** (#82) — `bootstrap-target.sh` пишет `active_phase: null` + `active_phase_set_at: null` явно в `profile.md`; success message инструктирует next-step (`/sdlc-phase`, `/sdlc-tools`) и предупреждает про `enforce-sdlc-phase` hook. Раньше отсутствие `active_phase` блокировало любой write после bootstrap.
